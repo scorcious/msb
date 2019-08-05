@@ -10,10 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_113133) do
+ActiveRecord::Schema.define(version: 2019_08_05_141559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "level"
+    t.integer "points"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_forums_on_match_id"
+    t.index ["user_id"], name: "index_forums_on_user_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.date "date"
+    t.string "location"
+    t.text "description"
+    t.time "time"
+    t.integer "level"
+    t.integer "number_of_players"
+    t.string "status"
+    t.string "photo"
+    t.string "score"
+    t.string "team_a"
+    t.string "team_b"
+    t.string "winner"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_matches_on_user_id"
+  end
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
@@ -57,8 +96,18 @@ ActiveRecord::Schema.define(version: 2019_08_05_113133) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "city"
+    t.string "address"
+    t.text "bio"
+    t.string "gender"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "users"
+  add_foreign_key "forums", "matches"
+  add_foreign_key "forums", "users"
+  add_foreign_key "matches", "users"
 end
