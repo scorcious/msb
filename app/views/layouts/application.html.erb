@@ -11,23 +11,78 @@
   </head>
   <body>
     <div class="wrapper">
+      <!-- NAVBAR -->
+      <div class="navbar">
+        <a href="/"><h4 class="logo">HomeGallery</h4></a>
+        <!-- SEARCH BAR -->
+        <% unless @no_search_bar %>
+          <div class="search-bar">
+            <%= simple_form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+              <%= f.input :title, label: false, placeholder: "Search...", input_html: {value: ""} %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- IF USER IS LOGGED IN -->
+        <% if current_user %>
+          <div class="options">
+            <%= link_to  "Host a match", new_match_path, class: "host-service" %>
+            
+            <!-- PROFILE DROPDOWN -->
+            <div class="nav-item dropdown">
+              <%= cl_image_tag current_user.photo, crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "object-fit: cover", data: { toggle: 'dropdown'} %>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>
+                <%= link_to  "Your Matches", matches_path, class:"dropdown-item" %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="options">
+            <%= link_to  "Login", new_user_session_path %>
+            <%= link_to  "Host a match", new_match_path, class: "host-service" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- CONTAINER -->
       <%= yield %>
     </div>
 
-    <footer class="row">
-      <%= link_to  "mysportbuddies", root_path, class: "logo" %>
-      <div class="col-sm-12 col-md-6">
-        <a href="" class="fab fa-github">Github</a>
-        <a href="" class="fab fa-instagram">Instagram</a>
-        <a href="" class="fab fa-facebook">Facebook</a>
-        <a href="" class="fab fa-twitter">Twitter</a>
-        <a href="" class="fab fa-linkedin">LinkedIn</a>
-      </div>
-
-      <div class="col-sm-12 col-md-6">
-        <a href="">Leave Us Feedbacks</a>
-        <a href="">Browse all matches</a>
-        <a href="">Browse all users</a>
+    <!-- FOOTER -->
+    <footer>
+      <div class="row">
+        <%= link_to  "mysportbuddies", root_path, class: "logo" %>
+        <div class="col-sm-12 col-md-6">
+          <div>
+            <a href=""><i class="fab fa-github"></i> Github</a>
+          </div>
+          <div>
+              <a href=""><i class="fab fa-instagram"></i> Instagram</a>
+          </div>
+          <div>
+              <a href=""><i class="fab fa-facebook"></i> Facebook</a>
+          </div>
+          <div>
+              <a href=""><i class="fab fa-linkedin"></i> LinkedIn</a>
+          </div>
+        </div>
+  
+        <div class="col-sm-12 col-md-6">
+          <div>
+            <a href="">Browse all matches</a>
+          </div>
+          <div>
+            <a href="">Browse all users</a>
+          </div>
+          <div>
+            <a href="">Leave Us Feedbacks</a>
+          </div>
+          <div>
+            <a href="">Contact Us</a>
+          </div>
+        </div>  
       </div>
     </footer>
     
