@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_032402) do
     t.string "address"
     t.text "bio"
     t.string "gender"
-    t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
