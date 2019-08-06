@@ -25,3 +25,4 @@ class MatchPolicy < ApplicationPolicy
     end
   end
 end
+
