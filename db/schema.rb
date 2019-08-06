@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2019_08_05_141559) do
     t.string "status"
     t.string "photo"
     t.string "score"
-    t.string "team_a"
-    t.string "team_b"
+    t.integer "team_a", array: true
+    t.integer "team_b", array: true
     t.string "winner"
     t.bigint "user_id"
     t.datetime "created_at", null: false
