@@ -1,12 +1,52 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+// Own navbar
+.navbar {
+  z-index: 3;
+  margin: 3vh 0;
+  .dropdown {
+    margin-right: 4vw;
+  }
+  a {
+    flex-grow: 1;
+  }
+  .logo {
+    font-family: $headers-font;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 24px;
+    color: $green;
+    margin-left: 4vw;
+  }
+  .options {
+    display: flex;
+    vertical-align: center;
+    a {
+      font-size: 18px; 
+      margin-right: 4vw;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    .host-service {
+      background-color: $green;
+      padding: 4px 20px;
+      border-radius: 4px;
+    }
+  }
+  .search-bar {
+    margin-right: 4vw;
+    form {
+      font-family: $body-font;
+      font-weight: bold;
+      margin: 0 auto;
+      * {
+        text-align: center;
+        border: none;
+        font-size: 16px;
+        border-radius: 5vh;
+      }
+      div > input {
+        background-color: #f7f7f7;
+        color: $blue-3;
+      }
+    }
+  }
 }
