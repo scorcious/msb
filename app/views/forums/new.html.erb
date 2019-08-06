@@ -1,0 +1,7 @@
+<% if policy(@forum).create? %>
+  <h1>add a comment</h1>
+  <%= simple_form_for [@match, @forum] do |f| %>
+    <%= f.input :content %>
+    <%= f.submit "save", class: "btn btn-success" %>
+  <% end %>
+<% end %>

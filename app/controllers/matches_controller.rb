@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
     authorize @match
     @players_a = @match.team_a.map { |player| User.find(player) }
     @players_b = @match.team_b.map { |player| User.find(player) }
+    @forums = @match.forums
   end
 
   def new
