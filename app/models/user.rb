@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :categories
   has_many :matches
   has_many :forums
+  mount_uploader :photo, PhotoUploader
 end

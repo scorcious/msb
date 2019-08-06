@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'pages#home'
   resources :matches
+  resources :profiles, only: [:show]
+  resources :categories, only: [:new, :create, :edit, :update ]
+  root to: 'pages#home'
 end
