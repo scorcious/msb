@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_032402) do
+ActiveRecord::Schema.define(version: 2019_08_06_084014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,12 +45,11 @@ ActiveRecord::Schema.define(version: 2019_08_06_032402) do
     t.string "status"
     t.string "photo"
     t.string "score"
-    t.integer "team_a", array: true
-    t.integer "team_b", array: true
     t.string "winner"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "city"
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
@@ -106,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_032402) do
     t.string "address"
     t.text "bio"
     t.string "gender"
-    t.string "photo"
+    t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,6 +1,8 @@
 class Match < ApplicationRecord
+  acts_as_taggable_on :tags
   belongs_to :user
   has_many :forums
   mount_uploader :photo, PhotoUploader
-  validates :date, :location, :description, :time, :level, :number_of_players, :photo, presence: true
+  validates :date, :city, :location, :description, :time, :level, presence: true
+  validates :number_of_players, numericality: { greater_than: 0 }
 end
