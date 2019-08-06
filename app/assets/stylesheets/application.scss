@@ -11,3 +11,39 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    .wrapper {
+        flex-grow: 1;
+    }
+    .footer {
+        flex-shrink: 0;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    color: $green-3;
+}
+
+a {
+    font-family: $headers-font;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.logo {
+    font-family: $logo-font;
+}

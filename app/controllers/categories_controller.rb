@@ -28,6 +28,15 @@ class CategoriesController < ApplicationController
     redirect_to profile_path(current_user)
   end
 
+   def destroy
+    authorize @category
+    if @category.destroy
+      redirect_to profile_path
+    else
+      render :show, notice: 'Error'
+    end
+  end
+
 
   private
 
