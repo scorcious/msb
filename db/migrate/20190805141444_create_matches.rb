@@ -10,8 +10,8 @@ class CreateMatches < ActiveRecord::Migration[5.2]
       t.string :status
       t.string :photo
       t.string :score
-      t.string :team_a
-      t.string :team_b
+      t.integer :team_a, array: true
+      t.integer :team_b, array: true
       t.string :winner
       t.references :user, foreign_key: true
 
