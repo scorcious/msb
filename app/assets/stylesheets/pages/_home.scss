@@ -1,1 +1,88 @@
 // Specific CSS for your home-page
+.pages-home {
+    .background {
+        &:after {
+            content: "";
+            background: url("https://images.unsplash.com/photo-1423068657086-889315a2eba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80") no-repeat center center;
+            background-size: cover;
+            display: block;
+            width: 100%;
+            height: 75vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+        background-image: linear-gradient(to top, rgba(200,200,200, 0.3), rgba(200,200,200, 0.1));
+        position: absolute;
+        width: 100%;
+        height: 75vh;
+        top: 0;
+        background-size: cover;
+        div {
+            margin-top:30vh;
+            h1 {
+                font-size: 44px;
+                font-weight: bold;
+            }
+            .mesg-top {
+                color: $green;
+            }
+        }
+        form {
+            font-family: $logo-font;
+            font-weight: bold;
+            margin: 6vh auto;
+            margin-bottom: 16px;
+            width: 70vw;
+            * {
+                --height: 50px;
+                margin: 0;
+                letter-spacing: 1px;
+                text-align: center;
+                height: var(--height);
+                border: none;
+                border-radius: var(--height);
+                font-size: 24px;
+            }
+        }
+    }
+    .container {
+        h2 {
+            margin: 10vh 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .row {
+            margin-bottom: 10vh;
+            .recommended {
+                padding: 0;
+                margin: 1vh 0;
+                --height: 18vh;
+                height: var(--height);
+                width: 90%;
+                display: flex;
+                justify-content: center;
+                img {
+                    filter: blur(1px);
+                    position: absolute;
+                    width: 94%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                    border-radius: 4px;
+                }
+                h2 {
+                    position: absolute;
+                    width: 94%;
+                    height: 100%;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    border-radius: 4px;
+                    background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255, 0.3));
+                    padding-top: 7vh;
+                }
+            }
+          }
+    }
+}

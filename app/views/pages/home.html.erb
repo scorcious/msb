@@ -1,2 +1,41 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="pages-home">
+    <div class="background text-center mx-auto">
+        <div>
+            <h1 class="mesg-top">Rent Paintings</h1>
+            <h1>around you</h1>
+        </div>
+        <%= simple_form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
+        <%= f.input :title, label: false, placeholder: "Search for users and matches", input_html: {value: ""} %>
+        <% end %>
+    </div>
+    
+    <div class="container" style="margin-top: 76vh;">
+        <h2>Recommended for you</h2>
+        <div class="row"> <!-- TODO: TAGS FOR SPORTS -->
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1533213443190-1d96641c17ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1549985113-b697753f5bfd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1556005693-00fff02f134c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1473798486505-a5279da7afa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1282&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1563724221518-9214b4d7a8f0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1554757388-29a2a86ef02f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1468796835058-f43f737a4941?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="">
+            </div>
+            <div class="recommended col-sm-12 col-md-6 col-lg-3">
+                <img src="https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+            </div>
+        </div>
+    </div>
+</div>
