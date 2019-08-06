@@ -17,12 +17,12 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(paramas[:id])
+    @category = Category.find(params[:id])
     authorize @category
   end
 
   def update
-    @category = Category.find(paramas[:id])
+    @category = Category.find(params[:id])
     authorize @category
     @category.update(category_params)
     redirect_to profile_path(current_user)

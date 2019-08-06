@@ -17,6 +17,16 @@
     <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-success" %>
 
 
+    <h2>Your categories</h2>
+    <% current_user.categories.each do |category| %>
+    <p><%= category.name %> : <%= category.level %></p>
+    <%= link_to "Edit", edit_category_path(category) %>
+    <% end %>
+    <br>
+    <%= link_to "Add a category", new_category_path, class: "btn btn-success" %>
+
   <% end %>
+
+
 
 
