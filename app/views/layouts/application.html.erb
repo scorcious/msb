@@ -10,7 +10,27 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= yield %>
+    <div class="wrapper">
+      <%= yield %>
+    </div>
+
+    <footer class="row">
+      <%= link_to  "mysportbuddies", root_path, class: "logo" %>
+      <div class="col-sm-12 col-md-6">
+        <a href="" class="fab fa-github">Github</a>
+        <a href="" class="fab fa-instagram">Instagram</a>
+        <a href="" class="fab fa-facebook">Facebook</a>
+        <a href="" class="fab fa-twitter">Twitter</a>
+        <a href="" class="fab fa-linkedin">LinkedIn</a>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <a href="">Leave Us Feedbacks</a>
+        <a href="">Browse all matches</a>
+        <a href="">Browse all users</a>
+      </div>
+    </footer>
+    
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>
