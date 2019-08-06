@@ -8,8 +8,8 @@ class MatchesController < ApplicationController
 
   def show
     authorize @match
-    @players_a = @match.team_a.map { |player| User.find(player) }
-    @players_b = @match.team_b.map { |player| User.find(player) }
+    @players_a = @match.players.select { |player| player.team == "A" }
+    @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
   end
 
