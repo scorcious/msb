@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :set_category, only: [:edit, :update, :destroy]
+
 
   def new
     @category = Category.new
@@ -17,14 +19,18 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(paramas[:id])
     authorize @category
   end
 
   def update
-    @category = Category.find(paramas[:id])
     authorize @category
     @category.update(category_params)
+    redirect_to profile_path(current_user)
+  end
+
+  def destroy
+    authorize @category
+    @category.destroy
     redirect_to profile_path(current_user)
   end
 
@@ -33,5 +39,9 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :level)
+  end
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 end
