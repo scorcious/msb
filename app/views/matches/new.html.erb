@@ -1,18 +1,22 @@
-<div class="row justify-content-center">
-  <div class="col-8">
-    <div class="border center">
-      <%= simple_form_for [@match] do |f| %>
-        <%= f.input :date %>
-        <%= f.input :city %>
-        <%= f.input :location %>
-        <%= f.input :description %>
-        <%= f.input :time %>
-        <%= f.input :level, collection: %w(beginner intermediate advanced) %>
-        <%= f.input :number_of_players, input_html: { value: 2 } %>
-        <%= f.input :photo %>
-        <%= f.input :photo_cache, as: :hidden %>
-        <%= f.submit "Create", class: "btn btn-success mb-2" %>
-      <% end %>
+<!-- Find me in app/views/matches/new.html.erb -->
+<h1 class="text-center mt-5 mb-4">Create a Match</h1>
+<div class="container center">
+  <div class="row justify-content-center">
+     <div class="col-8">
+      <div class="border center">
+        <%= simple_form_for [@match] do |f| %>
+          <%= f.input :date %>
+          <%= f.input :city %>
+          <%= f.input :location %>
+          <%= f.input :description %>
+          <%= f.input :time %>
+          <%= f.input :level, collection: %w(beginner intermediate advanced) %>
+          <%= f.input :number_of_players, input_html: { value: 2 } %>
+          <%= f.input :photo %>
+          <%= f.input :photo_cache, as: :hidden %>
+          <%= f.submit "Create", class: "btn btn-success mb-2" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
