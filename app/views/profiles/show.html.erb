@@ -10,7 +10,11 @@
         </div>
         <p class="font-weight-bold text-center mt-2 mb-0"><%= @user.name.capitalize %></p>
         <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @user.city %></p>
-        <p class="font-italic text-center mt-0">"<%= @user.bio.capitalize %>"</p>
+        <% if !(@user.bio.nil?) %>
+          <p class="font-italic text-center mt-0">"<%= @user.bio.capitalize %>"</p>
+          <% else %>
+          <p class="font-italic text-center mt-0"></p>
+        <% end %>
       </div>
       <div class="col-10">
         <h6>Sport Buddies</h6>
