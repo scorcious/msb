@@ -17,6 +17,8 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
     @forum = Forum.new
+    @friends = User.all
+    @player = Player.new
   end
 
   def new
@@ -29,6 +31,7 @@ class MatchesController < ApplicationController
     @match.user = current_user
     if @match.save
 
+      add_team_to_player
       add_tags_to_match
 
       redirect_to @match
@@ -81,5 +84,15 @@ class MatchesController < ApplicationController
 
   def add_tags_to_match
     @match.tag_list.add(match_params[:tag_list].split(','))
+  end
+
+  def add_team_to_player
+    @player = Player.new
+    @player.user = current_user
+    @player.status = "accepted"
+    @player.team = 'A'
+    @player.match = @match
+    authorize @player
+    @player.save!
   end
 end

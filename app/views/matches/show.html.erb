@@ -96,3 +96,12 @@
     <%= link_to tag, tagged_path(tag: tag) %>
   <% end %>
 </div>
+
+<% if user_signed_in? %>
+  <div class="border">
+      <%= simple_form_for [@match, @player] do |f| %>
+        <%= f.input :user_id, collection: @friends %>
+        <%= f.submit "Challenge!", class: "btn btn-success" %>
+      <% end %>
+    </div>
+<% end %>
