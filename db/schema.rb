@@ -45,12 +45,11 @@ ActiveRecord::Schema.define(version: 2019_08_06_093155) do
     t.string "status"
     t.string "photo"
     t.string "score"
-    t.integer "team_a", array: true
-    t.integer "team_b", array: true
     t.string "winner"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "city"
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 

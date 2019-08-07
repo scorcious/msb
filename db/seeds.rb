@@ -26,6 +26,15 @@ puts "Creating users..."
   user.save!
 end
 
+User.create!(
+  name: 'felipe',
+  email: 'felipe@gmail.com',
+  password: '123456',
+  address: 'WenDing Lu',
+  city: 'Shanghai',
+  gender: 'male',
+  bio: '...')
+
 puts "Created #{User.count} users!"
 
 
@@ -33,21 +42,16 @@ puts "Creating matches..."
 
 10.times do
 
-  users = User.all.ids
-  teams = [2, 4, 6, 8]
-  players = teams.sample
-
   match = Match.new(
     date: Faker::Date.forward(days: 23),
+    city: Faker::Address.city,
     location: Faker::Address.full_address,
     description: Faker::Sports::Football.competition,
     time: Faker::Time.between(from: DateTime.now - 12, to: DateTime.now),
     level: levels.sample,
-    number_of_players: players,
+    number_of_players: [2, 4, 6, 8].sample,
     status: 'open',
     score: 0,
-    team_a: users.pop(players / 2),
-    team_b: users.pop(players / 2),
     user_id: User.all.sample.id)
   match.save!
 end
