@@ -5,7 +5,7 @@
             <h1>around you</h1>
         </div>
         <%= simple_form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
-        <%= f.input :query, label: false, placeholder: "Search for users and matches", input_html: {value: ""} %>
+        <%= f.input :query, label: false, placeholder: "Search for users and matches or sports", input_html: {value: ""} %>
         <% end %>
     </div>
     
@@ -13,56 +13,50 @@
         <h2>Recommended for you</h2>
         <div class="row"> <!-- TODO: TAGS FOR SPORTS AND LINKS -->
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1533213443190-1d96641c17ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
-                <!-- TODO: PLACE LINK HERE -->
+                <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3><!-- TODO: PLACE LINK HERE --></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1549985113-b697753f5bfd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1556005693-00fff02f134c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1473798486505-a5279da7afa2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1282&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1563724221518-9214b4d7a8f0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1482614312710-79c1d29bda2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1554757388-29a2a86ef02f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1434596922112-19c563067271?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1468796835058-f43f737a4941?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3></h3>
             </div>
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
-                <img src="https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
+                <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="">
+                <h3><%= link_to  "See All", matches_path %></h3>
             </div>
         </div>
 
         <h2>Discover matches</h2>
         <div class="row paintings">
-            <!-- TODO: GET 3 MATCHES -->
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <img src="https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                <div>
-                    <h4>LINK TO TITLE</h4>
-                    <p>IDK WHAT THIS IS</p>
+            <% @matches.each do |m| %>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <%= cl_image_tag m.photo %>
+                    <div>
+                        <h4><%= link_to m.description, match_path(m) %></h4>
+                        <p>Coming in: <%= (m.date - Date.today).to_i %> days</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <img src="https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                <div>
-                    <h4>LINK TO TITLE</h4>
-                    <p>IDK WHAT THIS IS</p>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <img src="https://images.unsplash.com/photo-1505562130589-9879683e72da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                <div>
-                    <h4>LINK TO TITLE</h4>
-                    <p>IDK WHAT THIS IS</p>
-                </div>
-            </div>
+            <% end %>
         </div>
     </div>
 </div>

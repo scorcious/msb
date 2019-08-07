@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_093155) do
     t.integer "level"
     t.integer "number_of_players"
     t.string "status"
-    t.string "photo"
+    t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
     t.string "score"
     t.string "winner"
     t.bigint "user_id"
