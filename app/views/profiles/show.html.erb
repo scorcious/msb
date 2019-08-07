@@ -1,13 +1,12 @@
 <div class="container">
 
 <% if policy(@user).show? %>
-
   <h2 class="text-center mt-5 mb-3"><%= @user.name.capitalize %>'s profile</h2>
 
     <div class="row mt-5">
       <div class="col-2 border rounded p-3">
         <div class="text-center">
-          <%= cl_image_tag @user.photo, height: 150, width: 150, crop: :fill, style:"object-fit:cover", class: "rounded-circle center" %>
+          <%= cl_image_tag @user.photo, crop: :fill, style:"object-fit:cover; height: 150px; width: 150px", class: "rounded-circle center" %>
         </div>
         <p class="font-weight-bold text-center mt-2 mb-0"><%= @user.name.capitalize %></p>
         <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @user.city %></p>
