@@ -3,14 +3,19 @@
   z-index: 3;
   margin: 3vh 0;
   .dropdown {
+    cursor: pointer;
     margin-right: 4vw;
+    display: flex;
+    align-items: center;
+    p {
+      margin: 0;
+      margin-left: 8px;
+    }
   }
   a {
     flex-grow: 1;
   }
   .logo {
-    font-family: $headers-font;
-    font-style: italic;
     font-weight: bold;
     font-size: 24px;
     color: $green;
@@ -21,9 +26,14 @@
     vertical-align: center;
     a {
       font-size: 18px; 
-      margin-right: 4vw;
+      margin-right: 26px;
       padding-top: 4px;
       padding-bottom: 4px;
+      max-height: 35px;
+      transition: all 0.2s ease;
+      &:hover {
+        font-size: 19px;
+      }
     }
     .host-service {
       background-color: $green;
@@ -32,7 +42,7 @@
     }
   }
   .search-bar {
-    margin-right: 4vw;
+    margin-right: 30px;
     form {
       font-family: $body-font;
       font-weight: bold;
@@ -44,7 +54,7 @@
         border-radius: 5vh;
       }
       div > input {
-        background-color: #f7f7f7;
+        background-color: #eee;
         color: $blue-3;
       }
     }

@@ -1,1 +1,8 @@
-edit.html.erb
+<% if policy(@category).update? %>
+  <h1>add a category</h1>
+  <%= simple_form_for @category do |f| %>
+    <%= f.input :name %>
+    <%= f.input :level, collection: %w(beginner intermediate advanced)%>
+    <%= f.submit "save", class: "btn btn-success" %>
+  <% end %>
+<% end %>

@@ -9,8 +9,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 2019_08_06_084014) do
+ActiveRecord::Schema.define(version: 2019_08_06_093155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +59,17 @@ ActiveRecord::Schema.define(version: 2019_08_06_084014) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.bigint "match_id"
+    t.bigint "user_id"
+    t.string "team"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_players_on_match_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -114,4 +124,5 @@ ActiveRecord::Schema.define(version: 2019_08_06_084014) do
   add_foreign_key "forums", "matches"
   add_foreign_key "forums", "users"
   add_foreign_key "matches", "users"
+  add_foreign_key "players", "users"
 end

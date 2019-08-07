@@ -8,6 +8,9 @@ class MatchesController < ApplicationController
 
   def show
     authorize @match
+    @players_a = @match.players.select { |player| player.team == "A" }
+    @players_b = @match.players.select { |player| player.team == "B" }
+    @forums = @match.forums
   end
 
   def new

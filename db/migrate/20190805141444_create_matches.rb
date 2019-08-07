@@ -8,7 +8,7 @@ class CreateMatches < ActiveRecord::Migration[5.2]
       t.integer :level
       t.integer :number_of_players
       t.string :status
-      t.string :photo
+      t.string :photo, default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
       t.string :score
       t.string :winner
       t.references :user, foreign_key: true
