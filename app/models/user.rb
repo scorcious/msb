@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :matches
   has_many :forums
   mount_uploader :photo, PhotoUploader
-  validates :name, :city, :address, :bio, :gender, presence: true
+  validates :name, :city, presence: true
 end
