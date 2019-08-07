@@ -12,6 +12,7 @@ class MatchesController < ApplicationController
     @players_a = @match.players.select { |player| player.team == "A" }
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
+    @forum = Forum.new
   end
 
   def new

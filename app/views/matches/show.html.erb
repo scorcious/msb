@@ -76,12 +76,17 @@
 
 <h2 class="text-center mb-4 mt-5">Comments</h2>
 
+<% if policy(@forum).create? %>
+  <%= simple_form_for [@match, @forum] do |f| %>
+    <%= f.input :content %>
+    <%= f.submit "save", class: "btn btn-success" %>
+  <% end %>
+<% end %>
 
 <div class="text-center mb-5">
   <% @forums.each do |comment| %>
-    <p> <%= comment.content %> </p>
+    <p> <%= comment.created_at %></p>
+    <p> <%= comment.user.name %> : <%= comment.content %> </p>
   <% end %>
 </div>
-<div class="text-center mb-5">
-  <%= link_to "add a comment", new_match_forum_path(@match),class: "", style: "text-decoration: underline; color: blue" %>
-</div>
+
