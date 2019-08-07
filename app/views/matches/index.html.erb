@@ -10,9 +10,21 @@
       <p>At: <%= match.time %></p>
       <p>Level: <%= match.level %></p>
       <p>Max Players: <%= match.number_of_players %></p>
-      <p>Team A: <%= match.team_a %></p>
+      <p>Team A:</p>
+      <% @players_a = match.players.select { |player| player.team == "A" } %>
+      <% @players_b = match.players.select { |player| player.team == "B" } %>
+      <% @players_a.each do |player| %>
+          <%= cl_image_tag player.user.photo %>
+        <% end %>
       <p>Team B: <%= match.team_b %></p>
+      <% @players_b.each do |player| %>
+          <%= cl_image_tag player.user.photo %>
+        <% end %>
+
+
       <p><%= link_to "Show", match_path(match), class: "btn btn-success" %></p>
     </div>
   <% end %>
 </div>
+
+

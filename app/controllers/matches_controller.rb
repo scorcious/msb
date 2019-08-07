@@ -4,6 +4,14 @@ class MatchesController < ApplicationController
 
   def index
     @matches = policy_scope(Match).order(created_at: :desc)
+
+    # @matches.each do |match|
+      # @players_a = match.players.select { |player| player.team == "A" }
+    # end
+#
+    # @matches.each do |match|
+      # @players_b = match.players.select { |player| player.team == "B" }
+    # end
   end
 
   def show
