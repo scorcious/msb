@@ -61,11 +61,3 @@
     <%= link_to tag, tagged_path(tag: tag) %>
   <% end %>
 </div>
-
-<div>
-  <%= simple_form_for [@cocktail, @dose] do |f| %>
-    <%= f.input :description %>
-    <%= f.association :ingredient %>
-    <%= f.submit "Add dose", class: "btn btn-primary" %>
-  <% end %>
-</div>
