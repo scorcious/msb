@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :categories, only: [:new, :create, :edit, :update, :destroy ]
   resources :pages, only: [:index]
   root to: 'pages#home'
+  get '/tagged', to: 'matches#index', as: :tagged
 end

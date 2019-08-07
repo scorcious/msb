@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_06_093155) do
+ActiveRecord::Schema.define(version: 2019_08_07_053652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,12 +35,23 @@ ActiveRecord::Schema.define(version: 2019_08_06_093155) do
     t.index ["user_id"], name: "index_forums_on_user_id"
   end
 
+  create_table "friendships", id: :serial, force: :cascade do |t|
+    t.string "friendable_type"
+    t.integer "friendable_id"
+    t.integer "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "blocker_id"
+    t.integer "status"
+    t.index ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true
+  end
+
   create_table "matches", force: :cascade do |t|
     t.date "date"
     t.string "location"
     t.text "description"
     t.time "time"
-    t.integer "level"
+    t.string "level"
     t.integer "number_of_players"
     t.string "status"
     t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"

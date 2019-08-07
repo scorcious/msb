@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :forums
   mount_uploader :photo, PhotoUploader
   validates :name, :city, presence: true
+  has_friendship
 end

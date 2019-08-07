@@ -5,7 +5,7 @@ class CreateMatches < ActiveRecord::Migration[5.2]
       t.string :location
       t.text :description
       t.time :time
-      t.integer :level
+      t.string :level
       t.integer :number_of_players
       t.string :status
       t.string :photo, default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
