@@ -27,15 +27,15 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
     @forum = Forum.new
+    @friends = User.all
+    @player = Player.new
 
     @array_A = @players_a.map do |player|
       player.user
     end
-
     @array_B = @players_b.map do |player|
       player.user
     end
-
     @all_players = @array_B + @array_A
   end
 
@@ -49,6 +49,7 @@ class MatchesController < ApplicationController
     @match.user = current_user
     if @match.save
 
+      add_team_to_player
       add_tags_to_match
 
       redirect_to @match
@@ -101,6 +102,16 @@ class MatchesController < ApplicationController
 
   def add_tags_to_match
     @match.tag_list.add(match_params[:tag_list].split(','))
+  end
+
+  def add_team_to_player
+    @player = Player.new
+    @player.user = current_user
+    @player.status = "accepted"
+    @player.team = 'A'
+    @player.match = @match
+    authorize @player
+    @player.save!
   end
   
   def find_all_matches_user_signed_up
