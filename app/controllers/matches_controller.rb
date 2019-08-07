@@ -3,7 +3,11 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
   def index
-    @matches = policy_scope(Match).order(created_at: :desc)
+    if params[:tag].present?
+      @matches = policy_scope(Match.tagged_with(params[:tag]))
+    else
+      @matches = policy_scope(Match).order(created_at: :desc)
+    end
     @show_user_match = !(params[:user_id].nil?)
   end
 
@@ -25,7 +29,7 @@ class MatchesController < ApplicationController
     @match.user = current_user
     if @match.save
 
-      team_up
+      add_tags_to_match
 
       redirect_to @match
     else
@@ -75,12 +79,7 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
   end
 
-  def team_up
-    # Player.new(
-    #   match: @match,
-    #   user: current_user,
-    #   team: 'A',
-    #   status: 'accepted'
-    # )
+  def add_tags_to_match
+    @match.tag_list.add(match_params[:tag_list].split(','))
   end
 end
