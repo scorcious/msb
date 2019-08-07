@@ -23,7 +23,7 @@ class MatchesController < ApplicationController
     @match.user = current_user
     if @match.save
 
-      team_up
+      add_tags_to_match
 
       redirect_to @match
     else
@@ -73,12 +73,7 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
   end
 
-  def team_up
-    # Player.new(
-    #   match: @match,
-    #   user: current_user,
-    #   team: 'A',
-    #   status: 'accepted'
-    # )
+  def add_tags_to_match
+    @match.tag_list.add(match_params[:tag_list].split(','))
   end
 end
