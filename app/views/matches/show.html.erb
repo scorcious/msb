@@ -78,7 +78,7 @@
 
 <% if policy(@forum).create? %>
   <%= simple_form_for [@match, @forum] do |f| %>
-    <%= f.input :content %>
+    <%= f.input :content, input_html: {value: ""}%>
     <%= f.submit "save", class: "btn btn-success" %>
   <% end %>
 <% end %>
