@@ -15,12 +15,16 @@ class MatchesController < ApplicationController
 
   def new
     authorize @match = Match.new
+    @tags = Match.select(:city).distinct
   end
 
   def create
     authorize @match = Match.new(match_params)
     @match.user = current_user
     if @match.save
+
+      team_up
+
       redirect_to @match
     else
       render :new
@@ -34,7 +38,7 @@ class MatchesController < ApplicationController
   def update
     authorize @match
     if @match.update(match_params)
-      render :show
+      redirect_to @match
     else
       render :edit
     end
@@ -54,83 +58,27 @@ class MatchesController < ApplicationController
   def match_params
     params.require(:match).permit(
       :date,
+      :city,
       :location,
       :description,
       :time,
       :level,
       :number_of_players,
       :photo,
-      :team_a,
-      :team_b
+      :tag_list
     )
   end
 
   def set_match
     @match = Match.find(params[:id])
   end
+
+  def team_up
+    # Player.new(
+    #   match: @match,
+    #   user: current_user,
+    #   team: 'A',
+    #   status: 'accepted'
+    # )
+  end
 end
-
-# class PaintingsController < ApplicationController
-#   skip_before_action :authenticate_user!, only: [:index, :show]
-#   before_action :set_painting, only: [:show, :edit, :update, :destroy]
-
-#   def index
-#     @paintings = policy_scope(Painting).order(created_at: :desc)
-#     @search = params["search"]
-#     if @search.present? && @search["title"] != ""
-#         @title = @search["title"]
-#         @paintings = Painting.where("title ILIKE ?", "%#{@title}%")
-#     end
-#   end
-
-#   def show
-#     authorize @painting
-#   end
-
-#   def new
-#     authorize @painting = Painting.new
-#   end
-
-#   def create
-#     authorize @painting = Painting.new(painting_params)
-#     @painting.user = current_user
-#     if @painting.save
-#       redirect_to @painting
-#     else
-#       render :new
-#     end
-#   end
-
-#   def edit
-#     authorize @painting
-#   end
-
-#   def update
-#     authorize @painting
-#     if @painting.update(painting_params)
-#       render :show
-#     else
-#       render :edit
-#     end
-#   end
-
-#   def destroy
-#     authorize @painting
-#     if @painting.bookings.empty?
-#       @painting.destroy
-#       redirect_to paintings_path
-#     else
-#       render :show, notice: 'Your painting has bookings'
-#     end
-#   end
-
-#   private
-
-#   def painting_params
-#     params.require(:painting).permit(:title, :description, :price, :category, :location)
-#   end
-
-#   def set_painting
-#     @painting = Painting.find(params[:id])
-#   end
-# end

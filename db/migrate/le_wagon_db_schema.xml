@@ -76,11 +76,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="489" y="302" name="matches">
+<table x="500" y="336" name="matches">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="date" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="city" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="location" null="1" autoincrement="0">
@@ -112,12 +115,6 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="score" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="team A" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="team B" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="winner" null="1" autoincrement="0">
@@ -187,5 +184,27 @@
 RelatingUserID
 RelatedUserID
 Type[friend, block, etc] so then you need 2 rows per friendship, correct? e.g. Suppose user1 friend-requests user2 and user2 accepts. You will need to insert 2 rows to present this: RelatingUserID: user1 | RelatedUserID user2 ------ RelatingUserID: user2 | RelatedUserID user1</comment>
+</table>
+<table x="805" y="450.4000015258789" name="players">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_matches" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="matches" row="id" />
+</row>
+<row name="id_users" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="team" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="status" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
 </table>
 </sql>
