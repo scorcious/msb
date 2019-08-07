@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
 
   def index
     @matches = policy_scope(Match).order(created_at: :desc)
+    @show_user_match = !(params[:user_id].nil?)
   end
 
   def show

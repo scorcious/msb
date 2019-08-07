@@ -1,16 +1,41 @@
-<h1>Matches#index</h1>
-<p>Find me in app/views/matches/index.html.erb</p>
-<div class="container center">
-<p><%= link_to "New", new_match_path, class: "btn btn-success" %></p>
-  <% @matches.each do |match| %>
-    <div class="border center">
-      <p>When: <%= match.date %></p>
-      <p>Where: <%= match.location %></p>
-      <p>Details: <%= match.description %></p>
-      <p>At: <%= match.time %></p>
-      <p>Level: <%= match.level %></p>
-      <p>Max Players: <%= match.number_of_players %></p>
-      <p><%= link_to "Show", match_path(match), class: "btn btn-success" %></p>
+<div class="container match-index">
+  <!-- FIXME: search (back-end) controller -->
+  <% if @show_user_match %>
+    <!-- TODO: SHOW USER MATCHES -->
+    <h2 class="text-center">Your Matches</h2>
+  <% else %>
+    <div class="search">
+      <h2 class="text-center">Find Matches Around you</h2>
+      <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: '' } do |f| %>
+      <%= f.input :query, label: false, placeholder: "Search for matches", input_html: {value: ""} %>
+      <% end %>
     </div>
   <% end %>
+  <div class="row">
+    <% @matches.each do |match| %>
+      <!-- TODO: -->
+      <!-- <div class="flip">
+          <div class="front" style="background-image: url(https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
+             <h1 class="text-shadow">MOUNTAIN</hi>
+          </div>
+          <div class="back">
+             <h2>Angular</h2>
+             <p>Good tools make application development quicker and easier to maintain than if you did everything by hand..</p>
+          </div>
+      </div> -->
+
+
+
+      <div class="col-sm-12 col-md-6 col-lg-4 border">
+        <p>When: <%= match.date %></p>
+        <p>Where: <%= match.location %></p>
+        <p>Details: <%= match.description %></p>
+        <p>At: <%= match.time %></p>
+        <p>Level: <%= match.level %></p>
+        <p>Max Players: <%= match.number_of_players %></p>
+        <p><%= link_to "Show", match_path(match), class: "btn btn-success" %></p>
+      </div>
+    <% end %>
+
+  </div>
 </div>
