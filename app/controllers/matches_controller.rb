@@ -13,6 +13,16 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
     @forum = Forum.new
+
+    @array_A = @players_a.map do |player|
+      player.user
+    end
+
+    @array_B = @players_b.map do |player|
+      player.user
+    end
+
+    @all_players = @array_B + @array_A
   end
 
   def new
