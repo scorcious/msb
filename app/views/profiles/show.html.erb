@@ -1,17 +1,31 @@
-
+<div class="container">
 
 <% if policy(@user).show? %>
 
-  <h2>Your profile</h2>
+  <h2 class="text-center mt-5 mb-3"><%= @user.name.capitalize %>'s profile</h2>
 
-    <%= cl_image_tag @user.photo, height: 300, width: 400, crop: :fill, style:"object-fit:cover" %>
+    <div class="row mt-5">
+      <div class="col-2 border rounded p-3">
+        <div class="text-center">
+          <%= cl_image_tag @user.photo, height: 150, width: 150, crop: :fill, style:"object-fit:cover", class: "rounded-circle center" %>
+        </div>
+        <p class="font-weight-bold text-center mt-2 mb-0"><%= @user.name.capitalize %></p>
+        <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @user.city %></p>
+        <p class="font-italic text-center mt-0">"<%= @user.bio.capitalize %>"</p>
+      </div>
+      <div class="col-10">
+        <h6>Sport Buddies</h6>
+          <div>
 
-    <p>Name : <%= @user.name %></p>
-    <p>Gender : <%= @user.gender %></p>
-    <p>Email : <%= @user.email %></p>
-    <p>Bio : <%= @user.bio %></p>
-    <p>Address : <%= @user.address %></p>
-    <p>City : <%= @user.city %></p>
+          </div>
+        <h6>Interests</h6>
+          <div>
+            <% current_user.categories.each do |category| %>
+            <p><%= category.name %></p>
+            <% end %>
+          </div>
+      </div>
+    </div>
 
 
     <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-success" %>
@@ -28,6 +42,8 @@
     <%= link_to "Add a category", new_category_path, class: "btn btn-success" %>
 
   <% end %>
+
+</div>
 
 
 
