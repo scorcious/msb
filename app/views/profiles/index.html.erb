@@ -1,0 +1,4 @@
+<h1>teste</h1>
+<% @profiles.each do |profile| %>
+<p><%= link_to profile.name, add_friend_path(profile), method: :post %></p>
+<% end %>
