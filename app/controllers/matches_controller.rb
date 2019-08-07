@@ -3,12 +3,22 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
   def index
+    # TODO:
+    # 1. show user's matches
+    # 2. search fn() for all sports, and tags
+    # 3. get all tags
     if params[:tag].present?
+      # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
     else
+      # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
+      @show_user_match = !(params[:user_id].nil?)
+      if @show_user_match
+        @matches = Match.where("user_id = ?", current_user.id)
+        @all_matches_signed_up = find_all_matches_user_signed_up
+      end
     end
-    @show_user_match = !(params[:user_id].nil?)
   end
 
   def show
@@ -19,6 +29,14 @@ class MatchesController < ApplicationController
     @forum = Forum.new
     @friends = User.all
     @player = Player.new
+
+    @array_A = @players_a.map do |player|
+      player.user
+    end
+    @array_B = @players_b.map do |player|
+      player.user
+    end
+    @all_players = @array_B + @array_A
   end
 
   def new
@@ -94,5 +112,18 @@ class MatchesController < ApplicationController
     @player.match = @match
     authorize @player
     @player.save!
+  end
+  
+  def find_all_matches_user_signed_up
+    all_matches_signed_up = []
+    Match.all.each do |m|
+      m.players.each do |p|
+        # finding if current user is signed up these events
+        if p.user == current_user
+          all_matches_signed_up << m
+        end
+      end
+    end
+    return all_matches_signed_up
   end
 end

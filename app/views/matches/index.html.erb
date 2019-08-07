@@ -2,7 +2,11 @@
   <!-- FIXME: search (back-end) controller -->
   <% if @show_user_match %>
     <!-- TODO: SHOW USER MATCHES -->
-    <h2 class="text-center">Your Matches</h2>
+    <div class="search navigations">
+      <h3 class="active">Your Matches</h3>
+      <h3>Hosted Matches</h3>
+      <h3>Past Matches</h3>
+    </div>
   <% else %>
     <div class="search">
       <h2 class="text-center">Find Matches Around you</h2>
@@ -13,29 +17,27 @@
   <% end %>
   <div class="row">
     <% @matches.each do |match| %>
-      <!-- TODO: -->
-      <!-- <div class="flip">
-          <div class="front" style="background-image: url(https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb)">
-             <h1 class="text-shadow">MOUNTAIN</hi>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="content">
+          <%= cl_image_tag match.photo %>
+          <div>
+            <h4 class="text-center"><%= match.description %></h4>
+            <p><%= match.location %></p>
           </div>
-          <div class="back">
-             <h2>Angular</h2>
-             <p>Good tools make application development quicker and easier to maintain than if you did everything by hand..</p>
+
+          <div>
+            <p>Level: <%= match.level %></p>
+            <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+            <p>Max Players: <%= match.number_of_players %></p>
+            <%= link_to "See More", match_path(match), class: "btn btn-success" %>
           </div>
-      </div> -->
-
-
-
-      <div class="col-sm-12 col-md-6 col-lg-4 border">
-        <p>When: <%= match.date %></p>
-        <p>Where: <%= match.location %></p>
-        <p>Details: <%= match.description %></p>
-        <p>At: <%= match.time %></p>
-        <p>Level: <%= match.level %></p>
-        <p>Max Players: <%= match.number_of_players %></p>
-        <p><%= link_to "Show", match_path(match), class: "btn btn-success" %></p>
+        </div>
       </div>
     <% end %>
 
   </div>
 </div>
+
+<script>
+  
+</script>
