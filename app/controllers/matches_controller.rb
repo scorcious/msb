@@ -3,7 +3,11 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
   def index
-    @matches = policy_scope(Match).order(created_at: :desc)
+    if params[:tag].present?
+      @matches = policy_scope(Match.tagged_with(params[:tag]))
+    else
+      @matches = policy_scope(Match).order(created_at: :desc)
+    end
   end
 
   def show

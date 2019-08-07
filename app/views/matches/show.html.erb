@@ -55,3 +55,7 @@
   <%= link_to "add a comment", new_match_forum_path(@match),class: "", style: "text-decoration: underline; color: blue" %>
 </div>
 
+<h1>TAGS  ----- NEEDS STYLING </h1>
+<% @match.tag_list.each do |tag| %>
+  <%= link_to tag, tagged_path(tag: tag) %>
+<% end %>
