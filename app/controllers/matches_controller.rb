@@ -8,6 +8,7 @@ class MatchesController < ApplicationController
     else
       @matches = policy_scope(Match).order(created_at: :desc)
     end
+    @show_user_match = !(params[:user_id].nil?)
   end
 
   def show
@@ -15,6 +16,7 @@ class MatchesController < ApplicationController
     @players_a = @match.players.select { |player| player.team == "A" }
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
+    @forum = Forum.new
   end
 
   def new
