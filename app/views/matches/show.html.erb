@@ -19,23 +19,24 @@
       <p class="mb-0", style="font-size: 14px">Max Players: <%= @match.number_of_players %></p>
     </div>
     <div class="col-7">
-      <div class="mb-5"><b>Team A</b>
-        <br>
+      <h5><strong>Team A</strong></h5>
+      <div class="d-flex mb-5 round-plus-button">
         <% @players_a.each do |player| %>
             <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
         <% end %>
-        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) ) %>
-          <%= link_to "Join", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "btn btn-primary" %>
+        <!-- add button -->
+        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) || @match.status == "open" ) %>
+          <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
         <% end %>
       </div>
-      <div class=""><b>Team B</b>
-        <br>
+      <h5><strong>Team B</strong></h5>
+      <div class="d-flex mb-5 round-plus-button">
         <% @players_b.each do |player| %>
           <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
         <% end %>
-        <!-- TODO: add button -->
+        <!-- add button -->
         <% unless ( @all_players.any?{|user| user == current_user} || (@players_b.count >= @match.number_of_players)) %>
-          <%= link_to "Join", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' },class: "btn btn-primary" %>
+          <%= link_to "", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' }, class: "fas fa-plus-circle" %>
         <% end %>
       </div>
     </div>
