@@ -19,6 +19,7 @@ class MatchesController < ApplicationController
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
+      @matches = Match.where("status = ?", "open").order(created_at: :desc)
       @show_user_match = !(params[:user_id].nil?)
       if @show_user_match
         @matches = Match.where("user_id = ?", params["user_id"]).order(created_at: :desc)
@@ -54,11 +55,13 @@ class MatchesController < ApplicationController
   def create
     authorize @match = Match.new(match_params)
     @match.user = current_user
+    @match.status = "open"
     if @match.save
-
+      # add
       add_team_to_player
       add_tags_to_match
 
+      # redirect
       redirect_to @match
     else
       render :new
