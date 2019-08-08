@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:index, :show]
   post '/profiles/:id', to: 'profiles#add_friend', as: :add_friend
+  post '/profiles/:id', to: 'profiles#accept_friend', as: :accept_friend
+  post '/my_friends', to: 'profiles#index', as: :my_friends # check if it works
 end
