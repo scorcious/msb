@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(version: 2019_08_07_053652) do
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"

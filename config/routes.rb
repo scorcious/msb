@@ -1,19 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-
   resources :matches do
     resources :forums, only: [:new, :create]
     resources :players, only: [:create]
   end
-
-  resources :profiles, only: [:show, :index]
-
-  get '/request/:profile_id', to: 'buddies#request', as: :request
-
   resources :categories, only: [:new, :create, :edit, :update, :destroy ]
   resources :pages, only: [:index]
-  # resources :friendships, only: [:index]
-
   root to: 'pages#home'
   get '/tagged', to: 'matches#index', as: :tagged
+
+  resources :profiles, only: [:index, :show]
+  post '/profiles/:id', to: 'profiles#add_friend', as: :add_friend
+  post '/profiles/:id', to: 'profiles#accept_friend', as: :accept_friend
+  post '/my_friends', to: 'profiles#index', as: :my_friends # check if it works
 end
