@@ -1,0 +1,20 @@
+<% if policy(@profiles).my_friends? %>
+
+  <h1>My sport buddies</h1>
+  <% @profiles.each do |profile| %>
+  <p><%= profile.name %></p>
+  <% end %>
+
+  <h2>Pending friend requests (received)</h2>
+  <% current_user.requested_friends.each do |friend| %>
+    <p><%= friend.name %></p>
+    <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
+    <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
+  <% end %>
+
+  <h2>Pending friend requests (sent)</h2>
+  <% current_user.pending_friends.each do |friend| %>
+    <p><%= friend.name %></p>
+  <% end %>
+
+<% end %>
