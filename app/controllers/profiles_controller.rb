@@ -1,7 +1,24 @@
 class ProfilesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_profile, only: [:add_friend]
+
+  def index
+    @profiles = policy_scope(Profile)
+  end
+
   def show
-    @user = current_user
-    authorize @user
+    @profile = current_user
+    authorize @profile
     @categories = current_user.categories
+  end
+
+  def add_friend
+    current_user.friend_request(@profile)
+  end
+
+  private
+
+  def set_profile
+    authorize @profile = Profile.find(params[:id])
   end
 end
