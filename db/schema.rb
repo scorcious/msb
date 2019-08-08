@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_053652) do
     t.string "location"
     t.text "description"
     t.time "time"
-    t.string "level"
+    t.integer "level"
     t.integer "number_of_players"
     t.string "status"
     t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
