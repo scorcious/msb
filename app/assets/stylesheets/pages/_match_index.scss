@@ -35,6 +35,7 @@
     }
     > .row {
         margin-bottom: 10vh;
+        text-align: center;
         > div {
             padding: 0 28px;
             margin: 15px 0;
@@ -73,6 +74,20 @@
                     }
                 }
             }
+        }
+        > div.no-match {
+            > div {
+                display: block;
+                > a {
+                    margin-top: 10px;
+                }
+            }
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

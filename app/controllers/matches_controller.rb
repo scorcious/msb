@@ -3,10 +3,16 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
   def index
-    # TODO:
+    # TODO: SEARCH
     # 1. show user's matches
     # 2. search fn() for all sports, and tags
     # 3. get all tags
+    
+    # INIT
+    @all_matches_signed_up = []
+    @past_matches = []
+    
+    # SEARCH FOR TAGS
     if params[:tag].present?
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
@@ -15,8 +21,9 @@ class MatchesController < ApplicationController
       @matches = policy_scope(Match).order(created_at: :desc)
       @show_user_match = !(params[:user_id].nil?)
       if @show_user_match
-        @matches = Match.where("user_id = ?", current_user.id)
+        @matches = Match.where("user_id = ?", current_user.id).order(created_at: :desc)
         @all_matches_signed_up = find_all_matches_user_signed_up
+        @past_matches = Match.where("status = ?", "past")
       end
     end
   end

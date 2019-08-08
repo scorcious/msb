@@ -1,11 +1,10 @@
 <div class="container match-index">
   <!-- FIXME: search (back-end) controller -->
   <% if @show_user_match %>
-    <!-- TODO: SHOW USER MATCHES -->
     <div class="search navigations">
-      <h3 class="active">Your Matches</h3>
-      <h3>Hosted Matches</h3>
-      <h3>Past Matches</h3>
+      <h3 id="matches-current" class="active">Your Matches</h3>
+      <h3 id="hosted">Hosted Matches</h3>
+      <h3 id="matches-past">Past Matches</h3>
     </div>
   <% else %>
     <div class="search">
@@ -16,28 +15,173 @@
     </div>
   <% end %>
   <div class="row">
-    <% @matches.each do |match| %>
-      <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="content">
-          <%= cl_image_tag match.photo %>
-          <div>
-            <h4 class="text-center"><%= match.description %></h4>
-            <p><%= match.location %></p>
-          </div>
+    <% if @show_user_match %>
+      <% if @all_matches_signed_up != [] %>
+        <% @all_matches_signed_up.each do |match| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag match.photo %>
+              <div>
+                <h4 class="text-center"><%= match.description %></h4>
+                <p><%= match.location %></p>
+              </div>
 
+              <div>
+                <p>Level: <%= match.level %></p>
+                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= match.number_of_players %></p>
+                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-match">
           <div>
-            <p>Level: <%= match.level %></p>
-            <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
-            <p>Max Players: <%= match.number_of_players %></p>
-            <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+            <h4> "You have no matches" </h4>
+            <%= link_to  "Browse Matches", matches_path, class: "btn btn-success" %>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    <% else %>
+      <% @matches.each do |match| %>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="content">
+            <%= cl_image_tag match.photo %>
+            <div>
+              <h4 class="text-center"><%= match.description %></h4>
+              <p><%= match.location %></p>
+            </div>
 
+            <div>
+              <p>Level: <%= match.level %></p>
+              <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+              <p>Max Players: <%= match.number_of_players %></p>
+              <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
 <script>
-  
+  const addClassSelected = (target) => {
+    // take parent class -> get children -> remove classes for all children
+    const children = target.parentElement.children;
+    const childAmount = target.parentElement.childElementCount;
+    for (let i=0; i<childAmount; i++) {
+      children[i].classList.remove("active");
+    }
+    // add class
+    target.classList.add("active");
+  }
+
+  this.addEventListener("click", (e) => {
+    // INIT
+    const whereToShow = document.querySelector(".row");
+    const id = e.target.id;
+    
+    // INJECT HTML
+    if (id === "matches-current") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      whereToShow.insertAdjacentHTML("beforeend", `
+      <% if @all_matches_signed_up != [] %>
+        <% @all_matches_signed_up.each do |match| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag match.photo %>
+              <div>
+                <h4 class="text-center"><%= match.description %></h4>
+                <p><%= match.location %></p>
+              </div>
+
+              <div>
+                <p>Level: <%= match.level %></p>
+                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= match.number_of_players %></p>
+                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-match">
+          <div>
+            <h4> "You have no matches" </h4>
+            <%= link_to  "Browse Matches", matches_path, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+      `)
+    }
+    else if (id === "hosted") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      whereToShow.insertAdjacentHTML("beforeend", `
+      <% if @matches != [] %>
+        <% @matches.each do |match| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag match.photo %>
+              <div>
+                <h4 class="text-center"><%= match.description %></h4>
+                <p><%= match.location %></p>
+              </div>
+
+              <div>
+                <p>Level: <%= match.level %></p>
+                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= match.number_of_players %></p>
+                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-match">
+          <div>
+            <h4> "You have not host any matches" </h4>
+            <%= link_to  "Host a match", new_match_path, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+      `)
+    }
+    else if (id === "matches-past") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      whereToShow.insertAdjacentHTML("beforeend", `
+      <% if @past_matches != [] %>
+        <% @past_matches.each do |match| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag match.photo %>
+              <div>
+                <h4 class="text-center"><%= match.description %></h4>
+                <p><%= match.location %></p>
+              </div>
+
+              <div>
+                <p>Level: <%= match.level %></p>
+                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= match.number_of_players %></p>
+                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-match">
+          <div>
+            <h4> "No past matches are found!" </h4>
+            <%= link_to  "Browse Matches", matches_path, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+      `)
+    }
+  })
 </script>
