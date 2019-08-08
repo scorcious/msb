@@ -8,6 +8,6 @@ class Match < ApplicationRecord
   validates :number_of_players, numericality: { greater_than: 0 , even: true}
 
   def full?
-    self.players.count >= self.number_of_players
+    self.players.where.not(status: 'declined').count >= self.number_of_players
   end
 end
