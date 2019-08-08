@@ -77,7 +77,7 @@
       <% end %>
       </div>
       <div class="text-center">
-        <div class="border" style="margin: 6vh 0; padding: 20px;">
+        <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
         <% @forums.each do |comment| %>
         <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
           <div class="m-3">
