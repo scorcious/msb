@@ -1,8 +1,6 @@
+
+<h1>teste</h1>
 <% @profiles.each do |profile| %>
-  <p><%= profile.name %></p>
-
-  <%=  link_to "Send a friend request", request_path(profile.id), class: "btn btn-success" %>
-
+<p><%= link_to profile.name, add_friend_path(profile), method: :post %></p>
 <% end %>
 
-<!-- profile_request_path(profile) -->
