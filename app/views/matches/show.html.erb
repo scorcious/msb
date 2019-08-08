@@ -1,4 +1,3 @@
-<!-- Find me in app/views/matches/show.html.erb -->
 <div class="banner d-flex align-items-center justify-content-center" style="background: url(<%= (cl_image_tag @match.photo).match(/http\:(.)*"/)[0].gsub(/\"/, "") %>) no-repeat center center; background-size: cover; height: 70vh" >
   <div>
     <h1 class="text-center" style="color: white"><%= @match.description %></h1>
@@ -25,12 +24,12 @@
             <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
         <% end %>
         <!-- add button -->
-        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) || @match.status == "open" ) %>
+        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) || @match.status != "open" ) %>
           <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
         <% end %>
       </div>
       <h5><strong>Team B</strong></h5>
-      <div class="d-flex mb-5 round-plus-button">
+      <div class="d-flex round-plus-button">
         <% @players_b.each do |player| %>
           <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
         <% end %>
@@ -49,15 +48,27 @@
         <%= link_to "Delete", match_path(@match), method: :delete, class: "btn btn-outline-danger" %>
       <% end %>
     <% end %>
+
+    <!-- Challenge buddy -->
+    <!-- FIXME: current_user.friends != [] -->
+    <% if user_signed_in? && !@match.full? && current_user.friends == [] %>
+    <div class="challenge">
+      <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
+      <%= simple_form_for [@match, @player] do |f| %>
+        <%= f.input :user_id, label: "Choose your buddy:", include_blank: false, collection: @friends %>
+        <%= f.submit "Challenge!", class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 
-  <h2 class="text-center mb-4 mt-5">Comments</h2>
+  <h2 class="text-center mb-1 mt-5">Write a comment</h2>
   <div class="row justify-content-center">
     <div class="col-10">
       <div class="text-center">
       <% if policy(@forum).create? %>
         <%= simple_form_for [@match, @forum] do |f| %>
-          <%= f.input :content, label: "enter your comment here:" %>
+          <%= f.input :content, label: "Write your comment here:" %>
           <%= f.submit "save", class: "btn btn-success mt-0 mb-4" %>
         <% end %>
       <% end %>
@@ -73,20 +84,3 @@
     </div>
 
 </div>
-
-<div>
-  <p>TAGS  ----- NEEDS STYLING </p>
-  <% @match.tag_list.each do |tag| %>
-    <%= link_to tag, tagged_path(tag: tag) %>
-  <% end %>
-</div>
-
-<p>CHALLENGE YOUR BUDDY ----- NEEDS STYLING </p>
-<% if user_signed_in? %>
-  <div class="border">Challenge your Friend 👊👊👊
-      <%= simple_form_for [@match, @player] do |f| %>
-        <%= f.input :user_id, include_blank: false, collection: @friends %>
-        <%= f.submit "Challenge!", class: "btn btn-success" %>
-      <% end %>
-    </div>
-<% end %>
