@@ -36,7 +36,6 @@ class MatchesController < ApplicationController
     @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
     @friends = (current_user ? current_user.friends : [])
-    raise;
     @player = Player.new
 
     @array_A = @players_a.map do |player|
