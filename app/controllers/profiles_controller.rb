@@ -7,9 +7,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = current_user
+    @profile = User.find(params[:id])
     authorize @profile
-    @categories = current_user.categories
+    @categories = User.find(params[:id]).categories
   end
 
   def add_friend
