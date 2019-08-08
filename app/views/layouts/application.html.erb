@@ -33,7 +33,7 @@
           </div>
           <!-- PROFILE DROPDOWN -->
           <div class="nav-item dropdown">
-            <%= cl_image_tag current_user.photo, crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "object-fit: cover", data: { toggle: 'dropdown'} %>
+            <%= cl_image_tag current_user.photo, crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "height: 40px; object-fit: cover", data: { toggle: 'dropdown'} %>
             <!-- FIXME: the carret down is not press-able -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>
