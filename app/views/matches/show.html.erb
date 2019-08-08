@@ -74,16 +74,17 @@
 
 
 <div>
-  <h1>TAGS  ----- NEEDS STYLING </h1>
+  <p>TAGS  ----- NEEDS STYLING </p>
   <% @match.tag_list.each do |tag| %>
     <%= link_to tag, tagged_path(tag: tag) %>
   <% end %>
 </div>
 
+<p>CHALLENGE YOUR BUDDY ----- NEEDS STYLING </p>
 <% if user_signed_in? %>
-  <div class="border">
+  <div class="border">Challenge your Friend 👊👊👊
       <%= simple_form_for [@match, @player] do |f| %>
-        <%= f.input :user_id, collection: @friends %>
+        <%= f.input :user_id, include_blank: false, collection: @friends %>
         <%= f.submit "Challenge!", class: "btn btn-success" %>
       <% end %>
     </div>
