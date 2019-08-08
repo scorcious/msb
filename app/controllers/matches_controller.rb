@@ -34,7 +34,7 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums
     @forum = Forum.new
-    @friends = User.all
+    @friends = current_user.friends
     @player = Player.new
 
     @array_A = @players_a.map do |player|
@@ -120,7 +120,7 @@ class MatchesController < ApplicationController
     authorize @player
     @player.save!
   end
-  
+
   def find_all_matches_user_signed_up
     all_matches_signed_up = []
     Match.all.each do |m|
