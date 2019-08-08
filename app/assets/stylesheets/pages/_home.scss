@@ -50,7 +50,7 @@
     }
     .container {
         h2 {
-            margin: 10vh 0;
+            margin: 15vh 0 10vh 0;
             text-align: center;
             font-weight: bold;
         }
@@ -134,4 +134,11 @@
             }
         }
     }
+}
+
+div#icon-arm {
+  img {
+    height: 160px;
+
+  }
 }
