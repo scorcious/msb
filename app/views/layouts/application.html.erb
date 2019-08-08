@@ -27,7 +27,7 @@
         <% if current_user %>
           <div class="options">
             <!-- FIXME: FIND BUDDIES LINK -->
-            <%= link_to  "Find buddies", matches_path %>
+            <%= link_to  "Find buddies", profiles_path %>
             <%= link_to  "Browse matches", matches_path %>
             <%= link_to  "Host a match", new_match_path, class: "host-service" %>
           </div>
@@ -37,6 +37,7 @@
             <!-- FIXME: the carret down is not press-able -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>
+              <%= link_to  "Your Buddies", my_friends_path, class:"dropdown-item" %>
               <%= link_to  "Your Matches", matches_path(user_id: current_user.id), class:"dropdown-item" %>
               <%= link_to  "Your Challenges", matches_path, class:"dropdown-item" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
