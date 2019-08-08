@@ -8,9 +8,25 @@
         <%= f.input :query, label: false, placeholder: "Search for users and matches or sports", input_html: {value: ""} %>
         <% end %>
     </div>
-    
+
     <div class="container" style="margin-top: 76vh;">
-        <h2>Recommended for you</h2>
+        <h2 class="">How it works</h2>
+        <div class="row text-center">
+          <div class="col-3">
+            <i class="fas fa-user-plus mb-4", style="font-size: 100px"></i>
+            <p>Create or sign-up for a match. As simple as that!</p>
+          </div>
+          <div class="col-3 mx-5" id="icon-arm">
+            <i class="far fa-smile mb-4", style="font-size: 100px"></i>
+            <p>Play the challege and earn glory and honor</p>
+          </div>
+          <div class="col-3">
+            <i class="fas fa-chart-line mb-4", style="font-size: 100px"></i>
+            <p>Measure your progress and get better to beat your next opponent</p>
+          </div>
+        </div>
+
+        <h2 class="">Categories</h2>
         <div class="row"> <!-- TODO: TAGS FOR SPORTS AND LINKS -->
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
                 <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
@@ -46,7 +62,7 @@
             </div>
         </div>
 
-        <h2>Discover matches</h2>
+        <h2 class="">Discover matches</h2>
         <div class="row paintings">
             <% @matches.each do |m| %>
                 <div class="col-sm-12 col-md-6 col-lg-4">
