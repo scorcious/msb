@@ -39,7 +39,7 @@
               <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>
               <%= link_to  "Your Buddies", my_friends_path, class:"dropdown-item" %>
               <%= link_to  "Your Matches", matches_path(user_id: current_user.id), class:"dropdown-item" %>
-              <%= link_to  "Your Challenges", matches_path, class:"dropdown-item" %>
+              <%= link_to  "Your Challenges", players_path, class:"dropdown-item" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
             </div>
             <p><i class="fas fa-caret-down"></i></p>

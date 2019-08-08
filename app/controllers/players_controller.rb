@@ -1,4 +1,20 @@
 class PlayersController < ApplicationController
+  before_action :set_match, only: [:create, :accept_challenge]
+  before_action :challenge_params, only: [:update]
+  before_action :set_challenge, only: [:update]
+
+  def index
+    @challenges = policy_scope(Player).where(user_id: current_user, status: 'pending')
+  end
+
+  def update
+    authorize @challenge
+    if @challenge.update(challenge_params)
+      redirect_to @challenge.match
+    else
+      render 'error'
+    end
+  end
 
   def create
     if params[:player][:team].present?
@@ -7,7 +23,6 @@ class PlayersController < ApplicationController
       @player = Player.new
       @player.user = current_user
       @player.status = "accepted"
-      @match = Match.find(params[:match_id])
       @player.team = params[:player][:team]
       @player.match = @match
       authorize @player
@@ -21,7 +36,6 @@ class PlayersController < ApplicationController
     else
       # to challenge someone
       authorize @player = Player.new
-      @match = Match.find(params[:match_id])
 
       challenger = @match.players.where(user_id: current_user).first
 
@@ -29,6 +43,7 @@ class PlayersController < ApplicationController
 
       @player.match = @match
       @player.user = User.find(params[:player][:user_id])
+      # raise
 
       @player.team = challenger.team == 'A' ? 'B' : 'A'
       @player.status = 'pending'
@@ -40,6 +55,18 @@ class PlayersController < ApplicationController
   end
 
   private
+
+  def set_match
+    @match = Match.find(params[:match_id])
+  end
+
+  def set_challenge
+    @challenge = Player.find(params[:id])
+  end
+
+  def challenge_params
+    params.require(:challenge).permit(:status)
+  end
 
   def match_auto_join
     Player.create!(
