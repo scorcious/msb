@@ -10,9 +10,11 @@
   <div class="row border rounded mt-5 mb-2 mx-0 p-3" style="">
     <div class="col-5">
       <p><b>Event details</b></p>
-      <p style="font-size: 14px">Where: <%= @match.location %></p>
-      <p style="font-size: 14px">When: <%= @match.date %></p>
-      <p style="font-size: 14px">At: <%= @match.time %></p>
+      <p style="font-size: 14px">Location: <%= @match.location %></p>
+      <p style="font-size: 14px">Date & Time: <%= @match.date.strftime("%d/%m/%Y") %> -  <%= @match.time.strftime("%H:%M") %></p>
+      <% if (@match.date - Date.today).to_i >= 0 %>
+        <p style="font-size: 14px">Coming in: <%= (@match.date - Date.today).to_i %> days</p>
+      <% end %>
       <p style="font-size: 14px">Level: <%= @match.level %></p>
       <p class="mb-0", style="font-size: 14px">Max Players: <%= @match.number_of_players %></p>
     </div>
@@ -46,7 +48,6 @@
         <%= link_to "Delete", match_path(@match), method: :delete, class: "btn btn-outline-danger" %>
       <% end %>
     <% end %>
-    <%= link_to "See all Matches", matches_path, class: "btn btn-success" %>
   </div>
 
   <h2 class="text-center mb-4 mt-5">Comments</h2>
