@@ -8,6 +8,18 @@ class ProfilePolicy < ApplicationPolicy
     true
   end
 
+  def accept_friend?
+    true
+  end
+
+  def decline_friend?
+    true
+  end
+
+  def my_friends?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

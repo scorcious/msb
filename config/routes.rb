@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get '/tagged', to: 'matches#index', as: :tagged
 
   resources :profiles, only: [:index, :show]
-  post '/profiles/:id', to: 'profiles#add_friend', as: :add_friend
-  post '/profiles/:id', to: 'profiles#accept_friend', as: :accept_friend
-  post '/my_friends', to: 'profiles#index', as: :my_friends # check if it works
+  post '/profiles/:id/add', to: 'profiles#add_friend', as: :add_friend
+  post '/profiles/:id/accept', to: 'profiles#accept_friend', as: :accept_friend
+  post '/profiles/:id/decline', to: 'profiles#decline_friend', as: :decline_friend
+
+  get '/my_friends', to: 'profiles#my_friends', as: :my_friends
 end

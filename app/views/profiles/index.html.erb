@@ -1,5 +1,7 @@
-<h1>teste</h1>
+<h1>All sport buddies</h1>
 <% @profiles.each do |profile| %>
-<p><%= link_to profile.name, add_friend_path(profile), method: :post %></p>
+<p><%= profile.name %></p>
+
+<p><%= link_to "connect", add_friend_path(profile), method: :post, class: "btn btn-success" %></p>
 <% end %>
 

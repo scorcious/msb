@@ -46,22 +46,9 @@
 
     <h2>My friends</h2>
     <% current_user.friends.each do |friend| %>
-    <%= friend.name %>
-    <% end %>
-
-    <h2>My pending friend requests received</h2>
-    <% current_user.requested_friends.each do |friend| %>
     <p><%= friend.name %></p>
-     <%= link_to "accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %>
+
     <% end %>
-
-    <h2>My pending friend requests sent</h2>
-    <% current_user.pending_friends.each do |friend| %>
-      <p><%= friend.name %></p>
-    <% end %>
-
-
-
 
   <% end %>
 
