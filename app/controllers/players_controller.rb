@@ -18,6 +18,8 @@ class PlayersController < ApplicationController
 
   def create
     if params[:player][:team].present?
+      # add the player into the team
+      # TODO: status - close
       @player = Player.new
       @player.user = current_user
       @player.status = "accepted"
@@ -25,9 +27,14 @@ class PlayersController < ApplicationController
       @player.match = @match
       authorize @player
       if @player.save!
+        if @match.full?
+          @match.status = "close"
+          @match.save
+        end
         redirect_to match_path(@match)
       end
     else
+      # to challenge someone
       authorize @player = Player.new
 
       challenger = @match.players.where(user_id: current_user).first

@@ -55,7 +55,7 @@
 
             <div>
               <p>Level: <%= match.level %></p>
-              <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+              <p>Date & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
               <p>Max Players: <%= match.number_of_players %></p>
               <%= link_to "See More", match_path(match), class: "btn btn-success" %>
             </div>

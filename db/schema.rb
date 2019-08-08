@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_053652) do
     t.string "location"
     t.text "description"
     t.time "time"
-    t.integer "level"
+    t.string "level"
     t.integer "number_of_players"
     t.string "status"
     t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
@@ -82,11 +82,6 @@ ActiveRecord::Schema.define(version: 2019_08_07_053652) do
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_players_on_match_id"
     t.index ["user_id"], name: "index_players_on_user_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
