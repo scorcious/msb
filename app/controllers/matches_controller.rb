@@ -35,7 +35,7 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" }
     @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
-    @friends = current_user.friends
+    @friends = (current_user ? current_user.friends : [])
     @player = Player.new
 
     @array_A = @players_a.map do |player|
