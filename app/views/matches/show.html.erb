@@ -47,7 +47,7 @@
     <% if current_user %>
       <% if @match.user == current_user %>
         <%= link_to "Edit", edit_match_path(@match), class: "btn btn-outline-success" %>
-        <%= link_to "Delete", match_path(@match), method: :delete, class: "btn btn-outline-danger" %>
+        <%= link_to "Cancel", match_path(@match), method: :delete, class: "btn btn-outline-danger" %>
       <% end %>
     <% end %>
 

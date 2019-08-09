@@ -83,11 +83,9 @@ class MatchesController < ApplicationController
 
   def destroy
     authorize @match
-    if @match.destroy
-      redirect_to matches_path
-    else
-      render :show, notice: 'Error'
-    end
+    @match.status = "cancelled"
+    @match.save
+    redirect_to root_path
   end
 
   private
