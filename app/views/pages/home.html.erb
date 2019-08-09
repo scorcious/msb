@@ -69,8 +69,11 @@
                     <div>
                         <%= cl_image_tag m.photo %>
                         <div>
-                            <h4><%= link_to m.description, match_path(m) %></h4>
-                            <p>Coming in: <%= (m.date - Date.today).to_i %> days</p>
+                            <h4 class="text-truncate"><%= m.description %></h4>
+                            <div class="see-match">
+                                <p>Coming in: <%= (m.date - Date.today).to_i %> days</p>
+                                <%= link_to  "See More", match_path(m) %>
+                            </div>
                         </div>
                     </div>
                 </div>

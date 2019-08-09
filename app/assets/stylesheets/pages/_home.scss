@@ -122,13 +122,38 @@
                             margin: 8px 0;
                             margin-bottom: 0px;
                         }
-                        p {
-                            font-family: $body-font;
-                            font-size: 18px;
+                        > .see-match {
+                            padding: 0;
                             margin: 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            border: none;
+                            height: 40px;
+                            box-shadow: none;
+                            p {
+                                font-family: $body-font;
+                                font-size: 18px;
+                                margin: 0;
+                                font-weight: bold;
+                            }
+                            a {
+                                height: 36px;
+                                margin: 0;
+                                text-align: center;
+                                border-radius: 4px;
+                                padding: 10px 20px;
+                                font-size: 16px;
+                                color: $green-3;
+                                background-color: $green;
+                                overflow: hidden;
+                                transition: 0.2s ease-out;
+                                &:hover {
+                                    font-size: 18px;
+                                }
+                            }
                         }
                         h4 {
-                            height: 60px;
                             a {
                                 transition: all 0.1s ease;
                                 overflow: hidden;
