@@ -16,7 +16,7 @@
   <% end %>
   <div class="row">
     <% if @show_user_match %>
-      <% if @all_matches_signed_up != [] %>
+      <% if @all_matches_signed_up != [] # if im not looking for a specific user's match %>
         <% @all_matches_signed_up.each do |match| %>
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="content">
