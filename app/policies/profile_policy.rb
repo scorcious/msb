@@ -16,10 +16,6 @@ class ProfilePolicy < ApplicationPolicy
     true
   end
 
-  def my_friends?
-    true
-  end
-
   class Scope < Scope
     def resolve
       scope.all
