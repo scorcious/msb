@@ -7,10 +7,11 @@ class MatchesController < ApplicationController
     # 1. show user's matches
     # 2. search fn() for all sports, and tags
     # 3. get all tags
-    
+
     # INIT
     @all_matches_signed_up = []
     @past_matches = []
+    @user_name = params["user_id"].nil? ? "" : (User.find(params["user_id"]).name)
 
     # SEARCH FOR TAGS
     if params[:tag].present?
@@ -31,8 +32,8 @@ class MatchesController < ApplicationController
 
   def show
     authorize @match
-    @players_a = @match.players.select { |player| player.team == "A" }
-    @players_b = @match.players.select { |player| player.team == "B" }
+    @players_a = @match.players.select { |player| player.team == "A" && player.status != "declined" }
+    @players_b = @match.players.select { |player| player.team == "B" && player.status != "declined" }
     @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
     @friends = (current_user ? current_user.friends : [])
@@ -109,7 +110,10 @@ class MatchesController < ApplicationController
   end
 
   def add_tags_to_match
-    @match.tag_list.add(match_params[:tag_list].split(','))
+    tags = match_params[:tag_list].split(',')
+    tags << match_params[:city]
+    tags << match_params[:level]
+    @match.tag_list.add(tags)
   end
 
   def add_team_to_player

@@ -16,7 +16,7 @@
   <% end %>
   <div class="row">
     <% if @show_user_match %>
-      <% if @all_matches_signed_up != [] %>
+      <% if @all_matches_signed_up != [] # if im not looking for a specific user's match %>
         <% @all_matches_signed_up.each do |match| %>
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="content">
@@ -82,7 +82,7 @@
     // INIT
     const whereToShow = document.querySelector(".row");
     const id = e.target.id;
-    
+
     // INJECT HTML
     if (id === "matches-current") {
       addClassSelected(e.target);
@@ -143,7 +143,7 @@
       <% else %>
         <div class="no-match">
           <div>
-            <h4> "<%= User.find(params["user_id"]).name %> have not host any matches" </h4>
+            <h4> "<%= @user_name %> have not host any matches" </h4>
             <%= link_to  "Host a match", new_match_path, class: "btn btn-success" %>
           </div>
         </div>
