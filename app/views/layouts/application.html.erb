@@ -114,13 +114,6 @@
         <% end %>
       `)
 
-      // Matches
-      matches.insertAdjacentHTML("beforeend", `
-        <% if @matches_counts != 0 %>
-          <span><%= @matches_counts %></span>
-        <% end %>
-      `)
-
       // Challenges
       challenges.insertAdjacentHTML("beforeend", `
         <% if @challenges_counts != 0 %>

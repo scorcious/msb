@@ -282,13 +282,10 @@ end
 puts "Created #{Match.count} matches!"
 
 
-<<<<<<< HEAD
-=======
 ####################### CREANTING USERS #######################
 
 puts "Creating users..."
 
->>>>>>> origin
 profile = [
   "https://images.unsplash.com/photo-1539605480396-a61f99da1041?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
@@ -328,9 +325,6 @@ profile = [
   "https://images.unsplash.com/photo-1523307730650-594bc63f9d67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
 ]
 
-<<<<<<< HEAD
-
-=======
 # Famous Players
 index = -1
 
@@ -348,7 +342,6 @@ index = -1
   user.remote_photo_url = profile[index]
   user.save!
 end
->>>>>>> origin
 
 # Geeks
 index = -1

@@ -13,9 +13,8 @@ class ApplicationController < ActionController::Base
   def get_notif_value
     if current_user
       @challenges_counts = policy_scope(Player).where(user_id: current_user, status: 'pending').count
-      @matches_counts = find_all_matches_user_signed_up.count
       @buddies_pending_counts = current_user.requested_friends.count
-      @total_counts = @challenges_counts + @matches_counts + @buddies_pending_counts
+      @total_counts = @challenges_counts + @buddies_pending_counts
     end
   end
 
