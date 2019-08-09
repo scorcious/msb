@@ -1,20 +1,41 @@
-<% if policy(@profiles).my_friends? %>
+<div class="container">
+  <div class="profile-friends">
+    <% if policy(@profiles).my_friends? %>
+      <div class="search navigations">
+        <h3 id="request-get" class="active">Request Received</h3>
+        <h3 id="all-friends">My Sport Buddies</h3>
+        <h3 id="request-sent">Request Sent</h3>
+      </div>
 
-  <h1>My sport buddies</h1>
-  <% @profiles.each do |profile| %>
-  <p><%= profile.name %></p>
-  <% end %>
-
-  <h2>Pending friend requests (received)</h2>
-  <% current_user.requested_friends.each do |friend| %>
-    <p><%= friend.name %></p>
-    <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
-    <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
-  <% end %>
-
-  <h2>Pending friend requests (sent)</h2>
-  <% current_user.pending_friends.each do |friend| %>
-    <p><%= friend.name %></p>
-  <% end %>
-
-<% end %>
+      <div id="friends-toPlace">
+        <% if current_user.requested_friends != [] %>
+          <% current_user.requested_friends.each do |friend| %>
+            <p><%= friend.name %></p>
+            <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
+            <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
+          <% end %>
+        <% else %>
+          <!-- FIXME: show no friend request -->
+        <% end %>
+      </div>
+  
+      <h1>My sport buddies</h1>
+      <% @profiles.each do |profile| %>
+      <p><%= profile.name %></p>
+      <% end %>
+    
+      <h2>Pending friend requests (received)</h2>
+      <% current_user.requested_friends.each do |friend| %>
+        <p><%= friend.name %></p>
+        <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
+        <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
+      <% end %>
+    
+      <h2>Pending friend requests (sent)</h2>
+      <% current_user.pending_friends.each do |friend| %>
+        <p><%= friend.name %></p>
+      <% end %>
+    
+    <% end %>
+  </div>
+</div>
