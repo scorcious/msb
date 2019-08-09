@@ -26,7 +26,6 @@
         <!-- IF USER IS LOGGED IN -->
         <% if current_user %>
           <div class="options">
-            <!-- FIXME: FIND BUDDIES LINK -->
             <%= link_to  "Find buddies", profiles_path %>
             <%= link_to  "Browse matches", matches_path %>
             <%= link_to  "Host a match", new_match_path, class: "host-service" %>
@@ -41,6 +40,9 @@
               <%= link_to  "Your Matches", matches_path(user_id: current_user.id), class:"dropdown-item" %>
               <%= link_to  "Your Challenges", players_path, class:"dropdown-item" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
+            </div>
+            <div id="notif-div">
+              <p id="notif-total"><%= @total_count %></p>
             </div>
             <p><i class="fas fa-caret-down"></i></p>
           </div>
@@ -97,5 +99,32 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <script>
+      const items = document.querySelectorAll(".dropdown-item");
+      const buddies = items[1];
+      const matches = items[2];
+      const challenges = items[3];
+
+      // Buddies
+      buddies.insertAdjacentHTML("beforeend", `
+        <% if @buddies_pending_count != 0 %>
+          <span><%= @buddies_pending_count %></span>
+        <% end %>
+      `)
+
+      // Matches
+      matches.insertAdjacentHTML("beforeend", `
+        <% if @matches_count != 0 %>
+          <span><%= @matches_count %></span>
+        <% end %>
+      `)
+
+      // Challenges
+      challenges.insertAdjacentHTML("beforeend", `
+        <% if @challenges_count != 0 %>
+          <span><%= @challenges_count %></span>
+        <% end %>
+      `)
+    </script>
   </body>
 </html>

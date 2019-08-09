@@ -9,7 +9,37 @@
     align-items: center;
     p {
       margin: 0;
-      margin-left: 8px;
+      margin-left: 0px;
+    }
+    div#notif-div {
+      height: 40px;
+      margin-left: -15px;
+      margin-top: -15px;
+      p#notif-total {
+        height: 28px;
+        width: 28px;
+        margin: 0;
+        padding: 4px 10px;
+        font-size: 14px;
+        background-color: $error;
+        color: white;
+        border-radius: 100vh;
+      }
+    }
+    div {
+      a {
+        span { // the notif value
+          margin-left: 4px;
+          height: 28px;
+          width: 28px;
+          font-size: 14px;
+          background-color: $error;
+          color: white;
+          padding: 4px 9px;
+          border-radius: 100vh;
+
+        }
+      }
     }
   }
   a {
