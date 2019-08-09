@@ -52,7 +52,7 @@
     <% end %>
 
     <!-- Challenge buddy -->
-    <% if user_signed_in? && !@match.full? && current_user.friends != [] %>
+    <% if @all_players.any?{|user| user == current_user} && user_signed_in? && !@match.full? && current_user.friends != [] %>
     <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
     <div class="pb-4 challenge d-flex justify-content-center">
       <div class="col-sm-12 col-md-10 p-0">
