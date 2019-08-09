@@ -8,11 +8,11 @@
     <div class="col">
 
     <div class="row justify-content-between">
-      <div class="col-4 m-0">
-        <div class="border", style="border-radius: 10px">
-          <div class="rounded p-3">
+      <div class="col p-0">
+        <div class="border p-0 pt-4 pb-3 mb-0 mr-4", style="border-radius: 10px">
+          <div class="rounded p-0">
             <div class="text-center">
-              <%= cl_image_tag @profile.photo, crop: :fill, style:"object-fit:cover; height: 30vh; width: 30vh", class: "rounded-circle center" %>
+              <%= cl_image_tag @profile.photo, crop: :fill, style:"object-fit:cover; height: 25vh; width: 25vh", class: "rounded-circle center" %>
             </div>
             <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
             <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
@@ -27,7 +27,7 @@
 
       <!-- 2 - OTHER INFO -->
 
-      <div class="border col-8 p-3", style="border-radius: 10px">
+      <div class="border col-8 p-4", style="border-radius: 10px">
         <p class="text-center" style="font-weight: bold">My Sport Buddies</p>
           <div class="col mr-0">
             <% current_user.friends.each do |friend| %>
@@ -47,20 +47,26 @@
     </div>
 
 
-    <div class="row border", style="border-radius: 10px">
+    <div class="row border mt-4", style="border-radius: 10px">
       <div class="col">
         <p class="text-center" style="font-weight: bold">My Dashboard</p>
       </div>
 
+      <div>
+        <% current_user.categories.each do |category| %>
+          <%= category.name %>
+          <%= category.level %>
+        <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
+        <%= link_to "Delete", category_path(category), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+      <div>
+
+      </div>
     </div>
-      <% current_user.categories.each do |category| %>
-        <%= category.name %>
-        <%= category.level %>
-      <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
-      <%= link_to "Delete", category_path(category), method: :delete, class: "btn btn-danger" %>
-      <% end %>
 
     </div>
+
 
     <!-- 3 - DASHBOARD -->
 
