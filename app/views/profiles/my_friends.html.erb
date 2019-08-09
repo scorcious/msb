@@ -8,6 +8,47 @@
       </div>
 
       <div id="friends-toPlace">
+        <!-- FIXME: CORRECT VERSION -->
+        <!-- <% if current_user.requested_friends != [] %>
+          <% current_user.requested_friends.each do |friend| %>
+            <p><%= friend.name %></p>
+            <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
+            <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
+          <% end %>
+        <% else %>
+          <h4>"You have no pending friend requests"</h4>
+        <% end %> -->
+        <div class="row">
+          <% @profiles.each do |profile| %>
+            <div class="col-sm-12 col-md-6">
+              <p><%= profile.name %>TODO: styling</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  const addClassSelected = (target) => {
+    // take parent class -> get children -> remove classes for all children
+    const children = target.parentElement.children;
+    const childAmount = target.parentElement.childElementCount;
+    for (let i=0; i<childAmount; i++) {
+      children[i].classList.remove("active");
+    }
+    // add class
+    target.classList.add("active");
+  };
+
+  this.addEventListener("click", (e) => {
+    const whereToShow = document.querySelector("#friends-toPlace");
+    const id = e.target.id;
+    if (id === "request-get") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      whereToShow.insertAdjacentHTML("beforeend", `
         <% if current_user.requested_friends != [] %>
           <% current_user.requested_friends.each do |friend| %>
             <p><%= friend.name %></p>
@@ -15,27 +56,36 @@
             <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
           <% end %>
         <% else %>
-          <!-- FIXME: show no friend request -->
+          <h4>"You have no pending friend requests"</h4>
         <% end %>
-      </div>
-  
-      <h1>My sport buddies</h1>
-      <% @profiles.each do |profile| %>
-      <p><%= profile.name %></p>
-      <% end %>
-    
-      <h2>Pending friend requests (received)</h2>
-      <% current_user.requested_friends.each do |friend| %>
-        <p><%= friend.name %></p>
-        <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
-        <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
-      <% end %>
-    
-      <h2>Pending friend requests (sent)</h2>
-      <% current_user.pending_friends.each do |friend| %>
-        <p><%= friend.name %></p>
-      <% end %>
-    
-    <% end %>
-  </div>
-</div>
+      `);
+    }
+    else if (id === "all-friends") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      // TODO: FIXME: @profiles case empty
+      whereToShow.insertAdjacentHTML("beforeend", `
+        <% if @profiles != [] %>
+          <% @profiles.each do |profile| %>
+            <p><%= profile.name %>TODO: styling</p>
+          <% end %>
+        <% else %>
+          <h4>"You have no pending friend requests"</h4>
+        <% end %>
+      `);
+    }
+    else if (id === "request-sent") {
+      addClassSelected(e.target);
+      whereToShow.innerHTML = "";
+      whereToShow.insertAdjacentHTML("beforeend", `
+        <% if current_user.pending_friends != [] %>
+          <% current_user.pending_friends.each do |friend| %>
+            <p><%= friend.name %></p>
+          <% end %>
+        <% else %>
+          <h4>"You have no pending sent friend requests"</h4>
+        <% end %>
+      `);
+    };
+  });
+</script>
