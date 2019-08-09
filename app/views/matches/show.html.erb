@@ -31,7 +31,7 @@
       </div>
       <h5><strong>Team B</strong></h5>
       <div class="d-flex round-plus-button">
-        <% @players_b.each do |player| %>
+        <% raise;@players_b.each do |player| %>
           <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
         <% end %>
         <!-- add button -->

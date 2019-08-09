@@ -14,9 +14,9 @@
               </div>
               <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
               <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
-              <% if !(@profile.bio.nil?) %>
+              <% if (@profile.bio != "") %>
                 <p class="font-italic text-center mt-0">"<%= @profile.bio.capitalize %>"</p>
-                <% else %>
+              <% else %>
                 <p class="font-italic text-center mt-0"></p>
               <% end %>
             </div>
