@@ -9,7 +9,7 @@
 
       <div id="friends-toPlace">
         <!-- FIXME: CORRECT VERSION -->
-        <!-- <% if current_user.requested_friends != [] %>
+        <% if current_user.requested_friends != [] %>
           <% current_user.requested_friends.each do |friend| %>
             <p><%= friend.name %></p>
             <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
@@ -17,14 +17,18 @@
           <% end %>
         <% else %>
           <h4>"You have no pending friend requests"</h4>
-        <% end %> -->
-        <div class="row">
+        <% end %>
+
+        <!-- TODO: not done -->
+        <!-- <div class="row">
           <% @profiles.each do |profile| %>
             <div class="col-sm-12 col-md-6">
               <p><%= profile.name %>TODO: styling</p>
             </div>
           <% end %>
-        </div>
+        </div> -->
+
+        <!-- END friends-toPlace -->
       </div>
     <% end %>
   </div>
