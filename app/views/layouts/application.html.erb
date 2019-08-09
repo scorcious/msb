@@ -42,7 +42,7 @@
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
             </div>
             <div id="notif-div">
-              <p id="notif-total"><%= @total_count %></p>
+              <p id="notif-total"><%= @total_counts %></p>
             </div>
             <p><i class="fas fa-caret-down"></i></p>
           </div>
@@ -107,22 +107,22 @@
 
       // Buddies
       buddies.insertAdjacentHTML("beforeend", `
-        <% if @buddies_pending_count != 0 %>
-          <span><%= @buddies_pending_count %></span>
+        <% if @buddies_pending_counts != 0 %>
+          <span><%= @buddies_pending_counts %></span>
         <% end %>
       `)
 
       // Matches
       matches.insertAdjacentHTML("beforeend", `
-        <% if @matches_count != 0 %>
-          <span><%= @matches_count %></span>
+        <% if @matches_counts != 0 %>
+          <span><%= @matches_counts %></span>
         <% end %>
       `)
 
       // Challenges
       challenges.insertAdjacentHTML("beforeend", `
-        <% if @challenges_count != 0 %>
-          <span><%= @challenges_count %></span>
+        <% if @challenges_counts != 0 %>
+          <span><%= @challenges_counts %></span>
         <% end %>
       `)
     </script>

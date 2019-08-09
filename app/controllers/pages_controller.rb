@@ -4,12 +4,6 @@ class PagesController < ApplicationController
     @no_search_bar = true
     @no_container = true
     @matches = Match.where("status != ? AND status != ?", "past", "full").sample(3)
-
-    # Notifications
-    @challenges_count = policy_scope(Player).where(user_id: current_user, status: 'pending').count
-    @matches_count = find_all_matches_user_signed_up.count
-    @buddies_pending_count = current_user.requested_friends.count
-    @total_count = @challenges_count + @matches_count + @buddies_pending_count
   end
 
   def index
