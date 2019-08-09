@@ -1,7 +1,39 @@
-<% @challenges.each do |challenge| %>
-  <div>
-    <%= link_to challenge.match.description, match_path(challenge.match) %>
-    <p><%= link_to "Accept 👊", player_path(challenge, challenge: { status: 'accepted' }), method: :put %></p>
-    <p><%= link_to "Decline 😱", player_path(challenge, challenge: { status: 'declined' }), method: :put %></p>
+<div class="container">
+  <div class="challenge-index">
+    <h2 class="text-center">Your Challenges</h2>
+    <% if @challenges != [] %>
+        <div class="row">
+        <% @challenges.each do |challenge| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag challenge.match.photo %>
+              <div>
+                <h4 class="text-center"><%= challenge.match.description %></h4>
+                <p><%= challenge.match.location %></p>
+              </div>
+      
+              <div>
+                <p>Level: <%= challenge.match.level %></p>
+                <p>Darte & Time: <%= challenge.match.date.strftime("%d/%m/%Y") %> -  <%= challenge.match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= challenge.match.number_of_players %></p>
+                <%= link_to "See Match", match_path(challenge.match), class: "btn btn-success" %>
+                <%= link_to "Accept", player_path(challenge, challenge: { status: 'accepted' }), class: "btn btn-outline-primary", method: :put %>
+                <%= link_to "Decline", player_path(challenge, challenge: { status: 'declined' }), class: "btn btn-outline-danger", method: :put %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      <% else %>
+      <div id="no-matches">
+        <div>
+          <h4>"You have no challenges"</h4>
+          <div>
+            <%= link_to  "Browse Matches", matches_path %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
