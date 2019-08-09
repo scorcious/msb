@@ -1,0 +1,7 @@
+<% @challenges.each do |challenge| %>
+  <div>
+    <%= link_to challenge.match.description, match_path(challenge.match) %>
+    <p><%= link_to "Accept 👊", player_path(challenge, challenge: { status: 'accepted' }), method: :put %></p>
+    <p><%= link_to "Decline 😱", player_path(challenge, challenge: { status: 'declined' }), method: :put %></p>
+  </div>
+<% end %>

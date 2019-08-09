@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>mysportbuddies</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -27,18 +27,19 @@
         <% if current_user %>
           <div class="options">
             <!-- FIXME: FIND BUDDIES LINK -->
-            <%= link_to  "Find buddies", matches_path %>
+            <%= link_to  "Find buddies", profiles_path %>
             <%= link_to  "Browse matches", matches_path %>
             <%= link_to  "Host a match", new_match_path, class: "host-service" %>
           </div>
           <!-- PROFILE DROPDOWN -->
           <div class="nav-item dropdown">
-            <%= cl_image_tag current_user.photo, crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "object-fit: cover", data: { toggle: 'dropdown'} %>
+            <%= image_tag (cl_image_path current_user.photo), crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "height: 40px; object-fit: cover", data: { toggle: 'dropdown'} %>
             <!-- FIXME: the carret down is not press-able -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>
+              <%= link_to  "Your Buddies", my_friends_path, class:"dropdown-item" %>
               <%= link_to  "Your Matches", matches_path(user_id: current_user.id), class:"dropdown-item" %>
-              <%= link_to  "Your Challenges", matches_path, class:"dropdown-item" %>
+              <%= link_to  "Your Challenges", players_path, class:"dropdown-item" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
             </div>
             <p><i class="fas fa-caret-down"></i></p>
@@ -76,15 +77,18 @@
 
         <div class="col-sm-12 col-md-6">
           <div>
-            <a href="">Browse all matches</a>
+            <%= link_to  "Browse all matches", matches_path %>
           </div>
           <div>
+            <!-- FIXME: -->
             <a href="">Browse all users</a>
           </div>
           <div>
+            <!-- TODO: -->
             <a href="">Leave Us Feedbacks</a>
           </div>
           <div>
+            <!-- TODO: -->
             <a href="">Contact Us</a>
           </div>
         </div>

@@ -9,7 +9,7 @@
 Match.delete_all if Rails.env.development?
 User.delete_all if Rails.env.development?
 
-levels = %w(Beginner Intermediate Advanced)
+levels = %w(beginner intermediate advanced)
 
 puts "Creating users..."
 
@@ -52,7 +52,7 @@ puts "Creating matches..."
     number_of_players: [2, 4, 6, 8].sample,
     status: 'open',
     score: 0,
-    user_id: User.all.sample.id)
+    user_id: User.last.id)
   match.save!
 end
 

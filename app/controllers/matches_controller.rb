@@ -19,6 +19,7 @@ class MatchesController < ApplicationController
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
+      @matches = Match.where("status = ?", "open").order(created_at: :desc)
       @show_user_match = !(params[:user_id].nil?)
       if @show_user_match
         @matches = Match.where("user_id = ?", params["user_id"]).order(created_at: :desc)
@@ -32,9 +33,9 @@ class MatchesController < ApplicationController
     authorize @match
     @players_a = @match.players.select { |player| player.team == "A" }
     @players_b = @match.players.select { |player| player.team == "B" }
-    @forums = @match.forums
+    @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
-    @friends = current_user.friends
+    @friends = (current_user ? current_user.friends : [])
     @player = Player.new
 
     @array_A = @players_a.map do |player|
@@ -54,11 +55,13 @@ class MatchesController < ApplicationController
   def create
     authorize @match = Match.new(match_params)
     @match.user = current_user
+    @match.status = "open"
     if @match.save
-
+      # add
       add_team_to_player
       add_tags_to_match
 
+      # redirect
       redirect_to @match
     else
       render :new
@@ -80,11 +83,9 @@ class MatchesController < ApplicationController
 
   def destroy
     authorize @match
-    if @match.destroy
-      redirect_to matches_path
-    else
-      render :show, notice: 'Error'
-    end
+    @match.status = "cancelled"
+    @match.save
+    redirect_to root_path
   end
 
   private
