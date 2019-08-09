@@ -10,9 +10,9 @@ class PlayersController < ApplicationController
   def update
     authorize @challenge
     if @challenge.update(challenge_params)
-      redirect_to @challenge.match
+      redirect_to players_path
     else
-      render 'error'
+      redirect_to players_path
     end
   end
 
@@ -48,7 +48,10 @@ class PlayersController < ApplicationController
       @player.team = challenger.team == 'A' ? 'B' : 'A'
       @player.status = 'pending'
 
-      if @player.save!
+      if @player.save
+        redirect_to match_path(@match)
+      else
+        @player.errors.messages
         redirect_to match_path(@match)
       end
     end

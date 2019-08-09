@@ -32,11 +32,11 @@ class MatchesController < ApplicationController
 
   def show
     authorize @match
-    @players_a = @match.players.select { |player| player.team == "A" }
-    @players_b = @match.players.select { |player| player.team == "B" }
+    @players_a = @match.players.select { |player| player.team == "A" && player.status != "declined" }
+    @players_b = @match.players.select { |player| player.team == "B" && player.status != "declined" }
     @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
-    @friends = current_user.friends
+    @friends = (current_user ? current_user.friends : [])
     @player = Player.new
 
     @array_A = @players_a.map do |player|
@@ -84,11 +84,9 @@ class MatchesController < ApplicationController
 
   def destroy
     authorize @match
-    if @match.destroy
-      redirect_to matches_path
-    else
-      render :show, notice: 'Error'
-    end
+    @match.status = "cancelled"
+    @match.save
+    redirect_to root_path
   end
 
   private

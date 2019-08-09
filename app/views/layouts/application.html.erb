@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>mysportbuddies</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -33,7 +33,7 @@
           </div>
           <!-- PROFILE DROPDOWN -->
           <div class="nav-item dropdown">
-            <%= cl_image_tag current_user.photo, crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "object-fit: cover", data: { toggle: 'dropdown'} %>
+            <%= image_tag (cl_image_path current_user.photo), crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "height: 40px; object-fit: cover", data: { toggle: 'dropdown'} %>
             <!-- FIXME: the carret down is not press-able -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Your Profile", profile_path(current_user), class:"dropdown-item" %>

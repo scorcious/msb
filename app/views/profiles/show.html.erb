@@ -4,61 +4,69 @@
 <% if policy(@profile).show? %>
     <!-- 1 - PROFILE IMG -->
     <div class="col">
+      <div class="row justify-content-between">
+        <div class="col p-0">
+          <div class="border p-0 pt-4 pb-3 mb-0 mr-4", style="border-radius: 10px">
+            <div class="rounded p-0">
+              <div class="text-center">
+                <%= image_tag (cl_image_path @profile.photo), crop: :fill, style:"object-fit:cover; height: 30vh; width: 30vh", class: "rounded-circle center" %>
 
-    <div class="row justify-content-between">
-      <div class="col-4 m-0">
-        <div class="border", style="border-radius: 10px">
-          <div class="rounded p-3">
-            <div class="text-center">
-              <%= cl_image_tag @profile.photo, crop: :fill, style:"object-fit:cover; height: 30vh; width: 30vh", class: "rounded-circle center" %>
-            </div>
-            <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
-            <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
-            <% if !(@profile.bio.nil?) %>
-              <p class="font-italic text-center mt-0">"<%= @profile.bio.capitalize %>"</p>
+              </div>
+              <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
+              <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
+              <% if (@profile.bio != "") %>
+                <p class="font-italic text-center mt-0">"<%= @profile.bio.capitalize %>"</p>
               <% else %>
-              <p class="font-italic text-center mt-0"></p>
-            <% end %>
+                <p class="font-italic text-center mt-0"></p>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 2 - OTHER INFO -->
-
-      <div class="border col-8 p-3", style="border-radius: 10px">
-        <p class="text-center" style="font-weight: bold">My Sport Buddies</p>
+        <!-- 2 - OTHER INFO -->
+        <div class="border col-8 p-4", style="border-radius: 10px">
+          <p class="text-center" style="font-weight: bold">My Sport Buddies</p>
           <div class="col mr-0">
             <% current_user.friends.each do |friend| %>
-            <div class="text-center " style="width: 10vh">
-              <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px; width: 50px", class: "rounded-circle center justify-content-center" %>
-            </div>
+              <div class="text-center " style="width: 10vh">
+                <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px; width: 50px", class: "rounded-circle center justify-content-center" %>
+              </div>
             <div class="text-center mt-1" style="width: 10vh">
               <%= friend.name.split(" ")[0] %>
             </div>
             <% end %>
           </div>
-        <p class="pt-4 text-center" style="font-weight: bold; width: auto">Interests</p>
-          <% current_user.categories.each do |category| %>
-            <%= category.name %>
-          <% end %>
-      </div>
-    </div>
-
-
-    <div class="row border", style="border-radius: 10px">
-      <div class="col">
-        <p class="text-center" style="font-weight: bold">My Dashboard</p>
+          <p class="pt-4 text-center" style="font-weight: bold; width: auto">Interests</p>
+            <% current_user.categories.each do |category| %>
+              <%= category.name %>
+            <% end %>
+        </div>
       </div>
 
-    </div>
-      <% current_user.categories.each do |category| %>
-        <%= category.name %>
-        <%= category.level %>
-      <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
-      <%= link_to "Delete", category_path(category), method: :delete, class: "btn btn-danger" %>
-      <% end %>
+      <div class="row border", style="border-radius: 10px">
+        <div class="col-12">
+          <p class="text-center" style="font-weight: bold">My Dashboard</p>
+        </div>
 
-    </div>
+        <div class="row border mt-4", style="border-radius: 10px">
+          <div class="col">
+            <p class="text-center" style="font-weight: bold">My Dashboard</p>
+          </div>
+
+          <div>
+            <% current_user.categories.each do |category| %>
+              <%= category.name %>
+              <%= category.level %>
+            <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
+            <%= link_to "Delete", category_path(category), method: :delete, class: "btn btn-danger" %>
+            <% end %>
+          </div>
+          <div>
+
+          </div>
+        </div>
+      </div>
+
 
     <!-- 3 - DASHBOARD -->
 

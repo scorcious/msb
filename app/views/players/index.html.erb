@@ -1,5 +1,3 @@
-<p>Players#index</p>
-<p>Find me in app/views/players/index.html.erb</p>
 <% @challenges.each do |challenge| %>
   <div>
     <%= link_to challenge.match.description, match_path(challenge.match) %>
