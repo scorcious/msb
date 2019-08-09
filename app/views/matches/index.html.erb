@@ -82,7 +82,7 @@
     // INIT
     const whereToShow = document.querySelector(".row");
     const id = e.target.id;
-    
+
     // INJECT HTML
     if (id === "matches-current") {
       addClassSelected(e.target);
@@ -143,7 +143,7 @@
       <% else %>
         <div class="no-match">
           <div>
-            <h4> "<%= User.find(params["user_id"]).name %> have not host any matches" </h4>
+            <h4> "<%= @user_name %> have not host any matches" </h4>
             <%= link_to  "Host a match", new_match_path, class: "btn btn-success" %>
           </div>
         </div>
