@@ -41,9 +41,11 @@
               <%= link_to  "Your Challenges", players_path, class:"dropdown-item" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
             </div>
-            <div id="notif-div">
-              <p id="notif-total"><%= @total_counts %></p>
-            </div>
+            <% if @total_counts != 0 %>
+              <div id="notif-div">
+                <p id="notif-total"><%= @total_counts %></p>
+              </div>
+            <% end %>
             <p><i class="fas fa-caret-down"></i></p>
           </div>
         <% else %>
