@@ -129,10 +129,12 @@ class MatchesController < ApplicationController
   def find_all_matches_user_signed_up
     all_matches_signed_up = []
     Match.all.each do |m|
-      m.players.each do |p|
+      if m.status != "past" && m.status != "cancelled"
+        m.players.each do |p|
         # finding if current user is signed up these events
-        if p.user.id == params["user_id"].to_i
-          all_matches_signed_up << m
+          if p.user.id == params["user_id"].to_i
+            all_matches_signed_up << m
+          end
         end
       end
     end
