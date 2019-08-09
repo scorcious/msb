@@ -1,8 +1,11 @@
 <h1>All sport buddies</h1>
+
 <% @profiles.each do |profile| %>
-  <% unless profile.name == current_user.name %>
+  <% if profile.name != current_user.name %>
     <p><%= profile.name %></p>
-    <p><%= link_to "connect", add_friend_path(profile), method: :post, class: "btn btn-success" %></p>
+
+    <% unless current_user.friends.any? { |friend| friend.name == profile.name}  %>
+      <p><%= link_to "connect", add_friend_path(profile), method: :post, class: "btn btn-success" %></p>
+    <% end %>
   <% end %>
 <% end %>
-
