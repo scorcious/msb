@@ -23,9 +23,9 @@
       <div class="d-flex mb-5 round-plus-button">
         <% @players_a.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
         <!-- add button -->
@@ -37,9 +37,9 @@
       <div class="d-flex round-plus-button">
         <% @players_b.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
         <!-- add button -->
@@ -84,6 +84,7 @@
         <% end %>
       <% end %>
       </div>
+      <% if @forums != [] %>
       <div class="text-center">
         <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
         <% @forums.each do |comment| %>
@@ -101,6 +102,6 @@
           <% end %>
         </div>
       </div>
+      <% end %>
     </div>
-
 </div>
