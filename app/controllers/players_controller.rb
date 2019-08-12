@@ -10,7 +10,11 @@ class PlayersController < ApplicationController
   def update
     authorize @challenge
     if @challenge.update(challenge_params)
-      redirect_to players_path
+      if challenge_params["status"] == "declined"
+        redirect_to players_path
+      else
+        redirect_to matches_path(user_id: current_user.id)
+      end
     else
       redirect_to players_path
     end
