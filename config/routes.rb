@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :matches do
     resources :forums, only: [:new, :create]
     resources :players, only: [:create]
+    post 'winner', to: 'matches#winner', as: :winner
+
   end
   resources :categories, only: [:new, :create, :edit, :update, :destroy ]
   resources :pages, only: [:index]
