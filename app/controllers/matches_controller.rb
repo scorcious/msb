@@ -90,6 +90,14 @@ class MatchesController < ApplicationController
     redirect_to root_path
   end
 
+  def winner
+    @match = Match.find(params[:match_id])
+    authorize @match
+    @match.winner = params[:match]["winner"]
+    @match.save
+    redirect_to match_path(@match)
+  end
+
   private
 
   def match_params
@@ -141,4 +149,6 @@ class MatchesController < ApplicationController
     end
     return all_matches_signed_up
   end
+
+
 end

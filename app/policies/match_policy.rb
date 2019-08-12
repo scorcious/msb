@@ -19,6 +19,10 @@ class MatchPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def winner?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
