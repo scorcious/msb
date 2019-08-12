@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rankings/index'
   devise_for :users
   resources :matches do
     resources :forums, only: [:new, :create]
