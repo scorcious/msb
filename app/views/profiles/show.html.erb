@@ -27,7 +27,7 @@
         <div class="border col-8 p-4", style="border-radius: 10px">
           <p class="text-center" style="font-weight: bold">My Sport Buddies</p>
           <div class="col mr-0">
-            <% current_user.friends.each do |friend| %>
+            <% User.find(params[:id]).friends.each do |friend| %>
               <div class="text-center " style="width: 10vh">
                 <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px; width: 50px", class: "rounded-circle center justify-content-center" %>
               </div>
@@ -37,7 +37,7 @@
             <% end %>
           </div>
           <p class="pt-4 text-center" style="font-weight: bold; width: auto">Interests</p>
-            <% current_user.categories.each do |category| %>
+            <% User.find(params[:id]).categories.each do |category| %>
               <%= category.name %>
             <% end %>
         </div>
@@ -49,10 +49,8 @@
         </div>
 
         <div class="row border mt-4", style="border-radius: 10px">
-
-
           <div>
-            <% current_user.categories.each do |category| %>
+            <% User.find(params[:id]).categories.each do |category| %>
               <%= category.name %>
               <%= category.level %>
             <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
@@ -68,6 +66,7 @@
 
     <br>
     <br>
+    <!-- FIXME: if current_user == user then able to edit -->
     <%= link_to "Add a category", new_category_path, class: "btn btn-success" %>
 
 
