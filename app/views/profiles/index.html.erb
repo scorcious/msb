@@ -18,10 +18,11 @@
                       <p class="card-text"><%= profile.city %></p>
                     </div>
                   </div class="">
-                  <% raise; %>
                   <div class="m-3">
-                    <%= link_to "connect", add_friend_path(profile), method: :post, class: "btn btn-success" %>
-                    <%= link_to "view profile", profile_path(profile), class: "btn btn-outline-success" %>
+                    <% unless profile.friends.any? { |f| f == current_user } %>
+                      <%= link_to "Connect", add_friend_path(profile), method: :post, class: "btn btn-success" %>
+                    <% end %>
+                    <%= link_to "View Profile", profile_path(profile), class: "btn btn-outline-primary" %>
                   </div>
                 </div>
               </div>
