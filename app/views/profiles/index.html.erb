@@ -18,6 +18,7 @@
                       <p class="card-text"><%= profile.city %></p>
                     </div>
                   </div class="">
+                  <% raise; %>
                   <div class="m-3">
                     <%= link_to "connect", add_friend_path(profile), method: :post, class: "btn btn-success" %>
                     <%= link_to "view profile", profile_path(profile), class: "btn btn-outline-success" %>
