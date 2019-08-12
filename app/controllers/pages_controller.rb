@@ -5,9 +5,10 @@ class PagesController < ApplicationController
     @no_container = true
     @matches = Match.where("status != ? AND status != ?", "past", "full").sample(3)
   end
-
+  
   def index
     # TODO: SEARCH FUNCTIONS
+    @no_search_bar = true
   end
 
   private
