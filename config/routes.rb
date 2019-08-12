@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :matches do
-    resources :forums, only: [:new, :create]
+    # resources :forums, only: [:new, :create]
     resources :players, only: [:create]
+    # API for forums
+    resources :forums, only: [:new, :create], defaults: { format: :json }
   end
   resources :categories, only: [:new, :create, :edit, :update, :destroy ]
   resources :pages, only: [:index]
@@ -15,4 +17,6 @@ Rails.application.routes.draw do
   post '/profiles/:id/accept', to: 'profiles#accept_friend', as: :accept_friend
   post '/profiles/:id/decline', to: 'profiles#decline_friend', as: :decline_friend
   get '/my_friends', to: 'profiles#my_friends', as: :my_friends
+
+  resources :forums, only: [:index], defaults: { format: :json }
 end

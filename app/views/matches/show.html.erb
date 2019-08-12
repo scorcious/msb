@@ -79,13 +79,14 @@
       <div class="text-center">
       <% if policy(@forum).create? %>
         <%= simple_form_for [@match, @forum] do |f| %>
-          <%= f.input :content, label: "Write your comment here:" %>
-          <%= f.submit "save", class: "btn btn-success mt-0 mb-4" %>
+          <%= f.input :content, label: "Write your comment here:"%>
+          <%= f.submit "save", class: "btn btn-success mt-0 mb-4", id: "refresh" %>
         <% end %>
       <% end %>
       </div>
       <div class="text-center">
         <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
+
         <% @forums.each do |comment| %>
         <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
           <div class="m-3">
@@ -94,13 +95,19 @@
               <!-- TODO: CHANGE NAME INTO LINK TO USER -->
               <%= comment.user.name.split(" ").first  %>
               <% if dayCount != 0 %> - <%= dayCount unless dayCount == 0 %> days ago<% else %>
-               - <%= comment.created_at.strftime("%H:%M") %> UTC 
+               - <%= comment.created_at.strftime("%H:%M") %> UTC
                <% end %></strong></h5>
             <p class="m-0"> <%= comment.content %> </p>
           </div>
           <% end %>
         </div>
       </div>
+
+  <p>test</p>
+    <ul>
+
+    </ul>
+
     </div>
 
 </div>
