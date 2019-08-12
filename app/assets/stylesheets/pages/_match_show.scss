@@ -25,17 +25,53 @@
         form {
             display: flex;
             align-items: flex-end;
-            div {
-                margin: 0;
-                margin-top: 20px;
-                flex-grow: 1;
-                label {
-                    font-size: 18px;
-                    width: 100%;
-                }
+        }
+        div {
+            margin: 0;
+            margin-top: 20px;
+            flex-grow: 1;
+            label {
+                font-size: 18px;
+                width: 100%;
             }
-            > .btn {
-                margin-left: 20px;
+        }
+        .btn {
+            margin-left: 20px;
+        }
+    }
+}
+
+.challenge-btns {
+    div {
+        display: flex;
+        justify-content: center;
+        * {
+            margin: 0 10px;
+        }
+    }
+}
+
+h4.challenge-found {
+    color: $error;
+    font-weight: bold;
+    a {
+        color: $blue;
+        transition: 0.1s ease;
+        &:hover {
+            text-decoration: underline;
+            color: $blue-1;
+        }
+    }
+}
+
+.comments {
+    h5 {
+        font-weight: bold;
+        a {
+            color: $blue;
+            &:hover {
+                text-decoration: underline;
+                color: $blue1;
             }
         }
     }
