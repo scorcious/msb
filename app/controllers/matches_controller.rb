@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
     if params[:tag].present?
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
+      @matches = @matches.select { |match| match.status == "open" }
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)

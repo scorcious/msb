@@ -44,23 +44,27 @@
         </div>
       <% end %>
     <% else %>
-      <% @matches.each do |match| %>
-        <div class="col-sm-12 col-md-6 col-lg-4">
-          <div class="content">
-            <%= cl_image_tag match.photo %>
-            <div>
-              <h4 class="text-center"><%= match.description %></h4>
-              <p><%= match.location %></p>
-            </div>
+      <% if @matches.count != 0 %>
+        <% @matches.each do |match| %>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="content">
+              <%= cl_image_tag match.photo %>
+              <div>
+                <h4 class="text-center"><%= match.description %></h4>
+                <p><%= match.location %></p>
+              </div>
 
-            <div>
-              <p>Level: <%= match.level %></p>
-              <p>Date & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
-              <p>Max Players: <%= match.number_of_players %></p>
-              <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              <div>
+                <p>Level: <%= match.level %></p>
+                <p>Date & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <p>Max Players: <%= match.number_of_players %></p>
+                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
+      <% else %>
+        <h4 class="text-center" style="width: 100%;">"Sorry, there is no match available"</h4>
       <% end %>
     <% end %>
   </div>
