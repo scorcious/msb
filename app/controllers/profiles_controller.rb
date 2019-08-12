@@ -15,6 +15,8 @@ class ProfilesController < ApplicationController
     @profile = User.find(params[:id])
     authorize @profile
     @categories = User.find(params[:id]).categories
+    @matches = Match.where("status = ? AND user_id = ?", "open", current_user.id).order(created_at: :desc)
+    @player = Player.new
   end
 
   def add_friend
