@@ -26,6 +26,7 @@ class PlayersController < ApplicationController
       # TODO: status - close
       @player = Player.new
       @player.user = current_user
+      @player.challenger_id = current_user.id
       @player.status = "accepted"
       @player.team = params[:player][:team]
       @player.match = @match
@@ -41,6 +42,7 @@ class PlayersController < ApplicationController
       authorize @player = Player.new
       challenger = @match.players.where(user_id: current_user).first
       @player.match = @match
+      @player.challenger_id = challenger.user_id
       @player.user = User.find(params[:player][:challenged])
       @player.team = challenger.team == 'A' ? 'B' : 'A'
       @player.status = 'pending'
@@ -60,7 +62,7 @@ class PlayersController < ApplicationController
       challenger = @match.players.where(user_id: current_user).first
 
       challenger = match_auto_join if challenger.nil?
-
+      @player.challenger_id = challenger.user_id
       @player.match = @match
       @player.user = User.find(params[:player][:user_id])
 

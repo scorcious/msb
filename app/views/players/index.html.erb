@@ -11,12 +11,12 @@
                 <h4 class="text-center"><%= challenge.match.description %></h4>
                 <p><%= challenge.match.location %></p>
               </div>
-      
+
               <div>
                 <p>Level: <%= challenge.match.level %></p>
                 <p>Date & Time: <%= challenge.match.date.strftime("%d/%m/%Y") %> -  <%= challenge.match.time.strftime("%H:%M") %></p>
                 <p>Max Players: <%= challenge.match.number_of_players %></p>
-                <p class="challenger">Challenged by: <%= link_to  User.find(challenge.id).name.split(" ")[0], profile_path(User.find(challenge.id)) %></p>
+                <p class="challenger">Challenged by: <%= link_to  User.find(challenge.challenger_id).name.split(" ")[0], profile_path(User.find(challenge.challenger_id)) %></p>
                 <%= link_to "See Match", match_path(challenge.match), class: "btn btn-success" %>
                 <%= link_to "Accept", player_path(challenge, challenge: { status: 'accepted' }), class: "btn btn-outline-primary", method: :put %>
                 <%= link_to "Decline", player_path(challenge, challenge: { status: 'declined' }), class: "btn btn-outline-danger", method: :put %>
