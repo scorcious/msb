@@ -78,6 +78,7 @@
   <% if @match.winner.nil? %>
     <%= link_to "Team A", match_winner_path(@match, match: {winner: 'A'}), method: :post, data: { confirm: 'Are you sure you want to choose the team A?' }, class: "btn btn-success" %>
     <%= link_to "Team B", match_winner_path(@match, match: {winner: 'B'}), method: :post, data: { confirm: 'Are you sure you want to choose the team B?' }, class: "btn btn-danger" %>
+    <%= link_to "Draw", match_winner_path(@match, match: {winner: 'Draw'}), method: :post, data: { confirm: 'Are you sure you want to choose draw?' }, class: "btn btn-primary" %>
     <% else %>
     <p>Team : <%= @match.winner %> </p>
     <% end %>

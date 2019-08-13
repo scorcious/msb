@@ -94,7 +94,30 @@ class MatchesController < ApplicationController
     authorize @match
     @match.winner = params[:match]["winner"]
     @match.save
+    calculate_points
     redirect_to match_path(@match)
+  end
+
+
+  def calculate_points
+    @match = Match.find(params[:match_id])
+    authorize @match
+
+    winner_team = @match.winner.downcase
+    winner_points = 30
+    draw_points = 10
+    category_match = @match.tags[2].name.downcase
+    level_match = @match.tags[1].name.downcase
+
+    @match.players.each do |player|
+      category_user = Category.find_or_create_by(user_id: player.user_id, name: category_match, level: level_match)
+      if player.team.downcase == winner_team
+        category_user.points += winner_points
+      elsif winner_team == "draw"
+        category_user.points += draw_points
+      end
+      category_user.save
+    end
   end
 
   private
