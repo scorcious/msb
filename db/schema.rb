@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_042816) do
     t.string "level"
     t.integer "number_of_players"
     t.string "status"
-    t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
+    t.string "photo", default: "image/upload/v1565065662/profile_default_kttdt0.jpg"
     t.string "score"
     t.string "winner"
     t.bigint "user_id"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_042816) do
     t.string "address"
     t.text "bio"
     t.string "gender"
-    t.string "photo", default: "image/upload/v1565065662/v9rqr29fvuvsmyml5a7o.jpg"
+    t.string "photo", default: "image/upload/v1565065662/profile_default_kttdt0.jpg"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

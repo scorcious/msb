@@ -347,12 +347,11 @@ puts "Created #{Category.count} categories!"
 
 ####################### CONECTING FRIENDS #######################
 
-us << User.all.sample(5)
-us.flatten!
+friends = User.last(10)
 
 # Request friendship
 us.each do |u|
-  us.each { |f| u.friend_request(f) if u != f }
+  friends.each { |f| u.friend_request(f) }
 end
 
 # Accept friendship
