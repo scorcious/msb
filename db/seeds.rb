@@ -173,12 +173,15 @@ index = -1
     challenger_id: match.user_id
   )
 
-  Category.create!(
-    name: category[index],
-    level: level[index],
-    points: rand(400..800),
-    user_id: match.user_id
-  )
+  ranking = Category.find_or_create_by(
+      name: category[index],
+      level: level[index],
+      user_id: match.user_id
+    )
+
+  ranking.points = rand(400..800)
+  ranking.save!
+
   puts "Match Created!"
 end
 
