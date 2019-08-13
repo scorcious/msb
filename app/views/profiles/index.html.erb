@@ -17,20 +17,19 @@
                     <h5 class="card-title"><%= profile.name.titlecase %></h5>
                     <p class="card-text"><%= profile.city %></p>
                   </div>
-                </div class="">
-                <div class="m-3">
-                  <% unless profile.friends.any? { |f| f == current_user } %>
-                    <% if profile.requested_friends.any? { |f| f == current_user } %>
-                      <%= link_to "Pending", add_friend_path(profile), method: :post, class: "disabled btn btn-secondary  " %>
-                    <% else %>
-                      <%= link_to "Connect", add_friend_path(profile), method: :post, class: "btn btn-success" %>
-                    <% end %>
+                  <div class="m-3">
+                    <% unless profile.friends.any? { |f| f == current_user } %>
+                      <% if profile.requested_friends.any? { |f| f == current_user } %>
+                        <%= link_to "Pending", add_friend_path(profile), method: :post, class: "disabled btn btn-secondary  " %>
+                      <% else %>
+                        <%= link_to "Connect", add_friend_path(profile), method: :post, class: "btn btn-success" %>
+                      <% end %>
 
-                  <% end %>
-                  <%= link_to "View Profile", profile_path(profile), class: "btn btn-link" %>
+                    <% end %>
+                    <%= link_to "View Profile", profile_path(profile), class: "btn btn-link" %>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
