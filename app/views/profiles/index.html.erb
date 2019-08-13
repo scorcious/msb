@@ -17,7 +17,7 @@
                     <h5 class="card-title"><%= profile.name.titlecase %></h5>
                     <p class="card-text"><%= profile.city %></p>
                   </div>
-                  <div class="m-3">
+                  <div class="mt-3">
                     <% unless profile.friends.any? { |f| f == current_user } %>
                       <% if profile.requested_friends.any? { |f| f == current_user } %>
                         <%= link_to "Pending", add_friend_path(profile), method: :post, class: "disabled btn btn-secondary  " %>
