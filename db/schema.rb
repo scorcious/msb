@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_08_12_074616) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "level"
-    t.integer "points"
+    t.integer "points", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

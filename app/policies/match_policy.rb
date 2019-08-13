@@ -23,6 +23,10 @@ class MatchPolicy < ApplicationPolicy
     true
   end
 
+  def calculate_points?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
