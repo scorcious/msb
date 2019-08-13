@@ -1,3 +1,36 @@
-<% @ranking_a.each do |ranking| %>
-  <p><%= ranking.user.name %> / <%= ranking.name %> / <%= ranking.points %></p>
-<% end %>
+<!-- Ranking per User x Category x Level -->
+<div class="border">
+  <p>Ranking per User x Category x Level</p>
+  <% @ranking.each do |category| %>
+    <p><%= category.name %></p>
+    <% Category.ranking_per_user_category_level(category.name, 5).each do |player| %>
+    <p><%= player.user.name %> / <%= player.points %></p>
+    <% end %>
+    <p>-------------</p>
+  <% end %>
+</div>
+
+<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+<!-- Ranking per User x Category -->
+<div class="border">
+  <p>Ranking per User x Category</p>
+  <% @ranking.each do |category| %>
+    <p><%= category.name %></p>
+    <% Category.ranking_per_user_category(category.name, 5).each do |player| %>
+    <p><%= player.user.name %> / <%= player.points %></p>
+    <% end %>
+    <p>-------------</p>
+  <% end %>
+</div>
+
+
+
+<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+<!-- Ranking per User -->
+<div class="border">
+  <p>Ranking per User</p>
+  <% Category.ranking_per_user(5).each do |player| %>
+    <p><%= player.user.name %> / <%= player.points %></p>
+  <% end %>
+  <p>-------------</p>
+</div>
