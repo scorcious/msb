@@ -11,5 +11,6 @@ initMapbox();
 
 // OWN FILE
 
-import { refreshForum } from './forumRefresh.js';
+import { refreshForum, refreshButton  } from './forumRefresh.js';
 refreshForum()
+refreshButton()

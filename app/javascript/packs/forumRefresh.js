@@ -13,7 +13,7 @@ const refreshForum = () => {
     // const match_id = Number.parseInt(match, 10);
     event.preventDefault();
     const url = event.target.baseURI + '/forums'
-    const message = yourMessage.value;
+    let message = yourMessage.value;
 
     const myMessage = { content: message };
     fetch(url, {
@@ -29,7 +29,7 @@ const refreshForum = () => {
         message_start.insertAdjacentHTML("afterend", `
           <div class="m-3">
               <h5 class="m-0"><strong>
-                ${response.name} - Just Now
+                ${response.name} - ${response.timestamp} Local
               </strong>
               </h5>
               <p class="m-0"> ${message} </p>
@@ -37,10 +37,17 @@ const refreshForum = () => {
           `);
         console.log('Success:', JSON.stringify(response))
       });
+
+    console.log(yourMessage);
+    yourMessage.value = ""
   });
 }
 
-export { refreshForum }
+const refreshButton = () => {
+    document.querySelector("#refresh").disabled = false;
+  }
+
+export { refreshForum, refreshButton }
 
 
 // GET
