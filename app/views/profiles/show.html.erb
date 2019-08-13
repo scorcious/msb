@@ -74,8 +74,20 @@
 
   <% end %>
 
+
+    <!-- Challenge buddy -->
+    <% if user_signed_in? && params[:id].to_i != current_user.id %>
+      <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
+      <h1>NEEDS STYLING</h1>
+      <div class="pb-4 challenge d-flex justify-content-center">
+        <div class="col-sm-12 col-md-10 p-0">
+          <%= simple_form_for @player do |f| %>
+            <%= f.input :match_id, label: "Choose the game:", include_blank: false, collection: @matches,label_method: :description, value_method: :id %>
+            <%= f.hidden_field :challenged, value: @profile.id %>
+            <%= f.submit "Challenge!", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
 </div>
-
-
-
-

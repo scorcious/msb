@@ -67,7 +67,6 @@
     else if (id === "all-friends") {
       addClassSelected(e.target);
       whereToShow.innerHTML = "";
-      // TODO: FIXME: @profiles case empty
       whereToShow.insertAdjacentHTML("beforeend", `
         <% if @profiles != [] %>
           <% @profiles.each do |profile| %>
