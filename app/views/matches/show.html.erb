@@ -106,14 +106,16 @@
       <div class="text-center">
       <% if policy(@forum).create? %>
         <%= simple_form_for [@match, @forum] do |f| %>
-          <%= f.input :content, label: "Write your comment here:" %>
-          <%= f.submit "save", class: "btn btn-success mt-0 mb-4" %>
+          <%= f.input :content, label: "Write your comment here:"%>
+          <%= f.submit "save", class: "btn btn-success mt-0 mb-4", id: "refresh" %>
         <% end %>
       <% end %>
       </div>
       <% if @forums != [] %>
       <div class="text-center">
         <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
+
+        <div id='forumstart'></div>
         <% @forums.each do |comment| %>
         <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
           <div class="m-3 comments">
