@@ -9,8 +9,10 @@
   <% else %>
     <div class="search">
       <h2 class="text-center">Find Matches Around you</h2>
-      <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: '' } do |f| %>
-      <%= f.input :query, label: false, placeholder: "Search for matches", input_html: {value: ""} %>
+      <div class="text-center mr-0">
+        <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: 'text-center mr-0' } do |f| %>
+        <%= f.input :query, label: false, placeholder: "Search for matches", input_html: {value: ""}, class: "mr-0" %>
+      </div>
       <% end %>
     </div>
   <% end %>
@@ -20,17 +22,19 @@
         <% @all_matches_signed_up.each do |match| %>
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="content">
-              <%= cl_image_tag match.photo %>
-              <div>
-                <h4 class="text-center"><%= match.description %></h4>
-                <p><%= match.location %></p>
+              <%= cl_image_tag match.photo, class: "rounded-top" %>
+              <div class="mt-2">
+                <p class="text-left mb-2"><i class="fas fa-map-marker-alt"></i> <%= match.user.city %></p>
+                <h4 class="text-left text-truncate ml-1"><%= match.description %></h4>
               </div>
 
-              <div>
+              <div class="mt-0">
                 <p>Level: <%= match.level %></p>
-                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
                 <p>Max Players: <%= match.number_of_players %></p>
-                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+                <div class="d-flex px-0">
+                  <p style="color:rgba(0,0,0,0.6)"><i class="fas fa-calendar-alt"></i> <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                  <%= link_to "Details", match_path(match), class: "my-0 ml-5", style:"font-size: 14px; text-decoration: underline;" %>
+                </div>
               </div>
             </div>
           </div>
@@ -48,21 +52,21 @@
         <% @matches.each do |match| %>
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="content">
-              <%= cl_image_tag match.photo %>
-              <div>
-                <h4 class="text-center"><%= match.description %></h4>
-                <p><%= match.location %></p>
+              <%= cl_image_tag match.photo, class: "rounded-top" %>
+              <div class="mt-2">
+                <p class="text-left mb-2"><i class="fas fa-map-marker-alt"></i> <%= match.user.city %></p>
+                <h4 class="text-left text-truncate ml-1"><%= match.description %></h4>
               </div>
-
-              <div>
+              <div class="mt-0">
                 <p>Level: <%= match.level %></p>
-                <p>Date & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
                 <p>Max Players: <%= match.number_of_players %></p>
-                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+                <div class="d-flex px-0">
+                  <p style="color:rgba(0,0,0,0.6)";><i class="fas fa-calendar-alt"></i> <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                  <%= link_to "Details", match_path(match), class: "my-0 ml-5", style: "font-size: 14px; text-decoration: underline;" %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
       <% else %>
         <h4 class="text-center" style="width: 100%;">"Sorry, there is no match available"</h4>
       <% end %>
@@ -94,22 +98,25 @@
       whereToShow.insertAdjacentHTML("beforeend", `
       <% if @all_matches_signed_up != [] %>
         <% @all_matches_signed_up.each do |match| %>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-              <%= cl_image_tag match.photo %>
-              <div>
-                <h4 class="text-center"><%= match.description %></h4>
-                <p><%= match.location %></p>
-              </div>
 
-              <div>
-                <p>Level: <%= match.level %></p>
-                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
-                <p>Max Players: <%= match.number_of_players %></p>
-                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="content">
+            <%= cl_image_tag match.photo, class: "rounded-top" %>
+            <div class="mt-2">
+              <p class="text-left mb-2"><i class="fas fa-map-marker-alt"></i> <%= match.user.city %></p>
+              <h4 class="text-left text-truncate ml-1"><%= match.description %></h4>
+            </div>
+            <div class="mt-0">
+              <p>Level: <%= match.level %></p>
+              <p>Max Players: <%= match.number_of_players %></p>
+              <div class="d-flex px-0">
+                <p style="color:rgba(0,0,0,0.6)";><i class="fas fa-calendar-alt"></i> <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <%= link_to "Details", match_path(match), class: "my-0 ml-5", style: "font-size: 14px; text-decoration: underline;" %>
               </div>
             </div>
           </div>
+        </div>
+
         <% end %>
       <% else %>
         <div class="no-match">
@@ -127,22 +134,25 @@
       whereToShow.insertAdjacentHTML("beforeend", `
       <% if @matches != [] %>
         <% @matches.each do |match| %>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-              <%= cl_image_tag match.photo %>
-              <div>
-                <h4 class="text-center"><%= match.description %></h4>
-                <p><%= match.location %></p>
-              </div>
 
-              <div>
-                <p>Level: <%= match.level %></p>
-                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
-                <p>Max Players: <%= match.number_of_players %></p>
-                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="content">
+            <%= cl_image_tag match.photo, class: "rounded-top" %>
+            <div class="mt-2">
+              <p class="text-left mb-2"><i class="fas fa-map-marker-alt"></i> <%= match.user.city %></p>
+              <h4 class="text-left text-truncate ml-1"><%= match.description %></h4>
+            </div>
+            <div class="mt-0">
+              <p>Level: <%= match.level %></p>
+              <p>Max Players: <%= match.number_of_players %></p>
+              <div class="d-flex px-0">
+                <p style="color:rgba(0,0,0,0.6)";><i class="fas fa-calendar-alt"></i> <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <%= link_to "Details", match_path(match), class: "my-0 ml-5", style: "font-size: 14px; text-decoration: underline;" %>
               </div>
             </div>
           </div>
+        </div>
+
         <% end %>
       <% else %>
         <div class="no-match">
@@ -160,22 +170,25 @@
       whereToShow.insertAdjacentHTML("beforeend", `
       <% if @past_matches != [] %>
         <% @past_matches.each do |match| %>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-              <%= cl_image_tag match.photo %>
-              <div>
-                <h4 class="text-center"><%= match.description %></h4>
-                <p><%= match.location %></p>
-              </div>
 
-              <div>
-                <p>Level: <%= match.level %></p>
-                <p>Darte & Time: <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
-                <p>Max Players: <%= match.number_of_players %></p>
-                <%= link_to "See More", match_path(match), class: "btn btn-success" %>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="content">
+            <%= cl_image_tag match.photo, class: "rounded-top" %>
+            <div class="mt-2">
+              <p class="text-left mb-2"><i class="fas fa-map-marker-alt"></i> <%= match.user.city %></p>
+              <h4 class="text-left text-truncate ml-1"><%= match.description %></h4>
+            </div>
+            <div class="mt-0">
+              <p>Level: <%= match.level %></p>
+              <p>Max Players: <%= match.number_of_players %></p>
+              <div class="d-flex px-0">
+                <p style="color:rgba(0,0,0,0.6)";><i class="fas fa-calendar-alt"></i> <%= match.date.strftime("%d/%m/%Y") %> -  <%= match.time.strftime("%H:%M") %></p>
+                <%= link_to "Details", match_path(match), class: "my-0 ml-5", style: "font-size: 14px; text-decoration: underline;" %>
               </div>
             </div>
           </div>
+        </div>
+
         <% end %>
       <% else %>
         <div class="no-match">
