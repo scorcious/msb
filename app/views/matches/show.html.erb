@@ -28,8 +28,8 @@
             <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
-        <!-- add button -->
-        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) || @match.status != "open" ) %>
+        <!-- join button -->
+        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2) || @match.status != "open" ) && @match.status == "open" %>
           <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
         <% end %>
       </div>
@@ -42,8 +42,8 @@
             <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
-        <!-- add button -->
-        <% unless ( @all_players.any?{|user| user == current_user} || (@players_b.count >= @match.number_of_players) || @match.status != "open" ) %>
+        <!-- join button -->
+        <% unless ( @all_players.any?{|user| user == current_user} || (@players_b.count >= @match.number_of_players) || @match.status != "open" ) && @match.status == "open" %>
           <%= link_to "", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' }, class: "fas fa-plus-circle" %>
         <% end %>
       </div>
@@ -61,12 +61,17 @@
 
     <!-- WINNER -->
     <% if @match.user == current_user && @match.status == "past" %>
-      <h2 class="mt-5">Who is the winner :</h2>
+      <h2 class="text-center mb-1 mt-5">Who is the winner :</h2>
       <% if @match.winner.nil? %>
-        <%= link_to "Team A", match_winner_path(@match, match: {winner: 'A'}), method: :post, data: { confirm: 'Are you sure you want to choose the team A?' }, class: "btn btn-success" %>
-        <%= link_to "Team B", match_winner_path(@match, match: {winner: 'B'}), method: :post, data: { confirm: 'Are you sure you want to choose the team B?' }, class: "btn btn-danger" %>
-        <%= link_to "Draw", match_winner_path(@match, match: {winner: 'Draw'}), method: :post, data: { confirm: 'Are you sure you want to choose draw?' }, class: "btn btn-primary" %>
-        <% else %>
+        <div class="pb-4 challenge-btns d-flex justify-content-center">
+          <div class="col-sm-12 col-md-10 p-0 mt-3">
+            <%= link_to "Team A", match_winner_path(@match, match: {winner: 'A'}), method: :post, data: { confirm: 'Are you sure you want to choose the team A?' }, class: "btn btn-success" %>
+            <%= link_to "Draw", match_winner_path(@match, match: {winner: 'Draw'}), method: :post, data: { confirm: 'Are you sure you want to choose draw?' }, class: "btn btn-outline-dark" %>
+            <%= link_to "Team B", match_winner_path(@match, match: {winner: 'B'}), method: :post, data: { confirm: 'Are you sure you want to choose the team B?' }, class: "btn btn-primary" %>
+          </div>
+        </div>
+
+      <% else %>
         <p>Team : <%= @match.winner %> </p>
       <% end %>
     <% end %>
@@ -86,7 +91,7 @@
     <% end %>
 
     <!-- Challenge buddy -->
-    <% if @all_players.any?{|user| user == current_user} && user_signed_in? && !@match.full? && current_user.friends != [] %>
+    <% if @all_players.any?{|user| user == current_user} && user_signed_in? && !@match.full? && current_user.friends != [] && @match.status == "open" %>
     <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
     <div class="pb-4 challenge d-flex justify-content-center">
       <div class="col-sm-12 col-md-10 p-0">
