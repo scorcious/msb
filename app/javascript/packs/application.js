@@ -11,6 +11,7 @@ initMapbox();
 
 const yourMessage = document.querySelector("#forum_content");
 const messages = document.querySelector("ul");
+const message_start = document.querySelector("#forumstart");
 const form = document.querySelector("#new_forum");
 const url = "http://localhost:3000/forums";
 const refresh = document.getElementById("refresh");
@@ -34,34 +35,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 })
 
-// const refreshChat = () => {
-// }
-
-
-// FETCH
-
-
-
-
-// POST
-// form.addEventListener("submit", (event) => {
-//   const match = event.target.baseURI.split("/")[4]
-//   const match_id = Number.parseInt(match, 10);
-//   const url = event.target.baseURI + '/forums'
-//   const message = yourMessage.value;
-//   event.preventDefault();
-//   const myMessage = { content: `${message}` };
-// });
-
-// const postMessage = (message, callback, url) => {
-//   fetch(url, {
-//     method: 'POST',
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(message)
-//   })
-//     callback();
-// }
-
 // POST
 form.addEventListener("submit", (event) => {
   // const match = event.target.baseURI.split("/")[4]
@@ -69,23 +42,30 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   const url = event.target.baseURI + '/forums'
   const message = yourMessage.value;
-  console.log(message)
-  messages.insertAdjacentHTML("afterbegin", `<li><%= raise; %>${message}</li>`);
 
   const myMessage = { content: message };
   fetch(url, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(myMessage)
-  });
+  }).then(res => res.json())
+    .then((response) => {
+      message_start.insertAdjacentHTML("afterbegin", `
+        <div class="m-3">
+            <h5 class="m-0"><strong>
+              ${response.name} - ${response.timestamp}
+            </strong>
+            </h5>
+            <p class="m-0"> ${message} </p>
+          </div>
+        `);
+      console.log('Success:', JSON.stringify(response))
+    });
 });
 
-// refresh.addEventListener("click", refreshChat);
-
-// document.addEventListener("DOMContentLoaded", refreshChat);
-
-
-
+document.addEventListener("DOMContentLoaded", () => {
+  setInterval(refresh, 1000); // Every 1 second, the `refresh` function is called.
+});
 
 
 
