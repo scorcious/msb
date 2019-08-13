@@ -7,16 +7,35 @@
         <h3 id="request-sent">Request Sent</h3>
       </div>
 
-      <div id="friends-toPlace">
-        <!-- FIXME: CORRECT VERSION -->
+      <div id="friends-toPlace" class="row">
         <% if current_user.requested_friends != [] %>
           <% current_user.requested_friends.each do |friend| %>
-            <p><%= friend.name %></p>
-            <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
-            <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
+            <div class="col-sx-12 col-6">
+              <div class="card mb-3 border-0" style="border-radius: 15px; box-shadow: 1px 1px 5px rgba(0,0,0,0.2);">
+                <div class="row no-gutters", style="border-radius: 30px">
+                  <div class="col-md-4">
+                    <p class="mb-0"><%= image_tag (cl_image_path friend.photo), crop: :fill, style:"object-fit:cover; height: 170px; width: 170px", class: "rounded-circle center p-3" %></p>
+                  </div>
+                  <div class="col-md-8 d-flex flex-column justify-content-between">
+                    <div class="card-body">
+                      <div>
+                        <h5 class="card-title"><%= friend.name.titlecase %></h5>
+                        <p class="card-text"><%= friend.city %></p>
+                      </div>
+                    </div class="">
+                    <div class="m-3">
+                          <%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %>
+                          <%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %>
+                      <%= link_to "View Profile", profile_path(friend), class: "btn btn-link" %>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% else %>
-          <h4>"You have no pending friend requests"</h4>
+          <h4 class="text-center" style="width: 100%;">"You have no pending friend requests"</h4>
         <% end %>
 
         <!-- TODO: not done -->
@@ -53,15 +72,35 @@
       addClassSelected(e.target);
       whereToShow.innerHTML = "";
       whereToShow.insertAdjacentHTML("beforeend", `
-        <% if current_user.requested_friends != [] %>
-          <% current_user.requested_friends.each do |friend| %>
-            <p><%= friend.name %></p>
-            <p><%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %></p>
-            <p><%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %></p>
-          <% end %>
-        <% else %>
-          <h4>"You have no pending friend requests"</h4>
-        <% end %>
+      <% if current_user.requested_friends != [] %>
+      <% current_user.requested_friends.each do |friend| %>
+        <div class="col-sx-12 col-6">
+          <div class="card mb-3 border-0" style="border-radius: 15px; box-shadow: 1px 1px 5px rgba(0,0,0,0.2);">
+            <div class="row no-gutters", style="border-radius: 30px">
+              <div class="col-md-4">
+                <p class="mb-0"><%= image_tag (cl_image_path friend.photo), crop: :fill, style:"object-fit:cover; height: 170px; width: 170px", class: "rounded-circle center p-3" %></p>
+              </div>
+              <div class="col-md-8 d-flex flex-column justify-content-between">
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title"><%= friend.name.titlecase %></h5>
+                    <p class="card-text"><%= friend.city %></p>
+                  </div>
+                </div class="">
+                <div class="m-3">
+                      <%= link_to "Accept", accept_friend_path(friend), method: :post, class: "btn btn-success" %>
+                      <%= link_to "Decline", decline_friend_path(friend), method: :post, class: "btn btn-danger" %>
+                  <%= link_to "View Profile", profile_path(friend), class: "btn btn-link" %>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h4 class="text-center" style="width: 100%;">"You have no pending friend requests"</h4>
+    <% end %>
       `);
     }
     else if (id === "all-friends") {
@@ -69,11 +108,31 @@
       whereToShow.innerHTML = "";
       whereToShow.insertAdjacentHTML("beforeend", `
         <% if @profiles != [] %>
-          <% @profiles.each do |profile| %>
-            <p><%= profile.name %>TODO: styling</p>
+          <% @profiles.each do |friend| %>
+          <div class="col-sx-12 col-6">
+              <div class="card mb-3 border-0" style="border-radius: 15px; box-shadow: 1px 1px 5px rgba(0,0,0,0.2);">
+                <div class="row no-gutters", style="border-radius: 30px">
+                  <div class="col-md-4">
+                    <p class="mb-0"><%= image_tag (cl_image_path friend.photo), crop: :fill, style:"object-fit:cover; height: 170px; width: 170px", class: "rounded-circle center p-3" %></p>
+                  </div>
+                  <div class="col-md-8 d-flex flex-column justify-content-between">
+                    <div class="card-body">
+                      <div>
+                        <h5 class="card-title"><%= friend.name.titlecase %></h5>
+                        <p class="card-text"><%= friend.city %></p>
+                      </div>
+                    </div class="">
+                    <div class="m-3">
+                      <%= link_to "View Profile", profile_path(friend), class: "btn btn-success" %>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% else %>
-          <h4>"You have no pending friend requests"</h4>
+          <h4 class="text-center" style="width: 100%;">"You have no friends"</h4>
         <% end %>
       `);
     }
@@ -83,10 +142,31 @@
       whereToShow.insertAdjacentHTML("beforeend", `
         <% if current_user.pending_friends != [] %>
           <% current_user.pending_friends.each do |friend| %>
-            <p><%= friend.name %></p>
+            <div class="col-sx-12 col-6">
+              <div class="card mb-3 border-0" style="border-radius: 15px; box-shadow: 1px 1px 5px rgba(0,0,0,0.2);">
+                <div class="row no-gutters", style="border-radius: 30px">
+                  <div class="col-md-4">
+                    <p class="mb-0"><%= image_tag (cl_image_path friend.photo), crop: :fill, style:"object-fit:cover; height: 170px; width: 170px", class: "rounded-circle center p-3" %></p>
+                  </div>
+                  <div class="col-md-8 d-flex flex-column justify-content-between">
+                    <div class="card-body">
+                      <div>
+                        <h5 class="card-title"><%= friend.name.titlecase %></h5>
+                        <p class="card-text"><%= friend.city %></p>
+                      </div>
+                    </div class="">
+                    <div class="m-3">
+                          <%= link_to "Pending", accept_friend_path(friend), method: :post, class: "btn btn-secondary disabled" %>
+                      <%= link_to "View Profile", profile_path(friend), class: "btn btn-link" %>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% else %>
-          <h4>"You have no pending sent friend requests"</h4>
+          <h4 class="text-center" style="width: 100%;">"You have no pending sent friend requests"</h4>
         <% end %>
       `);
     };
