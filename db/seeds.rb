@@ -65,7 +65,7 @@ us << user = User.create!(
 
 
 ####################### CREANTING MATCHES #######################
-
+puts "Main Users created!"
 puts "Creating matches..."
 
 description = [
@@ -179,6 +179,7 @@ index = -1
     points: rand(400..800),
     user_id: match.user_id
   )
+  puts "Match Created!"
 end
 
 puts "Created #{Match.count} matches!"
@@ -256,6 +257,7 @@ index = -1
   # user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Geeks
@@ -274,6 +276,7 @@ end
   # user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Programmers
@@ -292,6 +295,7 @@ end
   # user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Sport Ppl
@@ -310,6 +314,7 @@ end
   # user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Hispter
@@ -328,6 +333,7 @@ end
   # user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
+  puts "User Created!"
 end
 
 
