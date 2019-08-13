@@ -65,79 +65,33 @@ us << user = User.create!(
 
 
 ####################### CREANTING MATCHES #######################
-
+puts "Main Users created!"
 puts "Creating matches..."
 
 description = [
- "Football game for advanced players",
- "Football, casual game",
- "Football, match, everybody is welcome!",
- "Basketball street game",
- "Basketball, only for the best!",
- "Basketball, come defeat us!",
- "Badmington, let’s have some fun",
- "Badmington, casual game",
- "Badmington, here to compete",
- "Tennis, only for serious player",
- "Tennis, let’s practice",
- "Tennis, here to train",
+ "Football game for advanced players", "Football, casual game",
+ "Football, match, everybody is welcome!", "Basketball street game",
+ "Basketball, only for the best!", "Basketball, come defeat us!",
+ "Badminton, let’s have some fun", "Badminton, casual game",
+ "Badminton, here to compete", "Tennis, only for serious player",
+ "Tennis, let’s practice", "Tennis, here to train",
  "Volleyball, looking for good players",
- "Volleyball, casual game",
- "Volleyball, let’s have some fun!",
- "Pool, only good players",
- "Pool, all levels welcome",
- "Pool, here to have fun",
- "Boxing, let’s hurt each other!",
- "Boxing, here to train",
- "Boxing, let’s fight!"
+ "Volleyball, casual game", "Volleyball, let’s have some fun!",
+ "Pool, only good players", "Pool, all levels welcome",
+ "Pool, here to have fun", "Boxing, let’s hurt each other!",
+ "Boxing, here to train", "Boxing, let’s fight!"
 ]
 
 level = [
- "advanced",
- "beginner",
- "beginner",
- "intermediate",
- "advanced",
- "advanced",
- "intermediate",
- "beginner",
- "advanced",
- "advanced",
- "intermediate",
- "beginner",
- "advanced",
- "intermediate",
- "intermediate",
- "advanced",
- "beginner",
- "intermediate",
- "advanced",
- "intermediate",
- "intermediate"
+ "advanced", "beginner", "beginner", "intermediate", "advanced", "advanced", "intermediate",
+ "beginner", "advanced", "advanced", "intermediate", "beginner", "advanced", "intermediate",
+ "intermediate", "advanced", "beginner", "intermediate", "advanced", "intermediate", "intermediate"
 ]
 
 category = [
- "Football",
- "Football",
- "Football",
- "Basketball",
- "Basketball",
- "Basketball",
- "Badmington",
- "Badmington",
- "Badmington",
- "Tennis",
- "Tennis",
- "Tennis",
- "Volleyball",
- "Volleyball",
- "Volleyball",
- "Pool",
- "Pool",
- "Pool",
- "Boxing",
- "Boxing",
- "Boxing"
+ "Football", "Football", "Football", "Basketball", "Basketball", "Basketball", "Badminton",
+ "Badminton", "Badminton", "Tennis", "Tennis", "Tennis", "Volleyball", "Volleyball", "Volleyball",
+ "Pool", "Pool", "Pool", "Boxing", "Boxing", "Boxing"
 ]
 
 address = [
@@ -196,25 +150,6 @@ index = -1
 21.times do
   index += 1
 
-  # case category[index]
-  # when "Football"
-  #   url = football[index]
-  # when "Basketball"
-  #   url = basketball[index]
-  # when "Badmington"
-  #   url = badminton[index]
-  # when "Tennis"
-  #   url = tennis[index]
-  # when "Volleyball"
-  #   url = volleyball[index]
-  # when "Pool"
-  #   url = billiard[index]
-  # when "Boxing"
-  #   url = boxing[index]
-  # else
-  #   url = football.sample
-  # end
-
   match = Match.new(
     date: Faker::Date.forward(days: 23),
     city: "Shanghai",
@@ -229,6 +164,22 @@ index = -1
   match.tag_list.add(["Shanghai", level[index], category[index]])
   # match.remote_photo_url = photos[index]
   match.save!
+
+  Player.create!(
+    match_id: match.id,
+    user_id: match.user_id,
+    team: 'A',
+    status: 'accepted',
+    challenger_id: match.user_id
+  )
+
+  Category.create!(
+    name: category[index],
+    level: level[index],
+    points: rand(400..800),
+    user_id: match.user_id
+  )
+  puts "Match Created!"
 end
 
 puts "Created #{Match.count} matches!"
@@ -277,6 +228,18 @@ profile = [
   "https://images.unsplash.com/photo-1523307730650-594bc63f9d67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
 ]
 
+
+# Categoryes
+def add_category(user, level, category)
+  Category.create!(
+    name: category.sample,
+    level: level.sample,
+    points: rand(100..300),
+    user_id: user.id
+  )
+end
+
+
 # Famous Players
 index = -1
 
@@ -293,6 +256,8 @@ index = -1
   )
   # user.remote_photo_url = profile[index]
   user.save!
+  add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Geeks
@@ -310,6 +275,8 @@ end
   )
   # user.remote_photo_url = profile[index]
   user.save!
+  add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Programmers
@@ -327,6 +294,8 @@ end
   )
   # user.remote_photo_url = profile[index]
   user.save!
+  add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Sport Ppl
@@ -344,6 +313,8 @@ end
   )
   # user.remote_photo_url = profile[index]
   user.save!
+  add_category(user, level, category)
+  puts "User Created!"
 end
 
 # Hispter
@@ -361,85 +332,11 @@ end
   )
   # user.remote_photo_url = profile[index]
   user.save!
+  add_category(user, level, category)
+  puts "User Created!"
 end
+
 
 puts "Created #{User.count} users!"
 
-
-
-
-
-
-
-football = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326326/football/jeffrey-f-lin-AKM-B2PoCOo-unsplash_uzwhgq.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326312/football/jeffrey-f-lin-e0Wq9Tnpf28-unsplash_jmgxlf.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326306/football/izuddin-helmi-adnan-K5ChxJaheKI-unsplash_mzlchw.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326298/football/alex-_AOL4_fDQ3M-unsplash_aclaqs.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326278/football/virgil-cayasa-qhfR7ClZABA-unsplash_pibd12.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326272/football/kyle-pham-njuYs5kFJ3s-unsplash_l5bj6x.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326272/football/izuddin-helmi-adnan-ndxwXAt0jpg-unsplash_uw39oh.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326270/football/henrique-macedo-8RzMsxk3wgg-unsplash_mkcv7j.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326265/football/kuan-fang-WaQ5xQq2E6g-unsplash_kpt7it.jpg"
-]
-
-badminton = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326482/badminton/frank-zhang-Qy2aD_qW3W0-unsplash_njasb4.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326478/badminton/unslpsh-U5epRU6sY_A-unsplash_fssj9v.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326442/badminton/frame-harirak-UR_mNYmpwco-unsplash_ju9yyk.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326428/badminton/jirayua-yaisamer-FUq3_ZCp4iU-unsplash_danljc.jpg"
-]
-
-basketball = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326464/basketball/peter-osmenda-20K-JZ2ppbE-unsplash_gtjyv0.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326461/basketball/channey-4pUmLUGDMEI-unsplash_quvtc2.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326451/basketball/tedward-quinn-LbXO_iFeL4I-unsplash_rfcbps.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326424/basketball/jerome-granados-_BMx_1jvdxY-unsplash_aqvijq.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326409/basketball/paul-wallez-LuQE3lqbVqo-unsplash_gvvaxr.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326404/basketball/sergio-souza-ELtkjCFaLhA-unsplash_cdrglr.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326401/basketball/ashwin-vaswani-ViJe3T1m5KE-unsplash_inay96.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326376/basketball/ahmad-tasviri-mKZjGET2WSQ-unsplash_i3fnnw.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326375/basketball/tim-mossholder-xwaaqLHL1VM-unsplash_sexgtb.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326336/basketball/nik-shuliahin-BWRyS1-KKrs-unsplash_yxfgtl.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326338/basketball/tim-mossholder-7XHbr-V62IM-unsplash_depm7i.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326362/basketball/alec-baker-Njd7MzxEYbo-unsplash_moitsb.jpg"
-]
-
-billiard = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326612/billiard/carla-oliveira-21FqSKZQGzI-unsplash_in7zuo.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326596/billiard/dimitri-bang-ZzBedSty35Y-unsplash_yxujop.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326585/billiard/carol-reis-BZkVQB2Nd1M-unsplash_jbyjx0.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326576/billiard/zakaria-zayane-NhUCRA7mUzE-unsplash_eyi0py.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326572/billiard/jonas-thijs-ih2IlFTDpjY-unsplash_sgs10e.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326555/billiard/hari-av-K9N5vF8Jf70-unsplash_ysfvwa.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326542/billiard/dimas-ardirosatama-jmhqXeZGSCs-unsplash_vamosl.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326540/billiard/marcelo-leal-6UeBe2HqziA-unsplash_cjoiw5.jpg"
-]
-
-boxing = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326706/boxing/action-athlete-black-background-1544774_rd5urq.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326705/boxing/wade-austin-ellis-nsAEILApJfs-unsplash_lddig4.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326692/boxing/alora-griffiths-XW47yQNE0TQ-unsplash_yjj2df.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326676/boxing/mark-adriane-FH6JcaCrYJ0-unsplash_iuwuop.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326667/boxing/hermes-rivera-_rNVw54xZZg-unsplash_oih7zy.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326655/boxing/ivana-cajina-rdZg6xmnpVM-unsplash_fpq9jf.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326653/boxing/luka-malic--YC5X_xwUgI-unsplash_ljdoeq.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326637/boxing/wade-austin-ellis-1DRIry1nN-k-unsplash_ucluc7.jpg"
-]
-
-tennis = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326543/tennis/action-athlete-ball-342361_txq2rq.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326532/tennis/dan-gold-zZfIuQwB6UI-unsplash_bonzs0.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326528/tennis/ball-court-design-209977_dnboad.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326513/tennis/ball-bright-color-2352372_mkkf2i.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326497/tennis/aerial-shot-athletes-competition-1619860_c04qfp.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326475/tennis/miguel-teirlinck-12Ozc-VG9pQ-unsplash_cxu7n5.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326463/tennis/ball-color-court-1405355_bcg7jd.jpg"
-]
-
-volleyball = [
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326617/volleyball/angelo-pantazis-n9o6NDvAyyU-unsplash_khmwlj.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326602/volleyball/vince-fleming-aZVpxRydiJk-unsplash_cchfxg.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326598/volleyball/nathan-hanna-pXmaghq_2Uc-unsplash_qdrbu6.jpg",
-  "https://res.cloudinary.com/defdajivj/image/upload/v1565326597/volleyball/steven-abraham-WYJNl4D-H7Y-unsplash_wegoh2.jpg"
-]
+puts "Created #{Category.count} categories!"

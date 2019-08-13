@@ -1,0 +1,19 @@
+.pages-index {
+    > .search {
+        margin: 10vh 0;
+        h2 {
+            margin: 0;
+            margin-bottom: 4vh;
+        }
+        form {
+            font-family: $headers-font;
+            input {
+                color: $green-3;
+                font-size: 18px;
+                --height: 50px;
+                height: var(--height);
+                text-align: center;
+            }
+        }
+    }
+}

@@ -10,7 +10,11 @@ class PlayersController < ApplicationController
   def update
     authorize @challenge
     if @challenge.update(challenge_params)
-      redirect_to players_path
+      if challenge_params["status"] == "declined"
+        redirect_to players_path
+      else
+        redirect_to matches_path(user_id: current_user.id)
+      end
     else
       redirect_to players_path
     end
@@ -22,6 +26,7 @@ class PlayersController < ApplicationController
       # TODO: status - close
       @player = Player.new
       @player.user = current_user
+      @player.challenger_id = current_user.id
       @player.status = "accepted"
       @player.team = params[:player][:team]
       @player.match = @match
@@ -33,6 +38,23 @@ class PlayersController < ApplicationController
         end
         redirect_to match_path(@match)
       end
+    elsif params[:player][:challenged].present?
+      authorize @player = Player.new
+      challenger = @match.players.where(user_id: current_user).first
+      @player.match = @match
+      @player.challenger_id = challenger.user_id
+      @player.user = User.find(params[:player][:challenged])
+      @player.team = challenger.team == 'A' ? 'B' : 'A'
+      @player.status = 'pending'
+      if @player.save
+        if @match.full?
+          @match.status = "close"
+          @match.save
+        end
+      else
+        @player.errors.messages
+      end
+      redirect_to match_path(@match)
     else
       # to challenge someone
       authorize @player = Player.new
@@ -40,27 +62,33 @@ class PlayersController < ApplicationController
       challenger = @match.players.where(user_id: current_user).first
 
       challenger = match_auto_join if challenger.nil?
-
+      @player.challenger_id = challenger.user_id
       @player.match = @match
       @player.user = User.find(params[:player][:user_id])
-      # raise
 
       @player.team = challenger.team == 'A' ? 'B' : 'A'
       @player.status = 'pending'
 
       if @player.save
-        redirect_to match_path(@match)
+        if @match.full?
+          @match.status = "close"
+          @match.save
+        end
       else
         @player.errors.messages
-        redirect_to match_path(@match)
       end
+      redirect_to match_path(@match)
     end
   end
 
   private
 
   def set_match
-    @match = Match.find(params[:match_id])
+    if params[:player][:match_id].present?
+      @match = Match.find(params[:player][:match_id])
+    else
+      @match = Match.find(params[:match_id])
+    end
   end
 
   def set_challenge

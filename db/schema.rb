@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_042816) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "challenger_id", default: 0
     t.index ["match_id"], name: "index_players_on_match_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end

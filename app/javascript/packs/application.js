@@ -8,3 +8,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 initMapbox();
 
+
+// OWN FILE
+
+import { refreshForum } from './forumRefresh.js';
+refreshForum()

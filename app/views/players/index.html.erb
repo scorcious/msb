@@ -3,7 +3,7 @@
     <h2 class="text-center">Your Challenges</h2>
     <% if @challenges != [] %>
         <div class="row">
-        <% @challenges.each do |challenge| %>
+        <% @challenges.each do |challenge|%>
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="content">
               <%= cl_image_tag challenge.match.photo %>
@@ -11,11 +11,12 @@
                 <h4 class="text-center"><%= challenge.match.description %></h4>
                 <p><%= challenge.match.location %></p>
               </div>
-      
+
               <div>
                 <p>Level: <%= challenge.match.level %></p>
-                <p>Darte & Time: <%= challenge.match.date.strftime("%d/%m/%Y") %> -  <%= challenge.match.time.strftime("%H:%M") %></p>
+                <p>Date & Time: <%= challenge.match.date.strftime("%d/%m/%Y") %> -  <%= challenge.match.time.strftime("%H:%M") %></p>
                 <p>Max Players: <%= challenge.match.number_of_players %></p>
+                <p class="challenger">Challenged by: <%= link_to  User.find(challenge.challenger_id).name.split(" ")[0], profile_path(User.find(challenge.challenger_id)) %></p>
                 <%= link_to "See Match", match_path(challenge.match), class: "btn btn-success" %>
                 <%= link_to "Accept", player_path(challenge, challenge: { status: 'accepted' }), class: "btn btn-outline-primary", method: :put %>
                 <%= link_to "Decline", player_path(challenge, challenge: { status: 'declined' }), class: "btn btn-outline-danger", method: :put %>
