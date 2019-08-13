@@ -72,8 +72,8 @@ description = [
  "Football game for advanced players", "Football, casual game",
  "Football, match, everybody is welcome!", "Basketball street game",
  "Basketball, only for the best!", "Basketball, come defeat us!",
- "Badmington, let’s have some fun", "Badmington, casual game",
- "Badmington, here to compete", "Tennis, only for serious player",
+ "Badminton, let’s have some fun", "Badminton, casual game",
+ "Badminton, here to compete", "Tennis, only for serious player",
  "Tennis, let’s practice", "Tennis, here to train",
  "Volleyball, looking for good players",
  "Volleyball, casual game", "Volleyball, let’s have some fun!",
@@ -89,8 +89,8 @@ level = [
 ]
 
 category = [
- "Football", "Football", "Football", "Basketball", "Basketball", "Basketball", "Badmington",
- "Badmington", "Badmington", "Tennis", "Tennis", "Tennis", "Volleyball", "Volleyball", "Volleyball",
+ "Football", "Football", "Football", "Basketball", "Basketball", "Basketball", "Badminton",
+ "Badminton", "Badminton", "Tennis", "Tennis", "Tennis", "Volleyball", "Volleyball", "Volleyball",
  "Pool", "Pool", "Pool", "Boxing", "Boxing", "Boxing"
 ]
 
