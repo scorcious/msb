@@ -343,3 +343,19 @@ end
 puts "Created #{User.count} users!"
 
 puts "Created #{Category.count} categories!"
+
+
+####################### CONECTING FRIENDS #######################
+
+us << User.all.sample(5)
+us.flatten!
+
+# Request friendship
+us.each do |u|
+  us.each { |f| u.friend_request(f) if u != f }
+end
+
+# Accept friendship
+us.each do |u|
+  u.pending_friends.each { |f| f.accept_request(u) }
+end
