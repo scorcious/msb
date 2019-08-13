@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
     if params[:tag].present?
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
+      @matches = @matches.select { |match| match.status == "open" }
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
@@ -46,6 +47,13 @@ class MatchesController < ApplicationController
       player.user
     end
     @all_players = @array_B + @array_A
+
+    # challenges
+    @challenges = policy_scope(Player).where(user_id: current_user, status: 'pending')
+    @challenges = @challenges.select { |c| c.match_id == @match.id }
+    unless @challenges == []
+      @challenger = User.find(@challenges[0].challenger_id)
+    end
   end
 
   def new
@@ -87,6 +95,37 @@ class MatchesController < ApplicationController
     @match.status = "cancelled"
     @match.save
     redirect_to root_path
+  end
+
+  def winner
+    @match = Match.find(params[:match_id])
+    authorize @match
+    @match.winner = params[:match]["winner"]
+    @match.save
+    calculate_points
+    redirect_to match_path(@match)
+  end
+
+
+  def calculate_points
+    @match = Match.find(params[:match_id])
+    authorize @match
+
+    winner_team = @match.winner.downcase
+    winner_points = 30
+    draw_points = 10
+    category_match = @match.tags[2].name.downcase
+    level_match = @match.tags[1].name.downcase
+
+    @match.players.each do |player|
+      category_user = Category.find_or_create_by(user_id: player.user_id, name: category_match, level: level_match)
+      if player.team.downcase == winner_team
+        category_user.points += winner_points
+      elsif winner_team == "draw"
+        category_user.points += draw_points
+      end
+      category_user.save
+    end
   end
 
   private
@@ -140,4 +179,6 @@ class MatchesController < ApplicationController
     end
     return all_matches_signed_up
   end
+
+
 end

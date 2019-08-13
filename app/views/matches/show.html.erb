@@ -23,9 +23,9 @@
       <div class="d-flex mb-5 round-plus-button">
         <% @players_a.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
         <!-- add button -->
@@ -37,9 +37,9 @@
       <div class="d-flex round-plus-button">
         <% @players_b.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px" %>
+            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
           <% end %>
         <% end %>
         <!-- add button -->
@@ -59,6 +59,32 @@
       <% end %>
     <% end %>
 
+    <!-- WINNER -->
+    <% if @match.user == current_user && @match.status == "past" %>
+      <h2 class="mt-5">Who is the winner :</h2>
+      <% if @match.winner.nil? %>
+        <%= link_to "Team A", match_winner_path(@match, match: {winner: 'A'}), method: :post, data: { confirm: 'Are you sure you want to choose the team A?' }, class: "btn btn-success" %>
+        <%= link_to "Team B", match_winner_path(@match, match: {winner: 'B'}), method: :post, data: { confirm: 'Are you sure you want to choose the team B?' }, class: "btn btn-danger" %>
+        <%= link_to "Draw", match_winner_path(@match, match: {winner: 'Draw'}), method: :post, data: { confirm: 'Are you sure you want to choose draw?' }, class: "btn btn-primary" %>
+        <% else %>
+        <p>Team : <%= @match.winner %> </p>
+      <% end %>
+    <% end %>
+
+    <!-- SHOW CHALLENGE REQUEST -->
+    <% unless @challenges == [] %>
+      <% if @challenges[0].match_id == @match.id %>
+        <h2 class="text-center mt-5">👊👊👊 You Have a Challenge! 👊👊👊</h2>
+        <h4 class="text-center mb-1 challenge-found">Challenger: <%= cl_image_tag @challenger.photo, class: "rounded-circle mt-1", style: "margin-left: 20px; width: 50px; height: 50px; object-fit: cover;" %> <%= link_to @challenger.name, profile_path(@challenger) %></h4>
+        <div class="pb-4 challenge-btns d-flex justify-content-center">
+          <div class="col-sm-12 col-md-10 p-0 mt-3">
+            <%= link_to "Sorry, I'm a coward", player_path(@challenges[0], challenge: { status: 'declined' }), class: "btn btn-danger", method: :put %>
+            <%= link_to "Bring it on!", player_path(@challenges[0], challenge: { status: 'accepted' }), class: "btn btn-primary", method: :put %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
     <!-- Challenge buddy -->
     <% if @all_players.any?{|user| user == current_user} && user_signed_in? && !@match.full? && current_user.friends != [] %>
     <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
@@ -73,6 +99,7 @@
     <% end %>
   </div>
 
+  <!-- COMMENTS -->
   <h2 class="text-center mb-1 mt-5">Write a comment</h2>
   <div class="row justify-content-center">
     <div class="col-10">
@@ -84,26 +111,26 @@
         <% end %>
       <% end %>
       </div>
+      <% if @forums != [] %>
       <div class="text-center">
         <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
 
         <div id='forumstart'></div>
         <% @forums.each do |comment| %>
         <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
-          <div class="m-3">
+          <div class="m-3 comments">
             <!-- IF DAYS == 0 THEN DONT SHOW DAYS -->
-            <h5 class="m-0"><strong>
+            <h5 class="m-0">
               <!-- TODO: CHANGE NAME INTO LINK TO USER -->
-              <%= comment.user.name.split(" ").first  %>
+              <%= link_to comment.user.name.split(" ").first, profile_path(comment.user) %>
               <% if dayCount != 0 %> - <%= dayCount unless dayCount == 0 %> days ago<% else %>
                - <%= comment.created_at.strftime("%H:%M") %> UTC
-               <% end %></strong></h5>
+               <% end %></h5>
             <p class="m-0"> <%= comment.content %> </p>
           </div>
           <% end %>
         </div>
       </div>
-
+      <% end %>
     </div>
-
 </div>
