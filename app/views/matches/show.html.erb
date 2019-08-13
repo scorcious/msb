@@ -111,26 +111,31 @@
         <% end %>
       <% end %>
       </div>
-      <% if @forums != [] %>
       <div class="text-center">
         <div class="border" style="margin: 10vh 0; margin-top: 20px;padding: 20px;">
-
         <div id='forumstart'></div>
-        <% @forums.each do |comment| %>
-        <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
-          <div class="m-3 comments">
-            <!-- IF DAYS == 0 THEN DONT SHOW DAYS -->
-            <h5 class="m-0">
-              <!-- TODO: CHANGE NAME INTO LINK TO USER -->
-              <%= link_to comment.user.name.split(" ").first, profile_path(comment.user) %>
-              <% if dayCount != 0 %> - <%= dayCount unless dayCount == 0 %> days ago<% else %>
-               - <%= comment.created_at.strftime("%H:%M") %> UTC
-               <% end %></h5>
-            <p class="m-0"> <%= comment.content %> </p>
-          </div>
+          <% if @forums != [] %>
+
+            <% @forums.each do |comment| %>
+            <% dayCount = (Time.new(Time.now - comment.created_at).day) -1 %>
+            <div class="m-3 comments">
+              <!-- IF DAYS == 0 THEN DONT SHOW DAYS -->
+              <h5 class="m-0">
+                <!-- TODO: CHANGE NAME INTO LINK TO USER -->
+                <%= link_to comment.user.name.split(" ").first, profile_path(comment.user) %>
+                <% if dayCount != 0 %> - <%= dayCount unless dayCount == 0 %> days ago<% else %>
+                 - <%= comment.created_at.strftime("%H:%M") %> UTC
+                 <% end %></h5>
+              <p class="m-0"> <%= comment.content %> </p>
+            </div>
+            <% end %>
+          <% else %>
+            <div class="m-3 comments">
+              <!-- IF DAYS == 0 THEN DONT SHOW DAYS -->
+              <h5 class="m-0">"There is no comments"</h5>
+            </div>
           <% end %>
         </div>
       </div>
-      <% end %>
     </div>
 </div>

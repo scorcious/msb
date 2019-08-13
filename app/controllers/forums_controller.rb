@@ -20,9 +20,11 @@ skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy
     @forum.match = @match
     @forum.save
 
+    @forums = @match.forums.count
     response = {
       name: @forum.user.name.split(" ").first,
-      timestamp: Time.now.strftime("%H:%M")
+      timestamp: Time.now.strftime("%H:%M"),
+      forum_empty: (@forums == 1) ? "true" : "false"
     }
 
     render json: response

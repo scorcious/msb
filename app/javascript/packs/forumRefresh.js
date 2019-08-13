@@ -1,7 +1,8 @@
 const refreshForum = () => {
   const yourMessage = document.querySelector("#forum_content");
   const messages = document.querySelector("ul");
-  const message_start = document.querySelector("#forumstart");
+  let message_start = document.querySelector("#forumstart");
+  console.log(message_start)
   const form = document.querySelector("#new_forum");
   const url = "http://localhost:3000/forums";
   const refresh = document.getElementById("refresh");
@@ -21,7 +22,11 @@ const refreshForum = () => {
       body: JSON.stringify(myMessage)
     }).then(res => res.json())
       .then((response) => {
-        message_start.insertAdjacentHTML("afterbegin", `
+        if (response.forum_empty == "true") {
+          message_start.parentElement.innerHTML = `<div id='forumstart'></div>`;
+        }
+        message_start = document.querySelector("#forumstart");
+        message_start.insertAdjacentHTML("afterend", `
           <div class="m-3">
               <h5 class="m-0"><strong>
                 ${response.name} - Just Now
