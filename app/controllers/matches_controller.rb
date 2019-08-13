@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
     if params[:tag].present?
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
+      @matches = @matches.select { |match| match.status == "open" }
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
@@ -46,6 +47,13 @@ class MatchesController < ApplicationController
       player.user
     end
     @all_players = @array_B + @array_A
+
+    # challenges
+    @challenges = policy_scope(Player).where(user_id: current_user, status: 'pending')
+    @challenges = @challenges.select { |c| c.match_id == @match.id }
+    unless @challenges == []
+      @challenger = User.find(@challenges[0].challenger_id)
+    end
   end
 
   def new
