@@ -234,12 +234,13 @@ profile = [
 
 # Categoryes
 def add_category(user, level, category)
-  Category.create!(
+  ranking = Category.find_or_create_by(
     name: category.sample,
     level: level.sample,
-    points: rand(100..300),
     user_id: user.id
   )
+  ranking.points = rand(100..300)
+  ranking.save!
 end
 
 
