@@ -1,15 +1,17 @@
-<h2 class="text-center mt-5 mb-4"><%= @profile.name.capitalize %>'s profile</h2>
-<div class="container">
+
+<div class="container mt-5">
+  <h2 class="text-center mb-3" ><%= @profile.name.capitalize %>'s profile</h2>
 
 <% if policy(@profile).show? %>
     <!-- 1 - PROFILE IMG -->
-    <div class="col">
+    <div class="col-12 col-md-4">
       <div class="row justify-content-between">
         <div class="col p-0">
-          <div class="border p-0 pt-4 pb-3 mb-0 mr-4", style="border-radius: 10px">
+          <div class="border p-0 pt-4 pb-3 mb-0 mr-4", style="border-radius: 5px">
             <div class="rounded p-0">
               <div class="text-center">
                 <%= image_tag (cl_image_path @profile.photo), crop: :fill, style:"object-fit:cover; height: 30vh; width: 30vh", class: "rounded-circle center" %>
+
 
               </div>
               <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
@@ -23,26 +25,56 @@
           </div>
         </div>
 
+
+
         <!-- 2 - OTHER INFO -->
-        <div class="border col-8 p-4", style="border-radius: 10px">
+        <div class="col-12 col-md-8 ml-3 pr-3", style="border-radius: 10px">
+          <div class="mb-4 pb-2 border-bottom border-info">
+          <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-link p-0" %>
+          </div>
+
           <p class="text-center" style="font-weight: bold">My Sport Buddies</p>
           <div class="col mr-0">
             <% User.find(params[:id]).friends.each do |friend| %>
-              <div class="text-center " style="width: 10vh">
+              <div class="text-center" style="width: 10vh">
                 <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px; width: 50px", class: "rounded-circle center justify-content-center" %>
               </div>
-            <div class="text-center mt-1" style="width: 10vh">
+            <div class="text-center mt-1 mb-4" style="width: 10vh">
               <%= friend.name.split(" ")[0] %>
             </div>
             <% end %>
           </div>
-          <p class="pt-4 text-center" style="font-weight: bold; width: auto">Interests</p>
-            <% User.find(params[:id]).categories.each do |category| %>
-              <%= category.name %>
-            <% end %>
+          <p class="pt-4 text-center pb-2" style="font-weight: bold; width: auto">My Dashboard</p>
+          <div>
+           <!--  <div class = "dashboard-grid border-bottom border-light mb-1 pb-1" >
+              <col-one>Sport</col-one>
+              <col-two>Level</col-two>
+              <col-three>Points</col-three>
+              <col-four>Ranking</col-four>
+              <col-five></col-five>
+            </div> -->
+
+            <div class = "text-secondary" >
+              <div class="row d-flex justify-content-between" style="width:100%">
+                <% User.find(params[:id]).categories.each do |category| %>
+                  <div class="border border-light col-12 col-md-3 m-1" style="text-align: left; box-shadow:  0 0 3px rgba(0,0,0,0.1)">
+                    <div class="p-2">
+                      <p style="text-align: center"><%= category.name.upcase %></p>
+                      <p><i class="fas fa-medal"></i> 1st</p>
+                      <p><i class="fas fa-layer-group"></i> <%= category.level %></p>
+                      <p><i class="fas fa-coins"></i> 500</p>
+                      <p><%= link_to "Edit", edit_category_path(category) %> / <%= link_to "Delete", category_path(category), method: :delete %></p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class= "my-5"><%= link_to "Add a category", new_category_path, class: "btn btn-link p-0" %></div>
+          </div>
+
         </div>
       </div>
-
+<!--
       <div class="row border mt-4", style="border-radius: 10px">
         <div class="col-12">
           <p class="text-center" style="font-weight: bold">My Dashboard</p>
@@ -50,16 +82,11 @@
 
         <div class="row border mt-4", style="border-radius: 10px">
           <div>
-            <% User.find(params[:id]).categories.each do |category| %>
-              <%= category.name %>
-              <%= category.level %>
-            <%= link_to "Edit", edit_category_path(category), class: "btn btn-success" %>
-            <%= link_to "Delete", category_path(category), method: :delete, class: "btn btn-danger" %>
-            <% end %>
+
           </div>
 
         </div>
-      </div>
+      </div> -->
 
 
     <!-- 3 - DASHBOARD -->
@@ -67,15 +94,16 @@
     <br>
     <br>
     <!-- FIXME: if current_user == user then able to edit -->
-    <%= link_to "Add a category", new_category_path, class: "btn btn-success" %>
 
 
-    <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-success" %>
+
+
+
 
   <% end %>
 
 
-    <!-- Challenge buddy -->
+    <!-- Challenge buddy FIXME: unless -> if -->
     <% if user_signed_in? && params[:id].to_i != current_user.id %>
       <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
       <h1>NEEDS STYLING</h1>
