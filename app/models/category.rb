@@ -31,8 +31,12 @@ class Category < ApplicationRecord
       .limit(limit)
   end
 
-  def self.ranking_position(params = {})
-    ranking = Category.ranking_per_category_user(params[:category], params[:limit])
-    ranking.pluck(:user_id).index(params[:user_id]) + 1
+  def self.ranking_position(category, user_id)
+    ranking = Category.select("user_id, name, sum(points) as points")
+      .where("name = ?", [category])
+      .group("user_id, name, points")
+      .order("points desc")
+    position = ranking.pluck(:user_id).index(user_id)
+    position.nil? ? 0 : position + 1
   end
 end
