@@ -25,12 +25,12 @@ class Category < ApplicationRecord
       .limit(limit)
   end
 
-  def self.ranking_per_user(limit)
-    Category.select("user_id, sum(points) as points")
-      .group("user_id")
-      .order("points desc")
-      .limit(limit)
-  end
+  # def self.ranking_per_user(limit)
+  #   Category.select("user_id, sum(points) as points")
+  #     .group("user_id")
+  #     .order("points desc")
+  #     .limit(limit)
+  # end
 
   # Category.ranking_position("Tennis", 72)
   def self.ranking_position(category, user_id)
