@@ -1,98 +1,109 @@
-
 <div class="container mt-5">
-
-  <div>
-    <div class="row">
-      <div class="col-12 col-md-4">
-      </div>
-      <div class="col-12 col-md-8">
-        <h2 class="mb-3" ><%= @profile.name.capitalize %>'s profile</h2>
-      </div>
+  <div class="row">
+    <div class="col-12 col-md-4">
+    </div>
+    <div class="col-12 col-md-8">
+      <h2 class="mb-3" ><%= @profile.name.capitalize %>'s profile</h2>
     </div>
   </div>
 
-
   <% if policy(@profile).show? %>
     <!-- 1 - PROFILE IMG -->
-    <div>
-      <div class="row">
-        <div class="col d-flex justify-content-between p-0">
-          <div class="p-0 mb-0", style="border-radius: 5px">
-            <div class="rounded p-5">
-              <div class="text-center mb-3">
-                <%= image_tag (cl_image_path @profile.photo), crop: :fill, style:"object-fit:cover; height: 30vh", class: "rounded-circle center" %>
-              </div>
-              <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
-              <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
-              <% if (@profile.bio != "" && @profile.bio != nil) %>
-                <p class="font-italic text-center mt-0">"<%= @profile.bio.capitalize %>"</p>
-              <% else %>
-                <p class="font-italic text-center mt-0"></p>
-              <% end %>
+    <div class="row">
+      <div class="col d-flex justify-content-between p-0">
+        <div class="p-0 mb-0", style="border-radius: 5px">
+          <div class="rounded p-5">
+            <div class="text-center mb-3">
+              <%= image_tag (cl_image_path @profile.photo), crop: :fill, style:"object-fit:cover; height: 30vh", class: "rounded-circle center" %>
             </div>
+            <p class="font-weight-bold text-center mt-2 mb-0"><%= @profile.name.capitalize %></p>
+            <p class="text-center mt-0 mb-3" style="font-size: 12px" ><%= @profile.city %></p>
+            <% if (@profile.bio != "" && @profile.bio != nil) %>
+              <p class="font-italic text-center mt-0">"<%= @profile.bio.capitalize %>"</p>
+            <% else %>
+              <p class="font-italic text-center mt-0"></p>
+            <% end %>
           </div>
         </div>
+      </div>
 
+      <!-- 2 - OTHER INFO -->
+      <div class="col-12 col-md-8", style="border-radius: 10px">
+        <div class="pb-2 border-bottom border-info">
+        <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-link p-0" %>
+        </div>
 
-
-        <!-- 2 - OTHER INFO -->
-        <div class="col-12 col-md-8", style="border-radius: 10px">
-          <div class="pb-2 border-bottom border-info">
-          <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-link p-0" %>
+        <p class="text-center my-5" style="font-weight: bold; font-size: 24px;">My Sport Buddies</p>
+        <div class="col mr-0">
+          <div class= "row d-flex">
+            <% User.find(params[:id]).friends.each do |friend| %>
+              <div class="col-4 col-md-2">
+                <div class="text-center">
+                  <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px", class: "rounded-circle center justify-content-center text-center" %>
+                </div>
+                <div class="text-center mt-1 mb-4 text-black-50" style="">
+                  <%= friend.name.split(" ")[0] %>
+                </div>
+              </div>
+            <% end %>
           </div>
-
-          <p class="text-center my-5 text-secondary" style="font-weight: bold; font-size: 24px;">My Sport Buddies</p>
-          <div class="col mr-0">
-            <div class= "row d-flex">
-              <% User.find(params[:id]).friends.each do |friend| %>
-                <div class="col-4 col-md-2">
-                  <div class="text-center">
-                    <%= cl_image_tag friend.photo, crop: :fill, style:"object-fit:cover; height: 50px", class: "rounded-circle center justify-content-center text-center" %>
-                  </div>
-                  <div class="text-center mt-1 mb-4 text-black-50" style="">
-                    <%= friend.name.split(" ")[0] %>
+        </div>
+        <p class="pt-4 text-center pb-2 my-5" style="font-weight: bold; width: auto; font-size: 24px">My Dashboard</p>
+        <div>
+          <div class = "text-secondary" >
+            <div class="row d-flex justify-content-around mt-5">
+              <% @categories.each do |category| %>
+                <div class="col-8 col-md-4 mb-4" style="text-align: left">
+                  <div class="border border-light p-2 mb-5">
+                    <p style="text-align: center; font-weight: bold"><%= category.name.capitalize %></p>
+                    <p><i class="fas fa-medal text-warning"></i> <span class="font-weight-light"><%= Category.ranking_position(category.name, @profile.id)[:position] %></span></p>
+                  <!--   <p><i class="fas fa-layer-group text-secondary"></i> <span class="font-weight-light"></span> </p> -->
+                    <p><i class="fas fa-coins text-secondary"></i> <span class="font-weight-light"><%= Category.ranking_position(category.name, @profile.id)[:points]%></span></p>
                   </div>
                 </div>
               <% end %>
             </div>
           </div>
-          <p class="pt-4 text-center pb-2 my-5 text-secondary" style="font-weight: bold; width: auto; font-size: 24px">My Dashboard</p>
-          <div>
-            <div class = "text-secondary" >
-              <div class="row d-flex justify-content-around mt-5">
-                <% User.find(params[:id]).categories.each do |category| %>
-                  <div class="col-8 col-md-4 mb-4" style="text-align: left">
-                    <div class="border border-light p-2">
-                      <p style="text-align: center"><%= category.name.upcase %></p>
-                      <p><i class="fas fa-medal text-warning"></i> <span class="font-weight-light">1st</span></p>
-                      <p><i class="fas fa-layer-group text-secondary"></i> <span class="font-weight-light"><%= category.level %></span> </p>
-                      <p><i class="fas fa-coins text-secondary"></i> <span class="font-weight-light"><%= category.points %></span></p>
-                      <p><%= link_to "Edit", edit_category_path(category) %> / <%= link_to "Delete", category_path(category), method: :delete %></p>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-            <div class= "mb-5"><%= link_to "Add a category", new_category_path, class: "btn btn-link p-0" %></div>
-          </div>
-
         </div>
       </div>
+    </div>
   <% end %>
-
-
-    <!-- Challenge buddy FIXME: unless -> if -->
-    <% if user_signed_in? && params[:id].to_i != current_user.id %>
-      <h2 class="text-center mb-1 mt-5">👊 Challenge Your Buddy 👊</h2>
-      <h1>NEEDS STYLING</h1>
-      <div class="pb-4 challenge d-flex justify-content-center">
-        <div class="col-sm-12 col-md-10 p-0">
-          <%= simple_form_for @player do |f| %>
-            <%= f.input :match_id, label: "Choose the game:", include_blank: false, collection: @matches,label_method: :description, value_method: :id %>
-            <%= f.hidden_field :challenged, value: @profile.id %>
-            <%= f.submit "Challenge!", class: "btn btn-success" %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
 </div>
+        <!-- Challenge buddy FIXME: unless -> if -->
+
+
+<div class="container" style="text-align: center">
+  <% if user_signed_in? && params[:id].to_i != current_user.id %>
+    <h2 class="text-center mb-4 mt-5" style="font-weight: bold">👊 Challenge Your Buddy 👊</h2>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <%= simple_form_for @player do |f| %>
+        <%= f.input :match_id, label: "Choose the game:", include_blank: false, collection: @matches,label_method: :description, value_method: :id, input_html: {style: "max-width: 20em"} %>
+        <%= f.hidden_field :challenged, value: @profile.id %>
+
+        <%= f.submit "Challenge!", class: "btn btn-success mt-4 mb-5" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
