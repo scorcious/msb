@@ -17,8 +17,8 @@
   </div>
 </section>
 
-<div id="ranking-tables" class="container">
-  <h2 id="category-title" class="text-center" style="margin-top: 10vh;">Football</h2>
+<div id="ranking-tables" class="container" style="margin-bottom: 10vh;">
+  <h2 id="category-title" class="text-center" style="margin-top: 10vh; margin-bottom: 4vh;">Football</h2>
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -34,7 +34,7 @@
           <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
           <!-- USERS -->
             <tr>
-              <td><%= index +1 %><% if index+1 == 1 %>👑<% end %></td>
+              <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
               <td><%= link_to c.user.name, profile_path(c.user) %></td>
               <td><%= c.points %></td>
             </tr>
@@ -42,14 +42,16 @@
         <% end %>
       <% end %>
     </tbody>
-    <tfoot style="color: #072714; background-color: #2ED573;">
-      <!-- TODO: USER RANKING -->
+    <tfoot style="color: #072714; background-color: #2ED573; font-weight: bold;">
       <% a = Category.ranking_position(@category, current_user.id) %>
-      <tr>
-        <td><%= a[:position] %></td>
-        <td><%= User.find(a[:user_id]).name %></td>
-        <td><%= a[:points] %></td>
-      </tr>
+      <% index = a[:position] %>
+      <% if index != (-1) %>
+        <tr>
+          <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+          <td><%= User.find(a[:user_id]).name %></td>
+          <td><%= a[:points] %></td>
+        </tr>
+      <% end %>
     </tfoot>
   </table>
 </div>
@@ -71,13 +73,14 @@
     e.addEventListener("click", (e) => {
       const li = e.target;
       const categoryName = li.id;
-      const tbody = document.querySelector("tbody")
-      const h2 = document.querySelector("#category-title")
+      const tbody = document.querySelector("tbody");
+      const h2 = document.querySelector("#category-title");
+      const tfoot = document.querySelector("tfoot");
       console.log(h2);
 
       // insert into tbody
-      // TODO: tfoot -> @category
       if (categoryName === "Football") {
+        addClassSelected(li);
         h2.innerHTML = "Football"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -87,7 +90,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -95,8 +98,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Basketball") {
+        addClassSelected(li);
         h2.innerHTML = "Basketball"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -106,7 +122,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -114,8 +130,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Badminton") {
+        addClassSelected(li);
         h2.innerHTML = "Badminton"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -125,7 +154,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -133,8 +162,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Tennis") {
+        addClassSelected(li);
         h2.innerHTML = "Tennis"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -144,7 +186,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -152,8 +194,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Volleyball") {
+        addClassSelected(li);
         h2.innerHTML = "Volleyball"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -163,7 +218,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -171,8 +226,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Pool") {
+        addClassSelected(li);
         h2.innerHTML = "Billiards"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -182,7 +250,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
@@ -190,8 +258,21 @@
             <% end %>
           <% end %>
         `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
+          <% end %>
+        `)
       }
       else if (categoryName === "Boxing") {
+        addClassSelected(li);
         h2.innerHTML = "Boxing"
         tbody.innerHTML = "";
         tbody.insertAdjacentHTML("beforeend", `
@@ -201,12 +282,24 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><%= index +1 %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index +1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
               <% end %>
             <% end %>
+          <% end %>
+        `)
+        tfoot.innerHTML = ""
+        tfoot.insertAdjacentHTML("beforeend", `
+          <% a = Category.ranking_position(@category, current_user.id) %>
+          <% index = a[:position] %>
+          <% if index != (-1) %>
+            <tr>
+              <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+              <td><%= User.find(a[:user_id]).name %></td>
+              <td><%= a[:points] %></td>
+            </tr>
           <% end %>
         `)
       }
