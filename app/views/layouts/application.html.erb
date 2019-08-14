@@ -37,8 +37,11 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", profile_path(current_user), class:"dropdown-item" %>
               <%= link_to  "Buddies", my_friends_path, class:"dropdown-item" %>
+              <hr>
               <%= link_to  "Games", matches_path(user_id: current_user.id), class:"dropdown-item" %>
               <%= link_to  "Challenges", players_path, class:"dropdown-item" %>
+              <%= link_to  "Leaderboards", rankings_path, class:"dropdown-item" %>
+              <hr>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
             </div>
             <% if @total_counts != 0 %>
@@ -87,6 +90,7 @@
             <%= link_to  "Browse all users", profiles_path %>
           </div>
           <div>
+            <!-- TODO: -->
             <a href="">Terms & Conditions</a>
           </div>
           <div>

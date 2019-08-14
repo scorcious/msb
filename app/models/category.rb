@@ -1,6 +1,7 @@
 class Category < ApplicationRecord
   belongs_to :user
 
+  # Rankings System
   def self.ranking_top_categories(limit)
     Category.select("name, sum(points) as points")
       .group("name")
