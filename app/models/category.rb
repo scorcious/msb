@@ -19,7 +19,7 @@ class Category < ApplicationRecord
   def self.ranking_per_category_user(category, limit)
     Category.select("user_id, name, sum(points) as points")
       .where("name = ?", [category])
-      .group("user_id, name")
+      .group("user_id, name, points")
       .order("points desc")
       .limit(limit)
   end
@@ -29,5 +29,10 @@ class Category < ApplicationRecord
       .group("user_id")
       .order("points desc")
       .limit(limit)
+  end
+
+  def self.ranking_position(params = {})
+    ranking = Category.ranking_per_category_user(params[:category], params[:limit])
+    ranking.pluck(:user_id).index(params[:user_id]) + 1
   end
 end
