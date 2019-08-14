@@ -231,7 +231,6 @@ profile = [
   "https://images.unsplash.com/photo-1523307730650-594bc63f9d67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
 ]
 
-
 # Categoryes
 def add_category(user, level, category)
   ranking = Category.find_or_create_by(
@@ -343,8 +342,6 @@ end
 
 puts "Created #{User.count} users!"
 
-puts "Created #{Category.count} categories!"
-
 
 ####################### CONECTING FRIENDS #######################
 
@@ -359,3 +356,21 @@ end
 us.each do |u|
   u.pending_friends.each { |f| f.accept_request(u) }
 end
+
+
+####################### CATEGORIES TO THE RANKING #######################
+
+category.uniq.each do |category|
+  level = ["advanced", "beginner", "intermediate"]
+  User.all.each do |user|
+    ranking = Category.find_or_create_by(
+      name: category,
+      user_id: user.id
+    )
+    ranking.level = level.sample
+    ranking.points = rand(100..300)
+    ranking.save!
+  end
+end
+
+puts "Created #{Category.count} categories!"
