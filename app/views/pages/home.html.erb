@@ -1,29 +1,61 @@
 <div class="pages-home">
-    <div class="background text-center mx-auto">
-        <div>
-            <h1 class="mesg-top">Find sports games</h1>
-            <h1>around you</h1>
-        </div>
-        <%= simple_form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
-        <%= f.input :query, label: false, placeholder: "Search for users and matches or sports", input_html: {value: ""} %>
-        <% end %>
+
+    <div style="margin-top: -20vh; position: relative; background: url('https://images.unsplash.com/photo-1423068657086-889315a2eba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'); background-position: center; background-size: top; background-repeat: no-repeat; height: 27em; width: 100%; padding: 7em 0 27em 0;">
+      <section style="margin-top: 14vh; position: relative; z-index: 2; margin-bottom: em; text-align: center;">
+          <h1 class="mesg-top" style="color: #2ED573; font-weight: bold">Find sports games</h1>
+          <h1 style="margin-bottom: 1em;">around you</h1>
+          <%= form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
+          <section style="position: relative; text-align:center;">
+            <%= f.text_field :query, label: false, placeholder: "", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 10px; opacity: 0.8;" %>
+            <i class="fas fa-search" id="icon-search" style="position: relative; top: 8px; right: -110px; color: rgba(0,0,0,0.5);"></i>
+          </section>
+          <% end %>
+      </section>
+      <div style="position: absolute; background: rgba(30, 30, 30, 0.1); top: 0; left: 0; right: 0; bottom: 0; width: 100%;"></div>
     </div>
 
-    <div class="container" style="margin-top: 76vh;">
+
+
+    <div class="container">
         <h2 class="">How it works</h2>
         <div class="row text-center">
-          <div class="col-3">
-            <i class="fas fa-user-plus mb-4", style="font-size: 100px"></i>
-            <p>Create or sign-up for a match. As simple as that!</p>
+
+          <div class="col-12 col-md-3">
+            <div class="parent px-4 pt-4 pb-0 mt-5">
+              <div class="child border rounded-circle p-1" style="opacity: 1;">
+                <p class="child-num">1</p>
+              </div>
+              <i class="icon-green fas fa-user-plus m-5", style="font-size: 100px"></i>
+              <p style="color: rgba(0,0,0,0.75)">Create or sign-up for a match. As simple as that!</p>
+              <br>
+            </div>
           </div>
-          <div class="col-3 mx-5" id="icon-arm">
-            <i class="far fa-smile mb-4", style="font-size: 100px"></i>
-            <p>Play the challege and earn glory and honor</p>
+
+          <div class="col-12 col-md-3">
+            <div class="parent px-4 pt-4 pb-0 mt-5">
+              <div class="child border rounded-circle p-1">
+                <p class="child-num">2</p>
+              </div>
+              <i class="icon-green far fa-smile m-5", style="font-size: 100px"></i>
+              <p style="color: rgba(0,0,0,0.75)">Play the challege and earn glory and honor</p>
+              <br>
+            </div>
           </div>
-          <div class="col-3">
-            <i class="fas fa-chart-line mb-4", style="font-size: 100px"></i>
-            <p>Measure your progress and get better to beat your next opponent</p>
+
+          <div class="col-12 col-md-3">
+            <div class="parent px-4 pt-4 pb-0 mt-5">
+              <div class="child border rounded-circle p-1">
+                <p class="child-num">3</p>
+              </div>
+              <i class="icon-green fas fa-chart-line m-5", style="font-size: 100px"></i>
+              <p style="color: rgba(0,0,0,0.75)">Measure your progress to get better</p>
+              <br>
+            </div>
           </div>
+
+
+
+
         </div>
 
         <h2 class="">Categories</h2>
@@ -63,20 +95,21 @@
         </div>
 
         <h2 class="">Discover Games</h2>
-        <div class="row paintings">
+        <div class="row paintings justify-content-center">
             <% @matches.each do |m| %>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div>
-                        <%= cl_image_tag m.photo %>
-                        <div>
-                            <h4 class="text-truncate"><%= m.description %></h4>
+                    <div class="card rounded shadow-sm border-0 m-3" style="box-shadow: 15 15 15 15; margin: 0;">
+                        <%= cl_image_tag m.photo, style: "height: 220px" %>
+                        <div class="card-body">
+                            <h5 class="text-truncate"><%= m.description %></h5>
                             <div class="see-match">
                                 <p>Coming in: <%= (m.date - Date.today).to_i %> days</p>
-                                <%= link_to  "See More", match_path(m) %>
+                                <%= link_to  "See More", match_path(m), style: "font-size: 14px; text-decoration: underline;" %>
                             </div>
                         </div>
                     </div>
                 </div>
+
             <% end %>
         </div>
     </div>
