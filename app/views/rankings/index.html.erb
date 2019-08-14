@@ -18,8 +18,8 @@
 </section>
 
 <div id="ranking-tables" class="container">
+  <h2 id="category-title" class="text-center" style="margin-top: 10vh;">Football</h2>
   <table class="table">
-    <h2 id="category-title">Football</h2>
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -49,3 +49,166 @@
   </table>
 </div>
 
+<script>
+  const addClassSelected = (target) => {
+    // take parent class -> get children -> remove classes for all children
+    const children = target.parentElement.children;
+    const childAmount = target.parentElement.childElementCount;
+    for (let i=0; i<childAmount; i++) {
+      children[i].classList.remove("active");
+    }
+    // add class
+    target.classList.add("active");
+  }
+
+  const lis = document.querySelectorAll("li");
+  lis.forEach((e) => {
+    e.addEventListener("click", (e) => {
+      const li = e.target;
+      const categoryName = li.id;
+      const tbody = document.querySelector("tbody")
+      const h2 = document.querySelector("#category-title")
+      console.log(h2);
+
+      // insert into tbody
+      // TODO: tfoot -> @category
+      if (categoryName === "Football") {
+        h2.innerHTML = "Football"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Football" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Basketball") {
+        h2.innerHTML = "Basketball"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Basketball" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Badminton") {
+        h2.innerHTML = "Badminton"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Badminton" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Tennis") {
+        h2.innerHTML = "Tennis"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Tennis" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Volleyball") {
+        h2.innerHTML = "Volleyball"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Volleyball" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Pool") {
+        h2.innerHTML = "Billiards"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Pool" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      else if (categoryName === "Boxing") {
+        h2.innerHTML = "Boxing"
+        tbody.innerHTML = "";
+        tbody.insertAdjacentHTML("beforeend", `
+          <% @rankings.each do |category| %>
+            <% if category.name == "Boxing" %>
+              <% @category = category.name %>
+              <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+              <!-- USERS -->
+                <tr>
+                  <td><%= index +1 %></td>
+                  <td><%= link_to c.user.name, profile_path(c.user) %></td>
+                  <td><%= c.points %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        `)
+      }
+      
+    })
+  })
+  
+
+
+</script>
