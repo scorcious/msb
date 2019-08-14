@@ -19,7 +19,7 @@
         height: 75vh;
         top: 0;
         background-size: cover;
-        div {
+        div  {
             margin-top:30vh;
             h1 {
                 font-size: 44px;
@@ -30,23 +30,28 @@
                 color: $green;
             }
         }
-        form {
-            font-family: $headers-font;
-            font-weight: bold;
-            margin: 6vh auto;
-            margin-bottom: 16px;
-            width: 70vw;
-            * {
-                --height: 50px;
-                margin: 0;
-                letter-spacing: 1px;
-                text-align: center;
-                height: var(--height);
-                border: none;
-                border-radius: var(--height);
-                font-size: 24px;
-            }
-        }
+        // form {
+        //     font-family: $headers-font;
+        //     font-weight: bold;
+        //     margin: 6vh auto;
+        //     margin-bottom: 16px;
+        //     width: 70vw;
+        //     * {
+        //         --height: 50px;
+        //         // margin: 0vh 25vh 0vh 25vh ;
+        //         position: absolute;
+        //         top: 14vh;
+        //         right: 50%;
+        //         transform: translate(50%, -50%);
+        //         letter-spacing: 1px;
+        //         text-align: center;
+        //         height: var(--height);
+        //         border: none;
+        //         border-radius: var(--height);
+        //         font-size: 24px;
+        //         width: 300px;
+        //     }
+        // }
     }
     .container {
         h2 {
@@ -98,85 +103,116 @@
                 }
             }
         }
-        .paintings {
-            margin: 0;
-            margin-bottom: 10vh;
-            div { // col-sm-12 etc..
-                margin: 10px 0;
-                border-radius: 4px;
-                > div { // content of discover
-                    margin: 0;
+        // .paintings {
+        //     margin: 0;
+        //     margin-bottom: 10vh;
+        //     div { // col-sm-12 etc..
+        //         margin: 10px 0;
+        //         border-radius: 4px;
+        //         > div { // content of discover
+        //             margin: 0;
 
-                    box-shadow:
-                    0px 0px 0px rgba(200, 200, 200, 0.5),
-                    1px 1px 1px rgba(200, 200, 200, 0.3),
-                    2px 2px 2px rgba(200, 200, 200, 0.2),
-                    3px 3px 3px rgba(200, 200, 200, 0.1);
-                    img {
-                        width: 100%;
-                        height: 34vh;
-                        border-radius: 4px;
-                        object-fit: cover;
-                    }
-                    > div {
-                        padding: 20px 14px;
-                        border: none;
-                        * {
-                            font-family: $headers-font;
-                            font-size: 24px;
-                            margin: 8px 0;
-                            margin-bottom: 0px;
-                        }
-                        > .see-match {
-                            padding: 0;
-                            margin: 0;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: flex-end;
-                            border: none;
-                            height: 40px;
-                            box-shadow: none;
-                            p {
-                                font-family: $body-font;
-                                font-size: 18px;
-                                margin: 0;
-                                font-weight: bold;
-                            }
-                            a {
-                                height: 36px;
-                                margin: 0;
-                                text-align: center;
-                                border-radius: 4px;
-                                padding: 6px 20px;
-                                font-size: 16px;
-                                color: $green-3;
-                                background-color: $green;
-                                overflow: hidden;
-                                transition: 0.2s ease-out;
-                                &:hover {
-                                    font-size: 18px;
-                                }
-                            }
-                        }
-                        h4 {
-                            a {
-                                transition: all 0.1s ease;
-                                overflow: hidden;
-                                &:hover {
-                                    font-size: 25px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //             box-shadow:
+        //             0px 0px 0px rgba(200, 200, 200, 0.5),
+        //             1px 1px 1px rgba(200, 200, 200, 0.3),
+        //             2px 2px 2px rgba(200, 200, 200, 0.2),
+        //             3px 3px 3px rgba(200, 200, 200, 0.1);
+        //             img {
+        //                 width: 100%;
+        //                 height: 34vh;
+        //                 border-radius: 4px;
+        //                 object-fit: cover;
+        //             }
+        //             > div {
+        //                 padding: 20px 14px;
+        //                 border: none;
+        //                 * {
+        //                     font-family: $headers-font;
+        //                     font-size: 24px;
+        //                     margin: 8px 0;
+        //                     margin-bottom: 0px;
+        //                 }
+        //                 > .see-match {
+        //                     padding: 0;
+        //                     margin: 0;
+        //                     display: flex;
+        //                     justify-content: space-between;
+        //                     align-items: flex-end;
+        //                     border: none;
+        //                     height: 40px;
+        //                     box-shadow: none;
+        //                     p {
+        //                         font-family: $body-font;
+        //                         font-size: 18px;
+        //                         margin: 0;
+        //                         font-weight: bold;
+        //                     }
+        //                     a {
+        //                         height: 36px;
+        //                         margin: 0;
+        //                         text-align: center;
+        //                         border-radius: 4px;
+        //                         padding: 6px 20px;
+        //                         font-size: 16px;
+        //                         color: $green-3;
+        //                         background-color: $green;
+        //                         overflow: hidden;
+        //                         transition: 0.2s ease-out;
+        //                         &:hover {
+        //                             font-size: 18px;
+        //                         }
+        //                     }
+        //                 }
+        //                 h4 {
+        //                     a {
+        //                         transition: all 0.1s ease;
+        //                         overflow: hidden;
+        //                         &:hover {
+        //                             font-size: 25px;
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
 
-div#icon-arm {
-  img {
-    height: 160px;
 
-  }
+.parent {
+  position: relative;
+  border: solid 1px #2ED573;
+  border-radius: 10px;
+  box-shadow: 25px;
+
+}
+
+.child {
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  border-color: red;
+  height: 80px;
+  width: 80px;
+  transform: translate(50%, -50%);
+  background-color: #2ED573;
+}
+
+.child-num {
+  color: rgba(255,245,255,1);
+  position: absolute;
+  top: 12px;
+  right: 36%;
+  font-size: 40px;
+}
+
+.icon-green {
+  color: #2ED573;
+  opacity: 0.5;
+}
+
+#icon-search {
+  position:absolute;
+  top: 30vh;
 }
