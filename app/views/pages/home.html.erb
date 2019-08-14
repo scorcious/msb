@@ -3,7 +3,7 @@
     <div style="margin-top: -20vh; position: relative; background: url('https://images.unsplash.com/photo-1423068657086-889315a2eba8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'); background-position: center; background-size: top; background-repeat: no-repeat; height: 27em; width: 100%; padding: 7em 0 27em 0;">
       <section style="margin-top: 14vh; position: relative; z-index: 2; margin-bottom: em; text-align: center;">
           <h1 class="mesg-top" style="color: #2ED573; font-weight: bold">Find sports games</h1>
-          <h1 style="margin-bottom: 1em;">around you</h1>
+          <h1 style="margin-bottom: 1em; color: rgb(50,50,50);">around you</h1>
           <%= form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
           <section style="position: relative; text-align:center;">
             <%= f.text_field :query, label: false, placeholder: "", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 10px; opacity: 0.8;" %>
@@ -17,7 +17,7 @@
 
 
     <div class="container">
-        <h2 class="">How it works</h2>
+        <h2 style="color: rgb(50,50,50)">How it works</h2>
         <div class="row text-center">
 
           <div class="col-12 col-md-3">
@@ -58,7 +58,7 @@
 
         </div>
 
-        <h2 class="">Categories</h2>
+        <h2 style="color: rgb(50,50,50)">Categories</h2>
         <div class="row"> <!-- TODO: TAGS FOR SPORTS AND LINKS -->
             <div class="recommended col-sm-12 col-md-6 col-lg-3">
                 <img src="https://images.unsplash.com/photo-1552667466-07770ae110d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="">
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <h2 class="">Discover matches</h2>
+        <h2 style="color: rgb(50,50,50)">Discover matches</h2>
         <div class="row paintings justify-content-center">
 
             <% @matches.each do |m| %>
