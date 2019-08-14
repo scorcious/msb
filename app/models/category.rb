@@ -38,7 +38,21 @@ class Category < ApplicationRecord
       .where("name = ?", [category])
       .group("user_id, name, points")
       .order("points desc")
+
     position = ranking.pluck(:user_id).index(user_id)
-    position.nil? ? 0 : position + 1
+
+    if position.nil?
+      {
+        user_id: user_id,
+        points: -1,
+        position: -1
+      }
+    else
+      {
+        user_id: user_id,
+        points: ranking[position].points,
+        position: position += 1
+      }
+    end
   end
 end
