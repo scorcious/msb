@@ -1,8 +1,15 @@
 class ForumsController < ApplicationController
 
+skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+
+  def index
+    @forums = Forum.all
+    render json: @forums #Just for testing
+  end
+
   def new
     @forum = Forum.new
-    authorize @forum
+    # authorize @forum
     @match = Match.find(params[:match_id])
   end
 
@@ -11,11 +18,16 @@ class ForumsController < ApplicationController
     @match = Match.find(params[:match_id])
     @forum.user = current_user
     @forum.match = @match
-    if @forum.save
-      redirect_to @match
-    else
-      render :new
-    end
+    @forum.save
+
+    @forums = @match.forums.count
+    response = {
+      name: @forum.user.name.split(" ").first,
+      timestamp: Time.now.strftime("%H:%M"),
+      forum_empty: (@forums == 1) ? "true" : "false"
+    }
+
+    render json: response
   end
 
 private
