@@ -114,8 +114,8 @@ class MatchesController < ApplicationController
     winner_team = @match.winner.downcase
     winner_points = 30
     draw_points = 10
-    category_match = @match.tags[2].name.downcase
-    level_match = @match.tags[1].name.downcase
+    category_match = @match.tags[0].name.downcase
+    level_match = @match.tags[2].name.downcase
 
     @match.players.each do |player|
       category_user = Category.find_or_create_by(user_id: player.user_id, name: category_match, level: level_match)
@@ -153,6 +153,7 @@ class MatchesController < ApplicationController
     tags << match_params[:city]
     tags << match_params[:level]
     @match.tag_list.add(tags)
+    @match.save
   end
 
   def add_team_to_player
