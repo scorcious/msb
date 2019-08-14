@@ -5,13 +5,13 @@
     
     <div class="categories">
       <ul class="categories-list">
-        <li id="Football" class="active">⚽ Football</li>
-        <li id="Basketball">🏀 Basketball</li>
-        <li id="Badminton">🏸 Badminton</li>
-        <li id="Tennis">🎾 Tennis</li>
-        <li id="Volleyball">🏐 Volleyball</li>
-        <li id="Pool">🎱 Billiards</li>
-        <li id="Boxing">🥊 Boxing</li>
+        <li id="Football" class="active">⚽ </li>
+        <li id="Basketball">🏀 </li>
+        <li id="Badminton">🏸 </li>
+        <li id="Tennis">🎾 </li>
+        <li id="Volleyball">🏐 </li>
+        <li id="Pool">🎱 </li>
+        <li id="Boxing">🥊 </li>
       </ul>
     </div>
   </div>
@@ -90,7 +90,7 @@
               <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
               <!-- USERS -->
                 <tr>
-                  <td><% if index == 1 %>👑<% else %><%= index %><% end %></td>
+                  <td><% if index+1 == 1 %>👑<% else %><%= index+1 %><% end %></td>
                   <td><%= link_to c.user.name, profile_path(c.user) %></td>
                   <td><%= c.points %></td>
                 </tr>
