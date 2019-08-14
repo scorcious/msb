@@ -1,0 +1,73 @@
+section.ranking-banner {
+    background: url('https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80') no-repeat center 40%;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    min-height: 300px;
+    padding: 150px 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 0;
+    &:after{
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        background: rgba(0,0,0, 0.2);
+        
+    }
+  
+    .banner-wrapper {
+        width: 480px;
+        z-index: 2;
+        .categories {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        h2 {
+            font-size: 1.125rem;
+            letter-spacing: .5px;
+        }
+        .categories-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 0;
+            margin-top: 20px;
+            li {
+                display: inline-block;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 1.5rem;
+                line-height: 1.4;
+                padding: 10px 10px 1px;
+                margin: 0 5px 10px;
+                min-width: 50px;
+                min-height: 50px;
+                border-radius: 25px;
+                cursor: pointer;
+                background: #fff;
+            }
+        }
+    }
+  
+    h1 {
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+  
+    h2 {
+        color: #eee;
+        font-size: 1.125rem;
+        letter-spacing: .5px;
+        font-family: $body-font;
+    }
+}
+  

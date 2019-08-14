@@ -1,11 +1,81 @@
+<!-- TODO: BANNER -->
+<section class="ranking-banner">
+  <div class="banner-wrapper">
+    <h1>Leaderboards</h1>
+    <h2>Only for the best</h2>
+    
+    <div class="categories">
+      <h2>Choose a category</h2>
+      <ul class="categories-list">
+        <li id="Football">⚽ Football</li>
+        <li id="Basketball">🏀 Basketball</li>
+        <li id="Badminton">🏸 Badminton</li>
+        <li id="Tennis">🎾 Tennis</li>
+        <li id="Volleyball">🏐 Volleyball</li>
+        <li id="Pool">🎱 Billiards</li>
+        <li id="Boxing">🥊 Boxing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div id="ranking-tables">
+  <table>
+    <thead>
+      <!-- TODO: THE IDS -->
+    </thead>
+    <tbody>
+      <!-- TODO: TOP RANKINGS -->
+    </tbody>
+    <tfoot>
+      <!-- TODO: USER RANKING -->
+    </tfoot>
+  </table>
+</div>
+
+
+
+<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 <!-- Ranking per Category x User -->
 <div class="border">
   <p>Ranking per Category x User</p>
   <% @ranking.each do |category| %>
-    <p><%= category.name %></p>
+  <p><%= category.name %></p>
     <% Category.ranking_per_category_user(category.name, 5).each do |player| %>
     <p><%= player.user.name %> / <%= player.points %></p>
     <% end %>
     <p>-------------</p>
   <% end %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Ranking per Category x User x Level -->
+<!-- <div class="border">
+  <p>Ranking per Category x User x Level</p>
+  <% @ranking.each do |category| %>
+  <p><%= category.name %></p>
+    <% Category.ranking_per_category_user_level(category.name, 5).each do |player| %>
+    <p><%= player.user.name %> / <%= player.level %> / <%= player.points %></p>
+    <% end %>
+    <p>-------------</p>
+  <% end %>
+</div> -->
+
+
+<!-- Ranking per User -->
+<!-- <div class="border">
+  <p>Ranking per User</p>
+  <% Category.ranking_per_user(5).each do |player| %>
+    <p><%= player.user.name %> / <%= player.points %></p>
+    <% end %>
+    <p>-------------</p>
+</div> -->
