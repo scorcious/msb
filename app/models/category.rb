@@ -9,13 +9,13 @@ class Category < ApplicationRecord
       .limit(limit)
   end
 
-  def self.ranking_per_category_user_level(category, limit)
-    Category.select("user_id, name, level, sum(points) as points")
-      .where("name = ?", [category])
-      .group("user_id, name, level")
-      .order("CASE WHEN (level = 'advanced') THEN 0 WHEN (level = 'intermediate') THEN 1 ELSE 2 END, points desc")
-      .limit(limit)
-  end
+  # def self.ranking_per_category_user_level(category, limit)
+  #   Category.select("user_id, name, level, sum(points) as points")
+  #     .where("name = ?", [category])
+  #     .group("user_id, name, level")
+  #     .order("CASE WHEN (level = 'advanced') THEN 0 WHEN (level = 'intermediate') THEN 1 ELSE 2 END, points desc")
+  #     .limit(limit)
+  # end
 
   def self.ranking_per_category_user(category, limit)
     Category.select("user_id, name, sum(points) as points")
@@ -32,6 +32,7 @@ class Category < ApplicationRecord
       .limit(limit)
   end
 
+  # Category.ranking_position("Tennis", 72)
   def self.ranking_position(category, user_id)
     ranking = Category.select("user_id, name, sum(points) as points")
       .where("name = ?", [category])

@@ -1,20 +1,8 @@
-<!-- TODO: BANNER -->
 <section class="ranking-banner">
   <div class="banner-wrapper">
     <h1>Leaderboards</h1>
     <h2>Only for the best</h2>
     
-    <!-- <div class="categories">
-      <ul class="categories-list">
-        <li id="Football">Football</li>
-        <li id="Basketball">Basketball</li>
-        <li id="Badminton">Badminton</li>
-        <li id="Tennis">Tennis</li>
-        <li id="Volleyball">Volleyball</li>
-        <li id="Pool">Billiards</li>
-        <li id="Boxing">Boxing</li>
-      </ul>
-    </div> -->
     <div class="categories">
       <ul class="categories-list">
         <li id="Football" class="active">⚽ Football</li>
@@ -31,6 +19,7 @@
 
 <div id="ranking-tables" class="container">
   <table class="table">
+    <h2 id="category-title">Football</h2>
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -41,44 +30,22 @@
     <tbody>
       <% @rankings.each do |category| %>
         <% if category.name == "Football" %>
-        <!-- HEADER -->
-        <h2><%= category.name %></h2>
+          <% @category = category.name %>
           <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
           <!-- USERS -->
             <tr>
               <td><%= index +1 %></td>
-              <td><%= c.user.name %></td>
+              <td><%= link_to c.user.name, profile_path(c.user) %></td>
               <td><%= c.points %></td>
             </tr>
           <% end %>
         <% end %>
       <% end %>
     </tbody>
-    <tfoot>
+    <tfoot class="thead-dark">
       <!-- TODO: USER RANKING -->
+      <% a = Category.ranking_position(@category, current_user.id) %>
     </tfoot>
   </table>
 </div>
 
-
-
-<!-- Ranking per Category x User -->
-<!-- <div class="border">
-  <p>Ranking per Category x User</p>
-  <% @rankings.each do |category| %>
-  <p><%= category.name %></p>
-    <% Category.ranking_per_category_user(category.name, 5).each do |player| %>
-      <p><%= player.user.name %> / <%= player.points %></p>
-    <% end %>
-    <p>-------------</p>
-  <% end %>
-</div> -->
-
-<script>
-  const ul = document.querySelector(".categories-list");
-  ul.addEventListener("click", (e) => {
-
-  });
-
-
-</script>

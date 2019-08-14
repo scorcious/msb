@@ -37,36 +37,9 @@ section.ranking-banner {
             padding: 0;
             margin-bottom: 0;
             margin-top: 20px;
-            // li {
-            //     --neon-text-color: #08f;
-            //     --neon-border-color: #f40;
-            //     display: inline-block;
-            //     padding: 10px 10px 1px;
-            //     margin: 0 5px 15px;
-            //     text-decoration: none;
-            //     display: inline-block;
-            //     font-size: 18px;
-            //     font-family: 'Raleway';
-            //     text-transform: uppercase;
-            //     letter-spacing: 1px;
-            //     line-height: 1.4;
-            //     min-width: 50px;
-            //     min-height: 50px;
-            //     font-style: italic;
-            //     font-weight: 700;
-            //     border-radius: 6px;
-            //     cursor: pointer;
-            //     color: var(--neon-text-color);
-            //     border: solid 2px var(--neon-border-color);
-            //     text-shadow:
-            //         -1px -1px 5px rgba(255,255,255, 1),
-            //         1px 1px 5px rgba(255,255,255, 1),
-            //         1 1 2px rgb(0, 136, 255)
-            //         ;
-            // }
             li {
                 display: inline-block;
-                padding: 10px 10px 1px;
+                padding: 12px 10px 0;
                 margin: 0 5px 15px;
                 text-decoration: none;
                 display: inline-block;
