@@ -22,6 +22,7 @@ class Category < ApplicationRecord
       .where("name = ?", [category])
       .group("user_id, name")
 
+    # FIXME: active record doesnt allow manual order
     ranking.order("points desc")
 
     position = ranking.pluck(:user_id).index(user_id)
