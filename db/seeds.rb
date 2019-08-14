@@ -27,7 +27,7 @@ us << user = User.create!(
   city: 'Shanghai',
   gender: 'male',
   bio: "Learning #{Faker::ProgrammingLanguage.name} at LeWagon 😎😎😎 ")
-  # user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331729/us/IMG_2266_cmxywt.png'
+  user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331729/us/IMG_2266_cmxywt.png'
   user.save!
 
 us << user = User.create!(
@@ -38,7 +38,7 @@ us << user = User.create!(
   city: 'Shanghai',
   gender: 'male',
   bio: "Learning #{Faker::ProgrammingLanguage.name} at LeWagon 😎😎😎 ")
-  # user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331716/us/50242319_z1ckpv.jpg'
+  user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331716/us/50242319_z1ckpv.jpg'
   user.save!
 
 us << user = User.create!(
@@ -49,7 +49,7 @@ us << user = User.create!(
   city: 'Shanghai',
   gender: 'male',
   bio: "Learning #{Faker::ProgrammingLanguage.name} at LeWagon 😎😎😎 ")
-  # user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331717/us/49895590_pc8u01.jpg'
+  user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331717/us/49895590_pc8u01.jpg'
   user.save!
 
 us << user = User.create!(
@@ -60,7 +60,7 @@ us << user = User.create!(
   city: 'Shanghai',
   gender: 'male',
   bio: "Learning #{Faker::ProgrammingLanguage.name} at LeWagon 😎😎😎 ")
-  # user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331731/us/IMG_20190604_142654_tancqs.jpg'
+  user.remote_photo_url = 'https://res.cloudinary.com/defdajivj/image/upload/v1565331731/us/IMG_20190604_142654_tancqs.jpg'
   user.save!
 
 
@@ -162,7 +162,7 @@ index = -1
     score: 0,
     user_id: us.sample.id)
   match.tag_list.add([category[index], "Shanghai",  level[index]])
-  # match.remote_photo_url = photos[index]
+  match.remote_photo_url = photos[index]
   match.save!
 
   Player.create!(
@@ -231,7 +231,6 @@ profile = [
   "https://images.unsplash.com/photo-1523307730650-594bc63f9d67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
 ]
 
-
 # Categoryes
 def add_category(user, level, category)
   ranking = Category.find_or_create_by(
@@ -258,7 +257,7 @@ index = -1
     gender: Faker::Gender.binary_type,
     bio: "#{Faker::Sports::Football.position} at #{Faker::Sports::Football.team} player!"
   )
-  # user.remote_photo_url = profile[index]
+  user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
   puts "User Created!"
@@ -277,7 +276,7 @@ end
     gender: Faker::Gender.binary_type,
     bio: "#{Faker::Game.platform} lover, trying some new activities #{Faker::SlackEmoji.activity} #{Faker::SlackEmoji.people}"
   )
-  # user.remote_photo_url = profile[index]
+  user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
   puts "User Created!"
@@ -296,7 +295,7 @@ end
     gender: Faker::Gender.binary_type,
     bio: "#{Faker::ProgrammingLanguage.name} developer, tired of being sat all day long xXX 💻💻💻"
   )
-  # user.remote_photo_url = profile[index]
+  user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
   puts "User Created!"
@@ -315,7 +314,7 @@ end
     gender: Faker::Gender.binary_type,
     bio: "Sport enthusiast and #{Faker::Beer.brand} 🍺🍺🍺 and #{Faker::Food.dish}"
   )
-  # user.remote_photo_url = profile[index]
+  user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
   puts "User Created!"
@@ -334,7 +333,7 @@ end
     gender: Faker::Gender.binary_type,
     bio: "Graduated at #{Faker::University.name}, fav reading #{Faker::Book.title} 📚, #{Faker::Music.instrument} player!"
   )
-  # user.remote_photo_url = profile[index]
+  user.remote_photo_url = profile[index]
   user.save!
   add_category(user, level, category)
   puts "User Created!"
@@ -342,8 +341,6 @@ end
 
 
 puts "Created #{User.count} users!"
-
-puts "Created #{Category.count} categories!"
 
 
 ####################### CONECTING FRIENDS #######################
@@ -359,3 +356,21 @@ end
 us.each do |u|
   u.pending_friends.each { |f| f.accept_request(u) }
 end
+
+
+####################### CATEGORIES TO THE RANKING #######################
+
+category.uniq.each do |category|
+  level = ["advanced", "beginner", "intermediate"]
+  User.all.each do |user|
+    ranking = Category.find_or_create_by(
+      name: category,
+      user_id: user.id
+    )
+    ranking.level = level.sample
+    ranking.points = rand(100..300)
+    ranking.save!
+  end
+end
+
+puts "Created #{Category.count} categories!"

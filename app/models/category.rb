@@ -12,18 +12,15 @@ class Category < ApplicationRecord
   def self.ranking_per_category_user(category, limit)
     ranking = Category.select("user_id, name, sum(points) as points")
       .where("name = ?", [category])
-      .group("user_id, name")
-    ranking.order("points desc").limit(limit)
+      .group("user_id, name").order("points desc").limit(limit).to_a
   end
 
   # Category.ranking_position("Tennis", 72)
   def self.ranking_position(category, user_id)
+    puts 'testing'
     ranking = Category.select("user_id, name, sum(points) as points")
-      .where("name = ?", [category])
-      .group("user_id, name")
-
-    # FIXME: active record doesnt allow manual order
-    ranking.order("points desc")
+      .where("name = ?", category)
+      .group("user_id, name").order("points desc").to_a
 
     position = ranking.pluck(:user_id).index(user_id)
 
@@ -42,18 +39,3 @@ class Category < ApplicationRecord
     end
   end
 end
-
-  # def self.ranking_per_category_user_level(category, limit)
-  #   Category.select("user_id, name, level, sum(points) as points")
-  #     .where("name = ?", [category])
-  #     .group("user_id, name, level")
-  #     .order("CASE WHEN (level = 'advanced') THEN 0 WHEN (level = 'intermediate') THEN 1 ELSE 2 END, points desc")
-  #     .limit(limit)
-  # end
-
-  # def self.ranking_per_user(limit)
-  #   Category.select("user_id, sum(points) as points")
-  #     .group("user_id")
-  #     .order("points desc")
-  #     .limit(limit)
-  # end
