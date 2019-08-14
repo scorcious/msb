@@ -16,6 +16,7 @@ class Category < ApplicationRecord
     ranking.order("points desc").limit(limit)
   end
 
+  # Category.ranking_position("Tennis", 72)
   def self.ranking_position(category, user_id)
     ranking = Category.select("user_id, name, sum(points) as points")
       .where("name = ?", [category])
