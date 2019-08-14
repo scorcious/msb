@@ -4,10 +4,20 @@
     <h1>Leaderboards</h1>
     <h2>Only for the best</h2>
     
-    <div class="categories">
-      <h2>Choose a category</h2>
+    <!-- <div class="categories">
       <ul class="categories-list">
-        <li id="Football">⚽ Football</li>
+        <li id="Football">Football</li>
+        <li id="Basketball">Basketball</li>
+        <li id="Badminton">Badminton</li>
+        <li id="Tennis">Tennis</li>
+        <li id="Volleyball">Volleyball</li>
+        <li id="Pool">Billiards</li>
+        <li id="Boxing">Boxing</li>
+      </ul>
+    </div> -->
+    <div class="categories">
+      <ul class="categories-list">
+        <li id="Football" class="active">⚽ Football</li>
         <li id="Basketball">🏀 Basketball</li>
         <li id="Badminton">🏸 Badminton</li>
         <li id="Tennis">🎾 Tennis</li>
@@ -19,13 +29,30 @@
   </div>
 </section>
 
-<div id="ranking-tables">
-  <table>
-    <thead>
-      <!-- TODO: THE IDS -->
+<div id="ranking-tables" class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">User</th>
+        <th scope="col">Points</th>
+      </tr>
     </thead>
     <tbody>
-      <!-- TODO: TOP RANKINGS -->
+      <% @rankings.each do |category| %>
+        <% if category.name == "Football" %>
+        <!-- HEADER -->
+        <h2><%= category.name %></h2>
+          <% Category.ranking_per_category_user(category.name, 10).each_with_index do |c, index|%>
+          <!-- USERS -->
+            <tr>
+              <td><%= index +1 %></td>
+              <td><%= c.user.name %></td>
+              <td><%= c.points %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
     </tbody>
     <tfoot>
       <!-- TODO: USER RANKING -->
@@ -35,47 +62,23 @@
 
 
 
-<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 <!-- Ranking per Category x User -->
-<div class="border">
+<!-- <div class="border">
   <p>Ranking per Category x User</p>
-  <% @ranking.each do |category| %>
+  <% @rankings.each do |category| %>
   <p><%= category.name %></p>
     <% Category.ranking_per_category_user(category.name, 5).each do |player| %>
-    <p><%= player.user.name %> / <%= player.points %></p>
-    <% end %>
-    <p>-------------</p>
-  <% end %>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-<!-- Ranking per Category x User x Level -->
-<!-- <div class="border">
-  <p>Ranking per Category x User x Level</p>
-  <% @ranking.each do |category| %>
-  <p><%= category.name %></p>
-    <% Category.ranking_per_category_user_level(category.name, 5).each do |player| %>
-    <p><%= player.user.name %> / <%= player.level %> / <%= player.points %></p>
+      <p><%= player.user.name %> / <%= player.points %></p>
     <% end %>
     <p>-------------</p>
   <% end %>
 </div> -->
 
+<script>
+  const ul = document.querySelector(".categories-list");
+  ul.addEventListener("click", (e) => {
 
-<!-- Ranking per User -->
-<!-- <div class="border">
-  <p>Ranking per User</p>
-  <% Category.ranking_per_user(5).each do |player| %>
-    <p><%= player.user.name %> / <%= player.points %></p>
-    <% end %>
-    <p>-------------</p>
-</div> -->
+  });
+
+
+</script>
