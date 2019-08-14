@@ -161,7 +161,7 @@ index = -1
     status: 'open',
     score: 0,
     user_id: us.sample.id)
-  match.tag_list.add(["Shanghai", level[index], category[index]])
+  match.tag_list.add([category[index], "Shanghai",  level[index]])
   # match.remote_photo_url = photos[index]
   match.save!
 
@@ -347,12 +347,11 @@ puts "Created #{Category.count} categories!"
 
 ####################### CONECTING FRIENDS #######################
 
-us << User.all.sample(5)
-us.flatten!
+friends = User.last(5)
 
 # Request friendship
 us.each do |u|
-  us.each { |f| u.friend_request(f) if u != f }
+  friends.each { |f| u.friend_request(f) }
 end
 
 # Accept friendship
