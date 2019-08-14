@@ -2,6 +2,8 @@ class PlayersController < ApplicationController
   before_action :set_match, only: [:create, :accept_challenge]
   before_action :challenge_params, only: [:update]
   before_action :set_challenge, only: [:update]
+  skip_before_action :verify_authenticity_token, only: [:join_team]
+
 
   def index
     @challenges = policy_scope(Player).where(user_id: current_user, status: 'pending')
@@ -79,6 +81,40 @@ class PlayersController < ApplicationController
       end
       redirect_to match_path(@match)
     end
+  end
+
+  def join_team
+
+    authorize @player = Player.create!(
+        match_id: Match.first.id,
+        user_id: User.first.id,
+        team: 'A',
+        status: 'accepted'
+      )
+
+    response = {
+      status: 'chegou aqui!',
+      player: @player.id
+    }
+
+    render json: response
+
+    # redirect_to match_path(@match) if @player.save!
+
+    # authorize @forum = Forum.new(forum_params)
+    # @match = Match.find(params[:match_id])
+    # @forum.user = current_user
+    # @forum.match = @match
+    # @forum.save
+
+    # @forums = @match.forums.count
+    # response = {
+    #   name: @forum.user.name.split(" ").first,
+    #   timestamp: Time.now.strftime("%H:%M"),
+    #   forum_empty: (@forums == 1) ? "true" : "false"
+    # }
+
+    # render json: response
   end
 
   private

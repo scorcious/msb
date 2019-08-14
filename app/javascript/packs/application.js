@@ -14,3 +14,6 @@ initMapbox();
 import { refreshForum, refreshButton  } from './forumRefresh.js';
 refreshForum()
 refreshButton()
+
+import { joimTeam } from './joinTeam.js';
+joimTeam()

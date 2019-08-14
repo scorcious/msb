@@ -10,6 +10,7 @@
         color: $green;
         overflow: hidden;
         transition: 0.3s ease-out;
+        cursor: pointer;
         &:hover {
             color: $green-1;
             font-size: 50px;

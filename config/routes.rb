@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   get '/my_friends', to: 'profiles#my_friends', as: :my_friends
 
   resources :forums, only: [:index], defaults: { format: :json }
+
+  # API for Join Team - Felipe
+  post 'players/join_team', to: 'players#join_team', as: :join_team
+
 end
