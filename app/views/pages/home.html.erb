@@ -3,15 +3,15 @@
     <div style="margin-top: -20vh; position: relative; background: url('https://images.unsplash.com/photo-1542446655-53a7e25c8fe2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1795&q=80'); background-position: center; background-size: top; background-repeat: no-repeat; height: 27em; width: 100%; padding: 20vh 0 58vh 0; background-size: cover;">
       <section style="margin-top: 14vh; position: relative; z-index: 2; margin-bottom: em; text-align: center;">
           <h1 class="mesg-top" style="color: #2ED573; font-weight: bold">Find sports games</h1>
-          <h1 style="margin-bottom: 1em; color: rgb(50,50,50);">around you</h1>
-          <%= form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
+          <h1 style="margin-bottom: 1em; color: rgb(230,230,230);">around you</h1>
+          <%= form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: '' } do |f| %>
           <section style="position: relative; text-align:center;">
-            <%= f.text_field :query, label: false, placeholder: "", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 10px; opacity: 0.8;" %>
+            <%= f.text_field :query, label: false, placeholder: "Search...", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 16px; opacity: 0.8;" %>
             <i class="fas fa-search" id="icon-search" style="position: relative; top: 8px; right: -110px; color: rgba(0,0,0,0.5);"></i>
           </section>
           <% end %>
       </section>
-      <div style="position: absolute; background: rgba(30, 30, 30, 0.1); top: 0; left: 0; right: 0; bottom: 0; width: 100%;"></div>
+      <div style="position: absolute; background-image: linear-gradient(to bottom, rgba(0,0,0, 0.6), rgba(255,255,255, 0.05)); top: 0; left: 0; right: 0; bottom: 0; width: 100%;"></div>
     </div>
 
 
