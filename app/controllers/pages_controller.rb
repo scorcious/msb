@@ -4,6 +4,7 @@ class PagesController < ApplicationController
     @no_search_bar = true
     @no_container = true
     @matches = Match.where("status = ?", "open").sample(3)
+    @white_links = true;
   end
   
   def index
