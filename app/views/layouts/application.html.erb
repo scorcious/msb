@@ -7,17 +7,22 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
     <div class="wrapper">
       <!-- NAVBAR -->
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin: 0 0 0 0 !important;">
-        <a class="navbar-brand mb-2" href="/">msb</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <div class="navbar">
+        <a href="/"><h4 class="logo">MYSPORTBUDDIES</h4></a>
+        <!-- SEARCH BAR -->
+        <% unless @no_search_bar %>
+          <div class="search-bar">
+            <%= simple_form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+              <%= f.input :title, label: false, placeholder: "Search for anything", input_html: {value: ""} %>
+            <% end %>
+          </div>
+        <% end %>
 
         <!-- IF USER IS LOGGED IN -->
         <% if current_user %>

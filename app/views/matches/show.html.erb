@@ -23,9 +23,9 @@
       <div class="d-flex mb-5 round-plus-button">
         <% @players_a.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% end %>
         <% end %>
         <!-- join button -->
@@ -37,9 +37,9 @@
       <div class="d-flex round-plus-button">
         <% @players_b.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% end %>
         <% end %>
         <!-- join button -->
@@ -112,7 +112,7 @@
       <% if policy(@forum).create? %>
         <%= simple_form_for [@match, @forum] do |f| %>
           <%= f.input :content, label: "Write your comment here:"%>
-          <%= f.submit "save", class: "btn btn-success mt-0 mb-4", id: "refresh" %>
+          <%= f.submit "save", class: "btn btn-success mt-0 mb-4", id: "refresh", data: { disable_with: false } %>
         <% end %>
       <% end %>
       </div>
@@ -131,7 +131,7 @@
                 <% if dayCount != 0 %> - <%= dayCount unless dayCount == 0 %> days ago<% else %>
                  - <%= comment.created_at.strftime("%H:%M") %> UTC
                  <% end %></h5>
-              <p class="m-0"> <%= comment.content %> </p>
+              <p class="m-0"style="text-align: center; word-break: break-word"> <%= comment.content %> </p>
             </div>
             <% end %>
           <% else %>
@@ -144,3 +144,13 @@
       </div>
     </div>
 </div>
+
+<!-- <script>
+  let submit = document.getElementById("refresh")
+  submit.addEventListener("click", function(){
+    console.log('click here')
+    if(submit.disabled === true){
+      submit.removeAttribute('disabled');
+    }
+  })
+</script> -->
