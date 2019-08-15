@@ -1,4 +1,5 @@
 .profile-friends {
+  margin-bottom: 10vh;
     > .navigations {
         margin: 10vh 0;
         h3 {
@@ -45,4 +46,18 @@
         }
       }
     }
+}
+
+#profile-index-buddy {
+  > h4 {
+    color: $error;
+    font-style: italic;
+  }
+}
+
+#friends-toPlace {
+  > h4 {
+    color: $error;
+    font-style: italic;
+  }
 }
