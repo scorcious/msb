@@ -31,7 +31,7 @@ class PlayersController < ApplicationController
       @player.team = params[:player][:team]
       @player.match = @match
       authorize @player
-      if @player.save!
+      if @player.save
         if @match.full?
           @match.status = "close"
           @match.save
