@@ -1,10 +1,10 @@
-<h1 class="text-center mt-5 mb-4">Create a Match</h1>
+<h1 class="text-center mt-5 mb-4">Create a Game</h1>
 <div class="container center">
   <div class="row justify-content-center">
      <div class="col-8">
       <div class="center">
         <%= simple_form_for [@match] do |f| %>
-          <%= f.input :description, label: "Match Name" %>
+          <%= f.input :description, label: "Game Name" %>
           <%= f.input :city %>
           <%= f.input :location %>
           <%= f.input :date %>

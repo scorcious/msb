@@ -26,42 +26,85 @@
 
         <!-- IF USER IS LOGGED IN -->
         <% if current_user %>
-          <div class="options">
-            <%= link_to  "Find buddies", profiles_path %>
-            <%= link_to  "Browse games", matches_path %>
-            <%= link_to  "Create game", new_match_path, class: "host-service" %>
-          </div>
-          <!-- PROFILE DROPDOWN -->
-          <div class="nav-item dropdown">
-            <%= image_tag (cl_image_path current_user.photo), crop: :fill, class:"avatar dropdown-toggle", id:"navbarDropdown", style: "height: 40px; object-fit: cover", data: { toggle: 'dropdown'} %>
-            <!-- FIXME: the carret down is not press-able -->
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <%= link_to "Profile", profile_path(current_user), class:"dropdown-item" %>
-              <%= link_to  "Buddies", my_friends_path, class:"dropdown-item" %>
-              <hr>
-              <%= link_to  "Games", matches_path(user_id: current_user.id), class:"dropdown-item" %>
-              <%= link_to  "Challenges", players_path, class:"dropdown-item" %>
-              <%= link_to  "Leaderboards", rankings_path, class:"dropdown-item" %>
-              <hr>
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
-            </div>
-            <% if @total_counts != 0 %>
-              <div id="notif-div">
-                <p id="notif-total"><%= @total_counts %></p>
-              </div>
-            <% end %>
-            <p><i class="fas fa-caret-down"></i></p>
-          </div>
-        <% else %>
-          <div class="options">
-            <%= link_to  "Browse games", matches_path %>
-            <%= link_to  "Login", new_user_session_path %>
-            <%= link_to  "Create game", new_match_path, class: "host-service" %>
-          </div>
-        <% end %>
-      </div>
 
-      <%= yield %>
+        <!-- SEARCH BAR -->
+        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-0">
+            <div class="row align-items-center pl-3 column-on-mobile">
+              <li class="nav-item mr-3">
+                <a class="nav-link pt-0" href="#"><%= link_to  "Create game", new_match_path, class: "host-service btn btn-success", style: "border-radius: 10px" %></a>
+              </li>
+              <li class="nav-item mr-3 active">
+                <a class="nav-link" href="#"><%= link_to  "Find buddies", profiles_path, style: "padding: 0;" %><span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link pt-0" href="#"><%= link_to  "Browse games", matches_path %></a>
+              </li>
+              <li class="nav-item dropdown">
+                <!-- HIDE ON MOB -->
+                <div class="hide-on-mobile nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="hide-on-mobile">
+                    <%= image_tag (cl_image_path current_user.photo), crop: :fill, style: "height: 40px; object-fit: cover; border-radius: 50%" %>
+                    <% if @total_counts != 0 %>
+                      <div id="notif-div" style="position: absolute; top: 25px; right: -20px;">
+                        <p id="notif-total"><%= @total_counts %></p>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <!-- PROFILE DROPDOWN -->
+                <div class="dropdown-menu hidden-lg" aria-labelledby="navbarDropdown" style="top: 40px; left: -5em !important;">
+                  <a class="dropdown-item" href="#"><%= link_to "Profile", profile_path(current_user), class:"dropdown-item" %></a>
+                  <a class="dropdown-item" href="#"><%= link_to  "Buddies", my_friends_path, class:"dropdown-item" %></a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"><%= link_to  "Games", matches_path(user_id: current_user.id), class:"dropdown-item" %></a>
+                  <a class="dropdown-item" href="#"><%= link_to  "Challenges", players_path, class:"dropdown-item" %></a>
+                  <a class="dropdown-item" href="#"><%= link_to  "Leaderboards", rankings_path, class:"dropdown-item" %></a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %></a>
+                </div>
+              </li>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="my-2 hide-on-large">
+              <div>
+                <a class="dropdown-item" href="#"><%= link_to "Profile", profile_path(current_user) %></a>
+                <a class="dropdown-item" href="#"><%= link_to  "Buddies", my_friends_path %></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><%= link_to  "Games", matches_path(user_id: current_user.id) %></a>
+                <a class="dropdown-item" href="#"><%= link_to  "Challenges", players_path %></a>
+                <a class="dropdown-item" href="#"><%= link_to  "Leaderboards", rankings_path %></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><%= link_to "Logout", destroy_user_session_path, method: :delete %></a>
+              </div>
+            </div>
+          </ul>
+        </div>
+
+        <% else %>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <div class="row pl-3 column-on-mobile">
+            <div class="align-items-center">
+            <ul class="navbar-nav mr-0">
+              <li class="nav-item mr-3">
+                <a class="nav-link pt-0" href="#"><%= link_to  "Create game", new_match_path, class: "host-service btn btn-success", style: "border-radius: 10px" %></a>
+              </li>
+              <li class="nav-item mr-3 d-flex align-items-center">
+                <%= link_to  "Browse games", matches_path %>
+              </li>
+              <li class="nav-item mr-3 d-flex align-items-center">
+                <%= link_to  "Login", new_user_session_path %>
+              </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </nav>
+
+    <%= yield %>
+
     </div>
 
     <!-- FOOTER -->
