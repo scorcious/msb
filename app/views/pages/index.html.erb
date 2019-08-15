@@ -1,11 +1,11 @@
 <div class="container">
     <div class="pages-index">
         <div class="search">
-            <h2 class="text-center">Searh for users, matches and sports</h2>
+            <h2 class="text-center">Searh for users, matches and sports...</h2>
             <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: '' } do |f| %>
             <%= f.input :query, label: false, placeholder: "Search for matches", input_html: {value: ""} %>
             <% end %>
         </div>
-        
+
     </div>
 </div>

@@ -1,11 +1,20 @@
-<h1 class="text-center" style="margin: 10vh 0;">Find Buddies</h1>
 
 <div class="container">
+
+  <div class="search" id="buddies-index-searchbar">
+    <h2 class="text-center" style="margin: 10vh 0 4vh;">Find Buddies</h2>
+    <div class="text-center mr-0" id="form-search">
+      <%= simple_form_for :search, defaults: { required: false }, url: profiles_path, method: "GET", html: { class: 'text-center mr-0', style: "" } do |f| %>
+      <%= f.input :query, label: false, placeholder: "Search for buddies", input_html: {value: ""} %>
+      <i class="fas fa-search" id="icon-search" style="position: relative; top: -48px; right: -140px; color: rgba(0,0,0,0.5);"></i>
+      <% end %>
+    </div>
+  </div>
 
   <div class="row justify-content-center">
     <% @profiles.each do |profile| %>
         <% unless profile.name == current_user.name %>
-        <div class="col-10 col-sm-6">
+        <div class="col-sm-8 offset-lg-0 col-lg-6">
           <div class="card mb-3 border-0" style="border-radius: 15px; box-shadow: 1px 1px 5px rgba(0,0,0,0.2);">
             <div class="row no-gutters", style="border-radius: 30px">
               <div class="col-md-4">

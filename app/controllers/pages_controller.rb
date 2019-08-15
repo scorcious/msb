@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @no_container = true
     @matches = Match.where("status = ?", "open").sample(3)
   end
-  
+
   def index
     # TODO: SEARCH FUNCTIONS
     @no_search_bar = true

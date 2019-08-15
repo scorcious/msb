@@ -12,6 +12,7 @@
       <div class="text-center mr-0" id="form-search">
         <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: 'text-center mr-0', style: "" } do |f| %>
         <%= f.input :query, label: false, placeholder: "Search for games", input_html: {value: ""}, class: "mr-0" %>
+        <i class="fas fa-search" id="icon-search" style="position: relative; top: -48px; right: -140px; color: rgba(0,0,0,0.5);"></i>
       </div>
       <% end %>
     </div>
