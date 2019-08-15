@@ -211,6 +211,4 @@ class MatchesController < ApplicationController
     end
     return all_matches_signed_up
   end
-
-
 end
