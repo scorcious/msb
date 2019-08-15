@@ -1,5 +1,7 @@
-<div class="banner d-flex align-items-center justify-content-center" style="background: url(<%= (cl_image_tag @match.photo).match(/http\:(.)*"/)[0].gsub(/\"/, "") %>) no-repeat center center; background-size: cover; height: 70vh" >
-  <div>
+<div class="banner d-flex align-items-center justify-content-center" style="background: url(<%= (cl_image_tag @match.photo).match(/http\:(.)*"/)[0].gsub(/\"/, "") %>) no-repeat center center; background-size: cover; height: 70vh; position: relative" >
+  <div style="background: rgba(0, 0, 0, 0.1); position:absolute; top:0; bottom:0;left:0;right:0">
+  </div>
+  <div style="position: absolute; z-index: 2">
     <h1 class="text-center" style="color: white"><%= @match.description %></h1>
     <p class="text-center" style="color: white"><%= @match.city %></p>
   </div>
@@ -19,7 +21,7 @@
               Today
               <% else %>
               <%= (@match.date - Date.today).to_i %> Days
-            <% end %> 
+            <% end %>
           </p>
         <% end %>
         <p style="font-size: 14px; margin: 0 0 12px; text-transform: capitalize;"><i class="fas fa-signal" style="font-size: 18px;"></i> <%= @match.level %></p>
@@ -44,7 +46,7 @@
       <div class="d-flex round-plus-button justify-content-center">
         <% @players_b.each do |player| %>
           <% if player.status == "pending" %>
-            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
+            <%= link_to (cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% else %>
             <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% end %>
