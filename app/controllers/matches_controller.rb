@@ -37,8 +37,15 @@ class MatchesController < ApplicationController
     @players_b = @match.players.select { |player| player.team == "B" && player.status != "declined" }
     @forums = @match.forums.order(created_at: :desc)
     @forum = Forum.new
-    @friends = (current_user ? current_user.friends : [])
     @player = Player.new
+
+    # friends available to challenge
+    @friends = (current_user ? current_user.friends : [])
+    if @friends != []
+      @friends = @friends.reject do |f|
+        player = Player.where("user_id = ? AND match_id = ?", f.id, @match.id).first.user == f
+      end
+    end
 
     @array_A = @players_a.map do |player|
       player.user
