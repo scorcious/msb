@@ -53,6 +53,7 @@ a {
 .hide-on-mobile {
   @media only screen and (max-width: 480px) {
     display: none;
+     background: transparent !important;
   }
 }
 
@@ -60,6 +61,12 @@ a {
 .hide-on-large {
   @media only screen and (min-width: 30em) and (min-width: 60em) {
     display: none;
+  }
+}
+
+.bg-nav-white {
+  @media only screen and (max-width: 480px) {
+    background: white !important;
   }
 }
 
