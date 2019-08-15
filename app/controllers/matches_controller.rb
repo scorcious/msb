@@ -43,7 +43,10 @@ class MatchesController < ApplicationController
     @friends = (current_user ? current_user.friends : [])
     if @friends != []
       @friends = @friends.reject do |f|
-        player = Player.where("user_id = ? AND match_id = ?", f.id, @match.id).first.user == f
+        player = Player.where("user_id = ? AND match_id = ?", f.id, @match.id)
+        if player != []
+          player.first.user == f
+        end
       end
     end
 
