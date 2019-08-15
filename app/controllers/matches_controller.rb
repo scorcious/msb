@@ -7,6 +7,15 @@ class MatchesController < ApplicationController
     # 1. show user's matches
     # 2. search fn() for all sports, and tags
     # 3. get all tags
+    search = false
+
+    if params.key?(:search)
+      search = params[:search]
+      if search.key?(:query)
+        search = params[:search][:query]
+        search = search.nil? && search == "" ? false : true
+      end
+    end
 
     # INIT
     @all_matches_signed_up = []
@@ -18,6 +27,8 @@ class MatchesController < ApplicationController
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
       @matches = @matches.select { |match| match.status == "open" }
+    elsif search && params[:search][:query].empty? == false
+      @matches = Match.search_by_game_details(params[:search][:query])
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)
