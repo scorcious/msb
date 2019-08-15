@@ -27,8 +27,18 @@ class MatchesController < ApplicationController
       # SHOW ALL MATCHES WITH THE TAG
       @matches = policy_scope(Match.tagged_with(params[:tag]))
       @matches = @matches.select { |match| match.status == "open" }
-    elsif search && params[:search][:query].empty? == false
+    elsif search == true && params[:search][:query].empty? == false
       @matches = Match.search_by_game_details(params[:search][:query])
+        .where("status = ?", "open")
+        .order(created_at: :desc)
+      @show_user_match = !(params[:user_id].nil?)
+      if @show_user_match
+        @matches = Match.search_by_game_details(params[:search][:query])
+        .where("user_id = ?", params["user_id"])
+        .order(created_at: :desc)
+        @all_matches_signed_up = find_all_matches_user_signed_up
+        @past_matches = Match.where("status = ?", "past")
+      end
     else
       # SHOW ALL MATCHES
       @matches = policy_scope(Match).order(created_at: :desc)

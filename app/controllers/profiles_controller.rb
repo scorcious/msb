@@ -3,7 +3,21 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:add_friend, :accept_friend, :decline_friend]
 
   def index
-    @profiles = policy_scope(Profile).order(created_at: :desc)
+    search = false
+
+    if params.key?(:search)
+      search = params[:search]
+      if search.key?(:query)
+        search = params[:search][:query]
+        search = search.nil? && search == "" ? false : true
+      end
+    end
+
+    if search == true && params[:search][:query].empty? == false
+      @profiles = Profile.search_by_user_details(params[:search][:query])
+    else
+      @profiles = policy_scope(Profile).order(created_at: :desc)
+    end
   end
 
   def my_friends
