@@ -6,7 +6,7 @@
           <h1 style="margin-bottom: 1em; color: rgb(50,50,50);">around you</h1>
           <%= form_for :search, defaults: { required: false }, url: pages_path, method: "GET", html: { class: '' } do |f| %>
           <section style="position: relative; text-align:center;">
-            <%= f.text_field :query, label: false, placeholder: "", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 10px; opacity: 0.8;" %>
+            <%= f.text_field :query, label: false, placeholder: "Search...", input_html: {value: ""}, style: "width: 19em; border-radius: 9999px; border-style: none; height: 2.5em; position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; padding-left: 16px; opacity: 0.8;" %>
             <i class="fas fa-search" id="icon-search" style="position: relative; top: 8px; right: -110px; color: rgba(0,0,0,0.5);"></i>
           </section>
           <% end %>
