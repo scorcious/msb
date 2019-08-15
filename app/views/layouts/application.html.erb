@@ -23,6 +23,7 @@
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
           <ul class="navbar-nav mr-0">
             <div class="row align-items-center pl-3 column-on-mobile">
+              <!-- HOME PAGE -->
               <% if @white_links == true %>
                 <li class="nav-item mx-4 mt-2">
                   <%= link_to  "Find buddies", profiles_path, style: "padding: 0;", class:"white" %>
@@ -38,9 +39,6 @@
                   <%= link_to  "Browse games", matches_path %>
                 </li>
               <% end %>
-
-
-              
               <li class="nav-item mx-4 mt-2">
                 <%= link_to  "Create game", new_match_path, class: "host-service" %>
               </li>
@@ -90,15 +88,25 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <div class="pl-3 column-on-mobile">
             <div class="align-items-center">
-            <ul class="navbar-nav mr-0">
-              <li class="nav-item mr-3">
-                <a class="nav-link pt-0" href="#"><%= link_to  "Create game", new_match_path, class: "host-service btn btn-success", style: "border-radius: 10px" %></a>
-              </li>
-              <li class="nav-item mr-3 d-flex align-items-center">
-                <%= link_to  "Browse games", matches_path %>
-              </li>
-              <li class="nav-item d-flex align-items-center" style="margin-right: 4vw;">
-                <%= link_to  "Login", new_user_session_path %></a>
+            <ul class="navbar-nav mr-0" id="home-white-links">
+              <!-- HOME PAGE - USER NOT LOGGED IN -->
+              <% if @white_links == true %>
+                <li class="nav-item mx-4 mt-2 d-flex align-items-center">
+                  <%= link_to  "Browse games", matches_path, class:"white" %>
+                </li>
+                <li class="nav-item d-flex align-items-center mx-4 mt-2">
+                  <%= link_to  "Login", new_user_session_path, class:"white" %>
+                </li>
+              <% else %>
+                <li class="nav-item mx-4 mt-2 d-flex align-items-center">
+                  <%= link_to  "Browse games", matches_path %>
+                </li>
+                <li class="nav-item d-flex align-items-center mx-4 mt-2">
+                  <%= link_to  "Login", new_user_session_path %>
+                </li>
+              <% end %>
+              <li class="nav-item ml-4 mt-2" style="margin-right: 4vw;">
+                <%= link_to  "Create game", new_match_path, class: "host-service" %>
               </li>
             </ul>
             </div>
