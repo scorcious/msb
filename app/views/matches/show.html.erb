@@ -23,9 +23,9 @@
       <div class="d-flex mb-5 round-plus-button">
         <% @players_a.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% end %>
         <% end %>
         <!-- join button -->
@@ -37,9 +37,9 @@
       <div class="d-flex round-plus-button">
         <% @players_b.each do |player| %>
           <% if player.status == "pending" %>
-            <%= cl_image_tag player.user.photo, class: "pending rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% else %>
-            <%= cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;" %>
+            <%= link_to (cl_image_tag player.user.photo, class: "rounded-circle mt-1", style: "width: 50px; height: 50px; object-fit: cover;"), profile_path(player.user) %>
           <% end %>
         <% end %>
         <!-- join button -->
