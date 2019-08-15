@@ -7,13 +7,14 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
     <div class="wrapper">
       <!-- NAVBAR -->
       <div class="navbar">
-        <a href="/"><h4 class="logo">msb</h4></a>
+        <a href="/"><h4 class="logo">MYSPORTBUDDIES</h4></a>
         <!-- SEARCH BAR -->
         <% unless @no_search_bar %>
           <div class="search-bar">
