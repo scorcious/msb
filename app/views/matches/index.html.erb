@@ -16,7 +16,7 @@
       <% end %>
     </div>
   <% end %>
-  <div class="row">
+  <div class="row" id='match-js'>
     <% if @show_user_match %>
       <% if @all_matches_signed_up != [] # if im not looking for a specific user's match %>
         <% @all_matches_signed_up.each do |match| %>
@@ -89,7 +89,7 @@
 
   this.addEventListener("click", (e) => {
     // INIT
-    const whereToShow = document.querySelector(".row");
+    const whereToShow = document.querySelector("#match-js");
     const id = e.target.id;
 
     // INJECT HTML
