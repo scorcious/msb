@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
 
   def add_friend
     current_user.friend_request(@profile)
-    redirect_to my_friends_path
+    redirect_to profiles_path
   end
 
   def accept_friend
