@@ -179,7 +179,7 @@ index = -1
       user_id: match.user_id
     )
 
-  ranking.points = rand(400..800)
+  ranking.points = rand(400..800).round(-1)
   ranking.save!
 
   puts "Match Created!"
@@ -238,7 +238,7 @@ def add_category(user, level, category)
     level: level.sample,
     user_id: user.id
   )
-  ranking.points = rand(100..300)
+  ranking.points = rand(100..300).round(-1)
   ranking.save!
 end
 
@@ -368,7 +368,22 @@ category.uniq.each do |category|
       user_id: user.id
     )
     ranking.level = level.sample
-    ranking.points = rand(100..300)
+    ranking.points = rand(100..300).round(-1)
+    ranking.save!
+  end
+end
+
+####################### CATEGORIES TO OUR RANKING - WE'RE THE BEST #######################
+
+category.uniq.each do |category|
+  level = ["advanced", "beginner", "intermediate"]
+  us.each do |user|
+    ranking = Category.find_or_create_by(
+      name: category,
+      user_id: user.id
+    )
+    ranking.level = level.sample
+    ranking.points = rand(400..800).round(-1)
     ranking.save!
   end
 end
