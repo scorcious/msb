@@ -1,7 +1,7 @@
 // Own navbar
 .navbar {
   z-index: 3;
-  margin: 3vh 0;
+  padding: 2vh 0;
   .dropdown {
     cursor: pointer;
     margin-right: 4vw;
@@ -69,11 +69,6 @@
         font-size: 19px;
       }
     }
-    .host-service {
-      background-color: $green;
-      padding: 4px 20px;
-      border-radius: 4px;
-    }
   }
   .search-bar {
     margin-right: 30px;
@@ -109,5 +104,88 @@ a.nav-link {
 
 }
 
+// notif mobile
+#notif-mobile {
+  > a {
+    span {
+      margin-left: 4px;
+      height: 28px;
+      width: 28px;
+      font-size: 14px;
+      background-color: #DA334A;
+      color: white;
+      padding: 4px 9px;
+      border-radius: 100vh;
+    }
+  }
+}
 
+.host-service {
+  background-color: $green;
+  padding: 8px 20px;
+  border-radius: 4px;
+}
 
+#navbarSupportedContent {
+  > ul {
+    > .column-on-mobile {
+      // WHEN LOGGED IN
+      > li {
+        > a {
+          font-weight: 500;
+          letter-spacing: 0.75px;
+          overflow: hidden;
+          transition: 0.2s ease;
+          &:hover {
+            font-size: 17px;
+          }
+        }
+        @media only screen and (max-width: 992px) {
+          > a {
+            color: black;
+          }
+        }
+        @media only screen and (min-width: 992px) {
+          > a {
+            color: black;
+          }
+          > a.white {
+            color: white;
+          }
+        }
+      }
+      > li + li + li {
+        > a {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+#home-white-links {
+  > li {
+    > a {
+      font-weight: 500;
+      letter-spacing: 0.75px;
+      overflow: hidden;
+      transition: 0.2s ease;
+      &:hover {
+        font-size: 17px;
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      > a {
+        color: black;
+      }
+    }
+    @media only screen and (min-width: 992px) {
+      > a {
+        color: black;
+      }
+      > a.white {
+        color: white;
+      }
+    }
+  }
+}
