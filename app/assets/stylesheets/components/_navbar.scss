@@ -1,7 +1,7 @@
 // Own navbar
 .navbar {
   z-index: 3;
-  margin: 3vh 0;
+  padding: 2vh 0;
   .dropdown {
     cursor: pointer;
     margin-right: 4vw;
@@ -109,5 +109,19 @@ a.nav-link {
 
 }
 
-
+// notif mobile
+#notif-mobile {
+  > a {
+    span {
+      margin-left: 4px;
+      height: 28px;
+      width: 28px;
+      font-size: 14px;
+      background-color: #DA334A;
+      color: white;
+      padding: 4px 9px;
+      border-radius: 100vh;
+    }
+  }
+}
 
