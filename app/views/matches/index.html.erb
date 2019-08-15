@@ -9,14 +9,14 @@
   <% else %>
     <div class="search">
       <h2 class="text-center">Find Games Around you</h2>
-      <div class="text-center mr-0">
-        <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: 'text-center mr-0' } do |f| %>
+      <div class="text-center mr-0" id="form-search">
+        <%= simple_form_for :search, defaults: { required: false }, url: matches_path, method: "GET", html: { class: 'text-center mr-0', style: "" } do |f| %>
         <%= f.input :query, label: false, placeholder: "Search for games", input_html: {value: ""}, class: "mr-0" %>
       </div>
       <% end %>
     </div>
   <% end %>
-  <div class="row">
+  <div class="row" id='match-js'>
     <% if @show_user_match %>
       <% if @all_matches_signed_up != [] # if im not looking for a specific user's match %>
         <% @all_matches_signed_up.each do |match| %>
@@ -89,7 +89,7 @@
 
   this.addEventListener("click", (e) => {
     // INIT
-    const whereToShow = document.querySelector(".row");
+    const whereToShow = document.querySelector("#match-js");
     const id = e.target.id;
 
     // INJECT HTML

@@ -7,26 +7,32 @@
         }
         form {
             font-family: $headers-font;
-            input {
-                color: $green-3;
-                font-size: 18px;
-                --height: 50px;
-                height: var(--height);
-                text-align: center;
+            > div {
+              display: flex;
+              justify-content: center;
+              > input {
+                  color: $green-3;
+                  font-size: 18px;
+                  --height: 2.5rem;
+                  height: var(--height);
+                  text-align: center;
 
-                border-radius: 5px;
-                margin: 0px;
-                text-align: center;
+                  border-radius: 100vh;
+                  margin: 0px;
+                  text-align: center;
+                  width: 19em;
+              }
             }
         }
     }
     > .navigations {
         h3 {
+            font-size: 20px;
             width: 100%;
             margin: 0;
-            padding: 14px 0;
+            padding: 7px 0;
             text-align: center;
-            border-radius: 14px;
+            border-radius: 5px;
             cursor: pointer;
         }
         h3.active {

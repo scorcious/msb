@@ -39,17 +39,32 @@ section.ranking-banner {
             margin-top: 20px;
             li {
                 display: inline-block;
+                padding: 12px 10px 0;
+                margin: 0 5px 15px;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 1.5rem;
+                font-size: 18px;
+                font-family: 'Raleway';
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
                 line-height: 1.4;
-                padding: 10px 10px 1px;
-                margin: 0 5px 10px;
                 min-width: 50px;
                 min-height: 50px;
                 border-radius: 25px;
                 cursor: pointer;
+                color: white;
+                background: rgba(0,0,0, 0.2);
+                // border: solid 2px rgba(255, 255, 255);
+                border: solid 2px #eee;
+                box-shadow: inset 0 0 10px #fff;
+
+            }
+            .active {
+                box-shadow: none;
+                border: none;
                 background: #fff;
+                color: black;
             }
         }
     }

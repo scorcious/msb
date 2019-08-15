@@ -13,7 +13,8 @@ class PlayersController < ApplicationController
       if challenge_params["status"] == "declined"
         redirect_to players_path
       else
-        redirect_to matches_path(user_id: current_user.id)
+        # redirect_to matches_path(user_id: current_user.id)
+        redirect_to match_path(@challenge.match)
       end
     else
       redirect_to players_path
@@ -31,7 +32,7 @@ class PlayersController < ApplicationController
       @player.team = params[:player][:team]
       @player.match = @match
       authorize @player
-      if @player.save!
+      if @player.save
         if @match.full?
           @match.status = "close"
           @match.save
