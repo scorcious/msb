@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @matches = Match.where("status = ?", "open").sample(3)
     @white_links = true;
   end
-  
+
   def index
     # TODO: SEARCH FUNCTIONS
     @no_search_bar = true
