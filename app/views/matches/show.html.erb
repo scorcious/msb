@@ -38,8 +38,14 @@
           <% end %>
         <% end %>
         <!-- join button -->
-        <% unless ( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2)) && @match.status == "open" %>
-          <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
+        <% unless (( @all_players.any?{|user| user == current_user} || @players_a.count >= (@match.number_of_players / 2)) && @match.status == "open") %>
+          <% if @challenges == [] %>
+            <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
+          <% else %>
+            <% unless @challenges[0].match_id == @match.id %>
+              <%= link_to "", match_players_path(@match, player: {team: 'A'}), method: :post, data: { confirm: 'Are you sure you want to join the team A?' }, class: "fas fa-plus-circle" %>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
       <h5 class="text-center"><strong>Team B</strong></h5>
@@ -52,8 +58,14 @@
           <% end %>
         <% end %>
         <!-- join button -->
-        <% unless ( @all_players.any?{|user| user == current_user} || (@players_b.count >= @match.number_of_players)) && @match.status == "open" %>
-          <%= link_to "", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' }, class: "fas fa-plus-circle" %>
+        <% unless (( @all_players.any?{|user| user == current_user} || (@players_b.count >= @match.number_of_players)) && @match.status == "open") %>
+          <% if @challenges == [] %>
+            <%= link_to "", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' }, class: "fas fa-plus-circle" %>
+          <% else %>
+            <% unless @challenges[0].match_id == @match.id %>
+              <%= link_to "", match_players_path(@match, player: {team: 'B'}), method: :post, data: { confirm: 'Are you sure you want to join the team B?' }, class: "fas fa-plus-circle" %>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
       </div>
@@ -154,12 +166,3 @@
     </div>
 </div>
 
-<!-- <script>
-  let submit = document.getElementById("refresh")
-  submit.addEventListener("click", function(){
-    console.log('click here')
-    if(submit.disabled === true){
-      submit.removeAttribute('disabled');
-    }
-  })
-</script> -->
