@@ -23,9 +23,9 @@
               <div class=" row justify-content-center">
                 <p class="challenger pt-4">Challenged by: <%= link_to  User.find(challenge.challenger_id).name.split(" ")[0], profile_path(User.find(challenge.challenger_id)) %></p>
 
-                <div style="margin-top: 1vh">
-                  <%= link_to "Accept", player_path(challenge, challenge: { status: 'accepted' }), class: "btn btn-outline-primary mb-2", method: :put %>
+                <div style="margin-top: 1vh; z-index: 1;">
                   <%= link_to "Decline", player_path(challenge, challenge: { status: 'declined' }), class: "btn btn-outline-danger mb-2", method: :put %>
+                  <%= link_to "Accept", player_path(challenge, challenge: { status: 'accepted' }), class: "btn btn-outline-primary mb-2", method: :put %>
                   <%= link_to "See Match", match_path(challenge.match), class: "btn btn-success m-0" %>
                 </div>
               </div>

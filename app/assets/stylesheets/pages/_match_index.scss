@@ -88,6 +88,10 @@
         }
         > div.no-match {
             > div {
+                h4 {
+                    color: $error;
+                    font-style: italic;
+                }
                 display: block;
                 > a {
                     margin-top: 10px;
