@@ -80,9 +80,12 @@ class MatchesController < ApplicationController
     @all_players = @array_B + @array_A
 
     # challenges
-    @challenges = policy_scope(Player).where("user_id = ? AND match_id = ? AND status = ?", current_user.id, @match.id, "pending")
-    unless @challenges == []
-      @challenger = User.find(@challenges[0].challenger_id)
+    @challenges = []
+    if current_user
+      @challenges = policy_scope(Player).where("user_id = ? AND match_id = ? AND status = ?", current_user.id, @match.id, "pending")
+      unless @challenges == []
+        @challenger = User.find(@challenges[0].challenger_id)
+      end
     end
   end
 
