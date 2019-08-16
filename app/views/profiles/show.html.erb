@@ -10,8 +10,8 @@
   <% if policy(@profile).show? %>
     <!-- 1 - PROFILE IMG -->
     <div class="row">
-      <div class="col d-flex justify-content-between p-0">
-        <div class="p-0 mb-0", style="border-radius: 5px">
+      <div class="col-sm-12 col-md-12 col-lg-4 p-0">
+        <div class="d-flex justify-content-center p-0 mb-0", style="border-radius: 5px">
           <div class="rounded p-5">
             <div class="text-center mb-3">
               <%= image_tag (cl_image_path @profile.photo), crop: :fill, style:"object-fit:cover; height: 30vh; width: 30vh", class: "rounded-circle center" %>
@@ -28,9 +28,13 @@
       </div>
 
       <!-- 2 - OTHER INFO -->
-      <div class="col-12 col-md-8", style="border-radius: 10px">
+      <div class="col-sm-12 col-md-12 col-lg-8" style="border-radius: 10px">
         <div class="pb-2 border-bottom border-info">
-        <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-link p-0" %>
+          <% if @profile == current_user %>
+            <%= link_to "Edit my profile", edit_user_registration_path(current_user), class: "btn btn-link p-0" %>
+          <% else %>
+            <%= link_to  "See My Matches", matches_path(user_id: @profile.id), class: "btn btn-link p-0" %>
+          <% end %>
         </div>
 
         <p class="text-center my-5" style="font-weight: bold; font-size: 24px;">My Sport Buddies</p>
@@ -58,7 +62,7 @@
                     <p style="text-align: center; font-weight: bold"><%= category.name.capitalize %></p>
                     <p><i class="fas fa-medal text-warning"></i> <span class="font-weight-light"> Ranking : <%= Category.ranking_position(category.name, @profile.id)[:position] %></span></p>
                   <!--   <p><i class="fas fa-layer-group text-secondary"></i> <span class="font-weight-light"></span> </p> -->
-                    <p><i class="fas fa-coins text-secondary"></i> <span class="font-weight-light"> Coins : <%= Category.ranking_position(category.name, @profile.id)[:points]%></span></p>
+                    <p><i class="fas fa-coins text-secondary"></i> <span class="font-weight-light"> Points : <%= Category.ranking_position(category.name, @profile.id)[:points]%></span></p>
                   </div>
                 </div>
               <% end %>
@@ -69,7 +73,6 @@
     </div>
   <% end %>
 </div>
-        <!-- Challenge buddy FIXME: unless -> if -->
 
 <div class="container" style="text-align: center">
   <% if user_signed_in? && params[:id].to_i != current_user.id %>
