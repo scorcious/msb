@@ -82,3 +82,15 @@ h4.challenge-found {
         }
     }
 }
+
+#match-show-event-details {
+    p {
+        display: flex;
+        span {
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            margin-right: 10px;
+        }
+    }
+}

@@ -10,13 +10,13 @@
 <div class="container">
   <div class="py-5">
     <div class="row border rounded mt-5 mb-2 mx-0 p-3">
-      <div class="col-5">
+      <div class="col-sm-12 col-md-12 col-lg-5" id="match-show-event-details">
         <h5 class="text-left"><strong>Event details</strong></h5>
-        <p style="font-size: 14px; margin: 20px 0 12px; text-transform: capitalize;"><i class="fas fa-map-marker-alt" style="font-size: 18px;"></i> <%= @match.location %></p>
-        <p style="font-size: 14px; margin: 0 0 12px; text-transform: capitalize;"><i class="fas fa-calendar-alt" style="font-size: 18px;"></i> <%= @match.date.strftime("%d/%m/%Y") %> -  <%= @match.time.strftime("%H:%M") %></p>
+        <p style="font-size: 14px; margin: 20px 0 12px; text-transform: capitalize;"><span><i class="fas fa-map-marker-alt" style="font-size: 18px;"></i></span> <%= @match.location %></p>
+        <p style="font-size: 14px; margin: 0 0 12px; text-transform: capitalize;"><span><i class="fas fa-calendar-alt" style="font-size: 18px;"></i></span> <%= @match.date.strftime("%d/%m/%Y") %> -  <%= @match.time.strftime("%H:%M") %></p>
         <% if (@match.date - Date.today).to_i >= 0 %>
           <p style="font-size: 14px; margin: 0 0 12px;">
-            <i class="fas fa-clock" style="font-size: 18px; text-transform: capitalize;"></i>
+            <span><i class="fas fa-clock" style="font-size: 18px; text-transform: capitalize;"></i></span>
             <% if (@match.date - Date.today).to_i == 0 %>
               Today
               <% else %>
@@ -24,10 +24,10 @@
             <% end %>
           </p>
         <% end %>
-        <p style="font-size: 14px; margin: 0 0 12px; text-transform: capitalize;"><i class="fas fa-signal" style="font-size: 18px;"></i> <%= @match.level %></p>
-        <p class="mb-0", style="font-size: 14px ; margin: 0; text-transform: capitalize;"><i class="fas fa-user-circle" style="font-size: 18px;"></i> <%= @match.number_of_players %> members max.</p>
+        <p style="font-size: 14px; margin: 0 0 12px; text-transform: capitalize;"><span><i class="fas fa-signal" style="font-size: 18px;"></i></span> <%= @match.level %></p>
+        <p class="mb-4", style="font-size: 14px ; margin: 0; text-transform: capitalize;"><span><i class="fas fa-user-circle" style="font-size: 18px;"></i></span> <%= @match.number_of_players %> members max.</p>
       </div>
-      <div class="col-7">
+      <div class="col-sm-12 col-md-12 col-lg-7">
       <h5 class="text-center"><strong>Team A</strong></h5>
       <div class="d-flex mb-5 round-plus-button justify-content-center">
         <% @players_a.each do |player| %>

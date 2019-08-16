@@ -179,7 +179,7 @@ index = -1
       user_id: match.user_id
     )
 
-  ranking.points = rand(400..800).round(-1)
+  ranking.points = rand(400..500).round(-1)
   ranking.save!
 
   puts "Match Created!"
@@ -383,7 +383,7 @@ category.uniq.each do |category|
       user_id: user.id
     )
     ranking.level = level.sample
-    ranking.points = rand(400..800).round(-1)
+    ranking.points = rand(400..500).round(-1)
     ranking.save!
   end
 end
