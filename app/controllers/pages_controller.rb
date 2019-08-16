@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!, only: [:home, :index, :contacts]
   def home
     @no_search_bar = true
     @no_container = true
