@@ -29,7 +29,9 @@ class ProfilesController < ApplicationController
     @profile = User.find(params[:id])
     authorize @profile
     @categories = @profile.categories.select(:name).distinct
-    @matches = Match.where("status = ? AND user_id = ?", "open", current_user.id).order(created_at: :desc)
+    if current_user
+      @matches = Match.where("status = ? AND user_id = ?", "open", current_user.id).order(created_at: :desc)
+    end
     @player = Player.new
     # @ranking = Category.ranking_position(@matches[0].tag_list[0], current_user)
   end
