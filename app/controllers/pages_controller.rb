@@ -12,6 +12,9 @@ class PagesController < ApplicationController
     @no_search_bar = true
   end
 
+  def contacts
+  end
+
   private
 
   def find_all_matches_user_signed_up

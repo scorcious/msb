@@ -35,4 +35,7 @@ Rails.application.routes.draw do
 
   # Rankings / Leaderboards
   get 'rankings', to: "rankings#index", as: :rankings
+
+  # Contact Us
+  get 'contacts', to: "pages#contacts", as: :contacts
 end
